@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>M.F.P. ログイン</title>
+
+</head>
+
+<body>
+  <h1>My First Programing</h1>
+
+  <form method="post" action="/php/login.php">
+    <p>
+      団体ID : <input type="text" name="teamid" maxlength="32" required>
+    </p>
+
+    <p>
+      ユーザID : <input type="text" name="accountid" maxlength="32" required>
+      &nbsp;
+      番号 : <input type="text" name="accountnum" maxlength="20" required>
+    </p>
+
+    <p>
+      パスワード : <input type="password" name="pass" maxlength="100" required>
+    </p>
+
+    <p>
+      <button type="submit" name ="submit" value="button">ログイン</button>
+    </p>
+    
+  </form>
+  <p>
+    <button onclick="location.href='/register.html'">新規登録</button>
+  </p>
+</body>
+</html>

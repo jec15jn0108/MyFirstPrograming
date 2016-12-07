@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>M.F.P. </title>
+  <link href="/css/basehtml.css" rel="stylesheet" type="text/css" media="all" />
+
+  <script type="text/javascript"><!--
+   function ChangeTab(tabname) {
+   // 全部消す
+   document.getElementById('teacherbox').style.display = 'none';
+   document.getElementById('studentbox').style.display = 'none';
+   document.getElementById('stagebox').style.display = 'none';
+   // 指定箇所のみ表示
+   document.getElementById(tabname).style.display = 'block';
+}
+// --></script>
+
+</head>
+
+<body>
+  <h1><font size="7">圧倒的設定画面</font></h1>
+   <p>
+    <button onclick="location.href='/main.html'">メイン画面に戻る</button>
+   </p>
+
+    <ul class="menulist">
+     <li id="teacher"><a href="#teacher" onclick="ChangeTab('teacherbox'); return false;">教師用アカウント設定</a></li>
+     <li id="student"><a href="#student" onclick="ChangeTab('studentbox'); return false;">生徒用アカウント設定</a></li>
+     <li id="stage"><a href="#stage" onclick="ChangeTab('stagebox'); return false;">ステージ設定</a></li>
+    </ul>
+
+  </br>
+    <div id="teacherbox" class="box">
+     <iframe src="/config_teacher.html" frameborder="0" height="100%" width="100%" scrolling="no">
+       このページでは、インラインフレームを使用しています。
+       対応しているブラウザで表示願います。
+     </iframe>
+    </div>
+    <div id="studentbox" class="box">
+      <iframe src="/config_student.html" frameborder="0" height="100%" width="100%" scrolling="no">
+        このページでは、インラインフレームを使用しています。
+        対応しているブラウザで表示願います。
+      </iframe>
+    </div>
+    <div id="stagebox" class="box">
+      <iframe src="/config_stage.html" frameborder="0" height="100%" width="100%" scrolling="no">
+        このページでは、インラインフレームを使用しています。
+        対応しているブラウザで表示願います。
+      </iframe>
+    </div>
+
+    <script type="text/javascript"><!--
+    // デフォルトのタブを選択
+    ChangeTab('teacherbox');
+// --></script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<?php include "/php/register.php"?>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/css/register.css">
+    <meta charset="utf-8">
+    <title>アカウント作成</title>
+  <head>
+  <body>
+    <h1>My First Programing</h1>
+    <h2>新規登録</h2><br>
+    <form action="/php/register.php" method="post">
+    <!-- <form action="javascript:check()" method="post"> -->
+    <div id="errorMessage"></div>
+    <div class="team">
+      <p>
+        団体ID&nbsp;
+        <input type="text" name="teamid" maxlength="32" required>
+      </p>
+      <p>
+        団体名&nbsp;
+        <input type="text" name="teamname" required>
+      </p>
+    </div>
+    <div id="container">
+      <div id="teacher">
+        <p>
+          教師用ID<br>
+          <input type="text" name="accountT" maxlength="32" required>
+        </p>
+        <p>
+          教師用パスワード<br>
+          <input type="password" name="tPass" id ="tPass"  maxlength="71"required>
+        </p>
+        <p>
+          教師用パスワードの再入力<br>
+          <input type="password" name="tPass2" id="tPass2" maxlength="71"onkeyup="check('tPass', 'tPass2', 'tishi')"　required>
+          <span id="tishi"></span>
+        </p>
+        <p id="message">
+          <?php
+          echo $_SESSION['teamId']; ?>
+        </p>
+        <p>
+          <br>
+          <br>
+          <br>
+          <input id="register" type="submit" name="register" value="登録">
+        </p>
+      </div>
+      <div id="student">
+        <p>
+          生徒ID<br>
+          <input type="text" name="accountS" maxlength="32"required>&emsp;
+        </p>
+        <p>
+          生徒用パスワード<br>
+          <input type="password" name="sPass" id="sPass" maxlength="71"required>
+        </p>
+        <p>
+          生徒用パスワードの再入力<br>
+          <input type="password" name="sPass2" id="sPass2" maxlength="71"onkeyup="check('sPass', 'sPass2', 'tishi2')" required>
+          <span id="tishi2"></span>
+        </p>
+      </div>
+    </div>
+    </form>
+    <script type="text/javascript">
+      // var form = document.forms[0];
+      function　check($id1, $id2, $tishi){
+        var pw1 = document.getElementById($id1).value;
+        var pw2 = document.getElementById($id2).value;
+        if(pw1 == pw2){
+          document.getElementById($tishi).innerHTML="<font color='green'>OK</font>";
+          document.getElementById("register").disabled = false;
+          if($tishi == "tishi2" && document.getElementById("register").disabled == true){
+            document.getElementById("register").disabled = true;
+          }
+        }
+        else{
+        document.getElementById($tishi).innerHTML="<font color='red'>一致していません</font>";
+        document.getElementById("register").disabled = true;
+        }
+    }
+      // 入力値チェックエラーが発生したときの処理
+      form.addEventListener("invalid", function() {
+        document.getElementById("errorMessage").innerHTML = "入力値にエラーがあります";
+      }, false);
+    </script>
+  </body>
+</html>

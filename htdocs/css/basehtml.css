@@ -1,0 +1,47 @@
+/*ぼくらのCSS*/
+body {
+  margin: 0px;
+}
+
+ul.menulist {
+  margin: 0px;
+  padding: 0px;
+}
+ul.menulist li {
+   list-style-type: none; /*先頭記号を消す */
+   float: left;           /*リスト項目を横方向に並べる */
+   margin: 0px;           /*各項目周囲の余白 */
+   padding: 0px;          /*枠線と内容の距離をゼロに */
+   height: 30px;          /*タブの高さ */
+}
+ul.menulist li a {
+   text-decoration: none; /*下線を消す */
+   display: block;        /*ブロックとして表示 */
+   padding: 5px 0px;      /*内側の余白量 */
+   width: 10em;            /*タブの横幅 */
+   text-align: center;    /*(文字列)を中央寄せ */
+   font-weight: bold;     /*ラベル(文字列)を太字にする */
+   background-color: #ccffcc;     /*タブの背景色 */
+   border: blue solid 1px;        /*タブの枠線 */
+   border-top-left-radius: 12px;  /*タブの左上の角を丸くする */
+   border-top-right-radius: 12px; /*タブの右上の角を丸くする */
+}
+　　　　　　　　　　　　　　/*各タブの色設定*/
+ul.menulist li#teacher  a { background-color: #ccffcc; color: #003300; border-color: #003300; }
+ul.menulist li#student  a { background-color: #ffcccc; color: #800000; border-color: #800000; }
+ul.menulist li#stage  a { background-color: #ffffcc; color: #808000; border-color: #808000; }
+
+　　　　　　　　　　/*各タブにマウスを置いたら色変える*/
+ul.menulist li#teacher  a:hover { background-color: #003300; color: #ccffcc; }
+ul.menulist li#student  a:hover { background-color: #800000; color: #ffcccc; }
+ul.menulist li#stage  a:hover { background-color: #808000; color: #ffffcc; }
+
+div.box {
+   /* ▼(C-2)ボックス共通の装飾 */
+   height: 800px; overflow: auto; clear: left;
+}
+/* ▼(C-3)各ボックスの配色 */
+div#teacherbox { border: 2px solid blue; background-color: #ccffcc; }
+div#studentbox { border: 2px solid red; background-color: #ffcccc; }
+div#stagebox { border: 2px solid yellow; background-color: #ffffcc; }
+div.box p { margin: 0.5em; }

@@ -1,0 +1,22 @@
+h1 {
+  text-align: center;
+}
+div.team {
+  height: 100px;
+  width: 330px;
+  text-align: center;
+}
+#container {
+ width: 800px;
+}
+#teacher{
+  float: left;
+  width: 200px；
+}
+#student{
+  float: right;
+  width: 400px;
+}
+#message{
+  color: red;
+}

@@ -1,0 +1,33 @@
+body{
+  margin-right: 0px;
+  margin-left: 0px;
+  padding: 0px;
+}
+
+#code{
+  display: none;
+  width: 300px;
+  height: 10px;
+}
+
+button {
+  width: 96px !important;
+  height: 30px !important;
+  margin: 5px;
+}
+
+
+#header {
+  margin-bottom: 20px;
+}
+
+#header1 {
+  float:left;
+  margin-right: 10px;
+  border: solid 1px black;
+}
+
+#header2 {
+  border: solid 1px black;
+  /*float: right;*/
+}

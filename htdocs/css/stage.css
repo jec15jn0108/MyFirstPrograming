@@ -1,0 +1,22 @@
+.junji {
+  width: 150px;
+  background-color:red;
+  float: left;
+}
+
+.bunki {
+  width: 150px;
+  background-color:yellow;
+  float: left;
+}
+
+.kurikaeshi {
+  width: 150px;
+  background-color: #00FF00;
+  float: left;
+}
+.ouyou {
+  width: 150px;
+  background-color: #FF00FF;
+  float: left;
+}
