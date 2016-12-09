@@ -28,7 +28,7 @@
     $tm->insertTeam($teamId, $teamName);
     $hashT = password_hash($tPass, PASSWORD_DEFAULT);
     $retT = $at->insertAccount($accountT,$teamId,$hashT,$isT);
-    $hashS = password_hash($studentPass, PASSWORD_DEFAULT);
+    $hashS = password_hash($sPass, PASSWORD_DEFAULT);
     $retS = $at->insertAccount($accountS,$teamId,$hashS,$isS);
     $_SESSION['teamId'] = "";
     header("Location: /index.html");

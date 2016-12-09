@@ -78,7 +78,7 @@
 
    /* 教師用IDかどうかを判定する　*/
     function isTeacher($accountId, $teamId){
-      $sql = "SELECT isTeacher FROM account WHERE teamID = teamid AND accountID = accountId";
+      $sql = "SELECT * FROM account WHERE teamID = :teamId AND accountID = :accountId";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindParam(':accountId', $accountId, PDO::PARAM_STR);
       $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
@@ -89,8 +89,11 @@
         print($e->getMessage() . '<br />');
         return false;
       }
-      if ($stmt->rowCount() == 1) {
-        return $stmt->fetch(PDO::FETCH_ASSOC)["isTeacher"];
+
+      $result = $stmt->fetch(PDO::FETCH_ASSOC)["isTeacher"];
+
+      if ($stmt->rowCount() == 1 && $result == 1) {
+        return true;
       } else {
         return false;
       }

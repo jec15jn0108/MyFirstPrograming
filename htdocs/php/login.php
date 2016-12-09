@@ -18,16 +18,17 @@
  $result2 = $ac->athentication($teamId, $accountId, $pass);
  if($result2){
    $result = $ac->isTeacher($accountId, $teamId);
-   if($result = 0){
-     setcookie(accountnum, $accountnum, 0);
+   if($result == false){
+     setcookie('number', $accountnum, 0);
    }else{
      ;//DoNothing
    }
-   setcookie(teamid, $teamId, 0, "/");
-   setcookie(accountid, $accountId, 0, "/");
+   setcookie('is_teacher', var_export($result, true), 0, "/");
+   setcookie('team', $teamId, 0, "/");
+   setcookie('account', $accountId, 0, "/");
    header( "Location: ../main.html" );
    exit();
-  }else{
+  } else {
    print("ログインに失敗しました<br>");
    print("$teamId : $accountId : $pass : $result2");
  }
