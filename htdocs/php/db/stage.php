@@ -148,7 +148,7 @@ function updateStageGenre($teamId, $stageId, $value){
 function updateStageNumber($teamId, $stageId, $value){
   $sql = "UPDATE stage SET stageNumber = :value WHERE stageID = :stageId AND teamID = :teamId";
   $stmt = $this->pdo->prepare($sql);
-  $stmt->bindParam(':value', $value, PDO::PARAM_STR);
+  $stmt->bindParam(':value', $value, PDO::PARAM_INT);
   $stmt->bindParam(':stageId', $stageId, PDO::PARAM_STR);
   $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
 

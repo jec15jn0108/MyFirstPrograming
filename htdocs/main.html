@@ -7,25 +7,35 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <script type="text/javascript" src="/js/enchant.js/build/enchant.js"></script>
   <script type="text/javascript" src="/js/main.js"></script>
+
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
   <script src="code_mirror/lib/codemirror.js"></script>
   <link rel="stylesheet" href="code_mirror/lib/codemirror.css">
   <script src="code_mirror/mode/javascript/javascript.js"></script>
-
   <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/tab.css">
+  <link rel="stylesheet" type="text/css" href="/css/drag_and_drop.css">
   <title>M.F.P.</title>
 
 </head>
 
 <body>
-<div id="header">
-  <div id="header1">
-    <ul>
-      <li>順次</li> <li>分岐</li> <li>繰返し</li> <li>応用</li>
-    </ul>
+  <div id="header">
+    <div id="header1">
+      <ul class="tab stage">
+          <li class="active">順次</li>
+          <li>判断</li>
+          <li>繰返し</li>
+          <li>応用</li>
+      </ul>
 
-    <button onclick="">チュートリアル</button>
+      <div class="tabContent stage active">This is the content of TAB 1.</div>
+      <div class="tabContent stage">This is the content of TAB 2.</div>
+      <div class="tabContent stage">This is the content of TAB 3.</div>
+      <div class="tabContent stage">This is the content of TAB 4.</div>
+
+    <!-- <button onclick="">チュートリアル</button> -->
   </div>
   <div id="header2">
     <button onclick='window.location.href="/stage_create.html";' class="teather_btn">ステージ作成</button>
@@ -35,10 +45,23 @@
   </div>
 </div>
 
+
 <div id="enchant-stage">
 </div>
 
+<div id="palette">
+  <div class="tabContent palette active">This is the content of TAB 1.</div>
+  <div class="tabContent palette">This is the content of TAB 2.</div>
+  <ul class="tab palette">
+      <li class="active">図形</li>
+      <li>コード</li>
+  </ul>
 
+  <div id="blocks">
 
+  </div>
+</div>
+  <script type="text/javascript" src="/js/tab.js"></script>
+  <script type="text/javascript" src="/js/drag_and_drop.js"></script>
 </body>
 </html>

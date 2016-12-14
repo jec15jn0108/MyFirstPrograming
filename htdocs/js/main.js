@@ -1,7 +1,7 @@
 enchant();
 
 window.onload = function() {
-  var game = new Core(1250, 800);
+  var game = new Core(520, 592);
 
   var charaImage = "/js/enchant.js/images/chara1.png";
 
@@ -26,8 +26,19 @@ window.onload = function() {
     character.image = game.assets[charaImage];
     character.x = 10;
     character.y = 10;
-    game.rootScene.addChild(character);
 
+
+    // var block = new Entity();
+    // block._element = document.createElement('button');
+    // block._element.setAttribute("class", "drag-and-drop");
+    // block._element.innerHTML = "aaa";
+    // block.width = 300;
+
+
+
+
+    // game.rootScene.addChild(block);
+    game.rootScene.addChild(character);
     game.rootScene.addChild(sprite);
 
   };

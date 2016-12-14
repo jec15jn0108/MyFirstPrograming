@@ -18,16 +18,67 @@ button {
 
 
 #header {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 #header1 {
   float:left;
-  margin-right: 10px;
+  /*margin-right: 10px;*/
+  padding-bottom: 6px;
   border: solid 1px black;
 }
 
 #header2 {
+  padding-top: 5px;
+  padding-bottom: 5px;
   border: solid 1px black;
-  /*float: right;*/
+  width: 450px;
+  margin-left: auto;
+}
+
+#enchant-stage {
+  clear: both;
+  float: left;
+}
+
+#palette {
+  width: 700px;
+  height: 800px;
+  border: solid 1px black;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+#blocks {
+  width: 700px;
+  height: 100px;
+  border-top: solid 1px black;
+  margin-top: 700px;
+}
+
+.tabContent.stage {
+  clear: both;
+}
+
+ul.tab.palette li {
+  float: none;
+  /*縦書き*/
+  writing-mode: vertical-rl;
+  -moz-writing-mode: vertical-rl;
+  -o-writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
+  /******/
+  font-size: 36px;
+  width: 40px;
+  height: 200px;
+  text-align: center;
+}
+
+.tab.palette {
+  float:right;
+}
+
+.tabContent.palette {
+
+  float: left;
 }

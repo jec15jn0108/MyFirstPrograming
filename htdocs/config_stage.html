@@ -3,11 +3,181 @@
 <head>
   <meta charset="utf-8">
   <title>M.F.P. </title>
-
+<link href="/css/stage.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 
 <body>
-  <h1>ステージ画面</h1>
-  <p>未だ処理創らず</p>
+  <h1>ステージ管理画面</h1>
+  <form action="/php/config_stage.php" method="post">
+
+  </form>
+  <div id="buju" >
+    <div class="junji1" >
+      <p>
+        <fieldset>
+          <legend><b>順次</b></legend>
+      </p>
+      <p>
+        <select  id="junji" name="junji" multiple="multiple" size="9" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <p>
+          <input type="button" name="ue" onclick="moveUpElement('junji')" value="上へ移動">
+        </p>
+        <p>
+          <input type="button" name="shita" onclick="moveDownElement('junji')" value="下へ移動">
+        </p>
+        <p>
+          <input type="submit" name="delete"onclick="removeOption('junji','tishi')" value="削除">
+        </p>
+        </fieldset>
+      </p>
+      <p>
+        <span id="tishi"></span>
+      </p>
+    </div>
+    <div class="bunki1">
+      <p>
+        <fieldset>
+          <legend><b>分岐</b></legend>
+      </p>
+      <p>
+        <select  id="bunki" name="bunki"  multiple="multiple" size="9" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <p>
+          <input type="button" name="ue" onclick="moveUpElement('bunki')" value="上へ移動">
+        </p>
+        <p>
+          <input type="button" name="shita" onclick="moveDownElement('bunki')" value="下へ移動">
+        </p>
+        <p>
+          <input type="submit" name="delete" onclick="removeOption('bunki','tishi2')" value="削除">
+        </p>
+        </fieldset>
+      </p>
+      <p>
+        <span id="tishi2"></span>
+      </p>
+    </div>
+    <div class="kurikaeshi1">
+      <p>
+        <fieldset>
+          <legend><b>繰返し</b></legend>
+      </p>
+      <p>
+        <select  id="kurikaeshi" name="kurikaeshi"  multiple="multiple" size="9" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <p>
+          <input type="button" name="ue" onclick="moveUpElement('kurikaeshi')" value="上へ移動">
+        </p>
+        <p>
+          <input type="button" name="shita" onclick="moveDownElement('kurikaeshi')" value="下へ移動">
+        </p>
+        <p>
+          <input type="submit" name="delete" onclick="removeOption('kurikaeshi','tishi3')"value="削除">
+        </p>
+        </fieldset>
+      </p>
+      <p>
+        <span id="tishi3"></span>
+      </p>
+    </div>
+    <div class="ouyou1">
+      <p>
+        <fieldset>
+          <legend><b>応用</b></legend>
+      </p>
+      <p>
+        <select  id="ouyou" name="ouyou" multiple="multiple" size="9" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <p>
+          <input type="button" name="ue" onclick="moveUpElement('ouyou')" value="上へ移動">
+        </p>
+        <p>
+          <input type="button" name="shita" onclick="moveDownElement('ouyou')" value="下へ移動">
+        </p>
+        <p>
+          <input type="submit" name="delete" onclick="removeOption('ouyou','tishi4')" value="削除">
+        </p>
+        </fieldset>
+      </p>
+      <p>
+        <span id="tishi4"></span>
+      </p>
+    </div>
+  </div>
 </body>
+</form>
+<script type="text/javascript">
+function moveUpElement($id) {
+var selectbox = document.getElementById($id);
+var option_list = selectbox.getElementsByTagName('option');
+for (var i = 0; i < option_list.length; i++) {
+  if (option_list[i].selected) {
+    if (i > 0 && !option_list[i-1].selected) {
+      selectbox.insertBefore(selectbox.removeChild(option_list[i]), option_list[i-1]);
+      }
+    }
+  }
+  selectbox.focus();
+}
+
+function moveDownElement($id) {
+var selectbox = document.getElementById($id);
+var option_list = selectbox.getElementsByTagName('option');
+for (var i = option_list.length-1; i >= 0; i--) {
+  if (option_list[i].selected) {
+    if (i < option_list.length-1 && !option_list[i+1].selected) {
+      selectbox.insertBefore(selectbox.removeChild(option_list[i+1]), option_list[i]);
+      }
+    }
+  }
+  selectbox.focus();
+}
+function removeOption($id,$tishi){
+  var target = document.getElementsByName($id)[0];
+  var index = target.selectedIndex;
+  if ( index != -1 ) {
+  target.remove(index);
+  document.getElementById($tishi).innerHTML="<font color='red'></font>";
+}else{
+  document.getElementById($tishi).innerHTML="<font color='red'>選択していません</font>";
+  }
+}
+</script>
 </html>

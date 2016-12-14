@@ -15,7 +15,10 @@
     <div class="team">
       <p>
         団体ID&nbsp;
-        <input type="text" name="teamid" maxlength="32" required>
+        <input type="text" name="teamid" id="teamid" pattern="^[0-9A-Za-z]+$"title="※半角英数"maxlength="32" onkeyup="idcheck('teamid','teamidlen')"required>
+      </p>
+      <p>
+        <span id="teamidlen"></span>
       </p>
       <p>
         団体名&nbsp;
@@ -26,16 +29,18 @@
       <div id="teacher">
         <p>
           教師用ID<br>
-          <input type="text" name="accountT" maxlength="32" required>
+          <input type="text" name="accountT" id="accountT"pattern="^[0-9A-Za-z]+$"title="※半角英数" maxlength="32" onkeypress="idcheck('accountT','tidlen')"onkeyup="idcheck('accountT','tidlen')" required>
+          <span id="tidlen"></span>
         </p>
         <p>
           教師用パスワード<br>
-          <input type="password" name="tPass" id ="tPass"  maxlength="71"required>
+          <input type="password" name="tPass" id ="tPass" onpaste="return false" maxlength="71" ononkeypress="pcheck('tPass','tpasslength')"onkeyup="check('tPass', 'tPass2', 'tishitp1')"required>
+          <span id="tpasslength"></span>
         </p>
         <p>
           教師用パスワードの再入力<br>
-          <input type="password" name="tPass2" id="tPass2" maxlength="71"onkeyup="check('tPass', 'tPass2', 'tishi')"　required>
-          <span id="tishi"></span>
+          <input type="password" name="tPass2" id="tPass2" onpaste="return false" maxlength="71" onkeypress="pcheck('tPass','tpasslength')" onkeyup="check('tPass', 'tPass2', 'tishitp1')"required>
+          <span id="tishitp1"></span>
         </p>
         <p id="message">
           <?php
@@ -45,22 +50,24 @@
           <br>
           <br>
           <br>
-          <input id="register" type="submit" name="register" value="登録">
+          <input id="register" type="submit" name="register"  value="登録">
         </p>
       </div>
       <div id="student">
         <p>
           生徒ID<br>
-          <input type="text" name="accountS" maxlength="32"required>&emsp;
+          <input type="text" name="accountS" id="accountS" pattern="^[0-9A-Za-z]+$"title="※半角英数" maxlength="32" onkeyup="idcheck('accountS','sidlen')"required>
+          <span id="sidlen"></span>
         </p>
         <p>
           生徒用パスワード<br>
-          <input type="password" name="sPass" id="sPass" maxlength="71"required>
+          <input type="password" name="sPass" id="sPass" onpaste="return false" maxlength="71" onkeypress="pcheck('sPass','spasslength')"onkeyup="check('sPass', 'sPass2', 'tishisp2')"required>
+          <span id="spasslength"></span>
         </p>
         <p>
           生徒用パスワードの再入力<br>
-          <input type="password" name="sPass2" id="sPass2" maxlength="71"onkeyup="check('sPass', 'sPass2', 'tishi2')" required>
-          <span id="tishi2"></span>
+          <input type="password" name="sPass2" id="sPass2" onpaste="return false"maxlength="71" onkeypress="pcheck('sPass','spasslength')" onkeyup="check('sPass', 'sPass2', 'tishisp2')"required>
+          <span id="tishisp2"></span>
         </p>
       </div>
     </div>
@@ -73,7 +80,7 @@
         if(pw1 == pw2){
           document.getElementById($tishi).innerHTML="<font color='green'>OK</font>";
           document.getElementById("register").disabled = false;
-          if($tishi == "tishi2" && document.getElementById("register").disabled == true){
+          if($tishi == "tishisp2" && document.getElementById("register").disabled == true || pcheck('tPass','tpasslength') == false || pcheck('sPass','spasslength') == false){
             document.getElementById("register").disabled = true;
           }
         }
@@ -81,6 +88,36 @@
         document.getElementById($tishi).innerHTML="<font color='red'>一致していません</font>";
         document.getElementById("register").disabled = true;
         }
+    }
+    function pcheck($pass,$length){
+      str = document.getElementById($pass).value;
+      if(str.length < 7){
+       document.getElementById($length).innerHTML="<font color='red'>8 ~ 71文字</font>";
+       document.getElementById("register").disabled = true;
+       if($length == "spasslength" && document.getElementById("register").disabled == true || idcheck('accountT','tidlen') == false ||idcheck('accountS','sidlen') == false){
+         document.getElementById("register").disabled = true;
+       }
+       return  false;
+     }else{
+       document.getElementById($length).innerHTML="<font color='green'>OK</font>";
+       document.getElementById("register").disabled = false;
+       return true;
+     }
+    }
+    function idcheck($id,$idlen){
+      str = document.getElementById($id).value;
+      if(str.length < 4){
+       document.getElementById($idlen).innerHTML="<font color='red'>4 ~ 32文字</font>";
+       document.getElementById("register").disabled = true;
+       if($idlen == "sidlen" && document.getElementById("register").disabled == true){
+         document.getElementById("register").disabled = true;
+       }
+       return  false;
+     }else{
+       document.getElementById($idlen).innerHTML="<font color='green'>OK</font>";
+       document.getElementById("register").disabled = false;
+       return true;
+     }
     }
       // 入力値チェックエラーが発生したときの処理
       form.addEventListener("invalid", function() {

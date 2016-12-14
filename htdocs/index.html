@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <title>M.F.P. ログイン</title>
 
+  <script type="text/javascript" src="/js/get_cookie.js"></script>
+
 </head>
 
 <body>
@@ -11,17 +13,17 @@
 
   <form method="post" action="/php/login.php">
     <p>
-      団体ID : <input type="text" name="teamid" required minlength="4" maxlength="10" pattern="^[0-9A-Za-z]+$" title="長さが短すぎです">
+      団体ID : <input type="text" name="teamid" required pattern="^[0-9A-Za-z]+$"title="※半角英数"maxlength="32">
     </p>
 
     <p>
-      ユーザID : <input type="text" name="accountid" required maxlength="32" pattern="^([a-zA-Z0-9._-]{3,32})$">
+      ユーザID : <input type="text" name="accountid" required pattern="^[0-9A-Za-z]+$"title="※半角英数" maxlength="32">
       &nbsp;
-      番号 : <input type="text" name="accountnum" required maxlength="20" pattern="^[0-9A-Za-z]+$">
+      番号 : <input type="text" name="accountnum" pattern="^[0-9A-Za-z]+$"title="※半角英数" maxlength="20" >
     </p>
 
     <p>
-      パスワード : <input type="password" name="pass" required maxlength="71" pattern="^([a-zA-Z0-9._-#!?+*$%()&]{8,})$">
+      パスワード : <input type="password" name="pass" required  onpaste="return false" maxlength="71">
     </p>
 
     <p>
