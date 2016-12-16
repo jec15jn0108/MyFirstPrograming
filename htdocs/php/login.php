@@ -26,8 +26,9 @@
      if(!empty($accountnum) && $isExistNum == 0){
        setcookie('number', $accountnum, 0, "/"); //生徒ログイン成功
      } else {
-       setcookie('login_error', "番号を入力してください", 0, "/");
-       header("Location: " . $_SERVER['DOCUMENT_ROOT'] . "/index.html");
+       setcookie('login_error', "1", time() + 1, "/");
+      //  header("Location: " . $_SERVER['DOCUMENT_ROOT'] . "/index.html");
+       echo '<script type="text/javascript">window.location.href = `/index.html`;</script>';
        exit();
      }
    }
@@ -37,9 +38,8 @@
    header( "Location: ../main.html" );
    exit();
  } else {
-   print("ログインに失敗しました<br>");
+   setcookie('login_error', "0", time() + 1, "/");
+  //  header("Location: " . $_SERVER['DOCUMENT_ROOT'] . "/index.html");
+   echo '<script type="text/javascript">window.location.href = `/index.html`;</script>';
+   exit();
  }
-
-function login() {
-
-}

@@ -11,29 +11,36 @@ body{
 }
 
 button {
-  width: 96px !important;
-  height: 30px !important;
+  width: 96px;
+  height: 30px;
   margin: 5px;
 }
 
 
 #header {
   margin-bottom: 10px;
+  /*border: solid 1px black;*/
+  height: 60px;
 }
 
 #header1 {
   float:left;
   /*margin-right: 10px;*/
-  padding-bottom: 6px;
+  /*padding-bottom: 6px;*/
   border: solid 1px black;
 }
 
-#header2 {
+#teacher-header {
   padding-top: 5px;
   padding-bottom: 5px;
   border: solid 1px black;
   width: 450px;
   margin-left: auto;
+}
+
+#teacher-header button {
+  width: 100px;
+  margin-right: auto;
 }
 
 #enchant-stage {
@@ -79,6 +86,10 @@ ul.tab.palette li {
 }
 
 .tabContent.palette {
-
   float: left;
+}
+
+.drag-and-drop {
+  padding: 4px;
+  border: solid 1px black;
 }

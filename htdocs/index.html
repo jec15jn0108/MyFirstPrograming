@@ -12,14 +12,15 @@
   <h1>My First Programing</h1>
 
   <form method="post" action="/php/login.php">
+    <p id="error-login"></p>
     <p>
       団体ID : <input type="text" name="teamid" required pattern="^[0-9A-Za-z]+$"title="※半角英数"maxlength="32">
     </p>
-
     <p>
       ユーザID : <input type="text" name="accountid" required pattern="^[0-9A-Za-z]+$"title="※半角英数" maxlength="32">
       &nbsp;
       番号 : <input type="text" name="accountnum" pattern="^[0-9A-Za-z]+$"title="※半角英数" maxlength="20" >
+      <p id="error-number"></p>
     </p>
 
     <p>
@@ -34,5 +35,24 @@
   <p>
     <button onclick="location.href='/register.html'">新規登録</button>
   </p>
+  <script type="text/javascript">
+  window.onload = function(){
+    var errName = [
+      "error-login",
+      "error-number",
+    ];
+    // var msg = get_cookie("login_failure");
+    var msg = [
+      "ログインできませんでした。",
+      "番号を入力してください。",
+    ];
+    var errNum = get_cookie("login_error");
+    if (errNum != null) {
+      // console.log(msg);
+      var element = document.getElementById(errName[errNum]);
+      element.innerHTML = msg[errNum];
+    }
+  }
+  </script>
 </body>
 </html>

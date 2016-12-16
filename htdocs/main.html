@@ -7,6 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <script type="text/javascript" src="/js/enchant.js/build/enchant.js"></script>
   <script type="text/javascript" src="/js/main.js"></script>
+  <script type="text/javascript" src="/js/get_cookie.js"></script>
 
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -18,16 +19,18 @@
   <link rel="stylesheet" type="text/css" href="/css/drag_and_drop.css">
   <title>M.F.P.</title>
 
+
+
 </head>
 
 <body>
   <div id="header">
     <div id="header1">
       <ul class="tab stage">
-          <li class="active">順次</li>
-          <li>判断</li>
-          <li>繰返し</li>
-          <li>応用</li>
+        <li class="active">順次</li>
+        <li>判断</li>
+        <li>繰返し</li>
+        <li>応用</li>
       </ul>
 
       <div class="tabContent stage active">This is the content of TAB 1.</div>
@@ -35,15 +38,15 @@
       <div class="tabContent stage">This is the content of TAB 3.</div>
       <div class="tabContent stage">This is the content of TAB 4.</div>
 
-    <!-- <button onclick="">チュートリアル</button> -->
+      <!-- <button onclick="">チュートリアル</button> -->
+    </div>
+    <div id="teacher-header">
+      <button onclick='window.location.href="/stage_create.html";' class="teacher-btn">ステージ作成</button>
+      <button onclick='window.open("/progress.html");' class="teacher-btn">進捗管理</button>
+      <button onclick='window.location.href="/config_base.html";' class="teacher-btn">設定変更</button>
+      <button onclick='window.location.href="/php/logout.php";'>ログアウト</button>
+    </div>
   </div>
-  <div id="header2">
-    <button onclick='window.location.href="/stage_create.html";' class="teather_btn">ステージ作成</button>
-    <button onclick='window.open("/progress.html");' class="teather_btn">進捗管理</button>
-    <button onclick='window.location.href="/config_base.html";' class="teather_btn">設定変更</button>
-    <button onclick='window.location.href="/";'>ログアウト</button>
-  </div>
-</div>
 
 
 <div id="enchant-stage">
@@ -58,10 +61,28 @@
   </ul>
 
   <div id="blocks">
-
+    <div class="drag-and-drop b1">
+      上に移動
+    </div>
+    <br />
+    <br />
+    <div class="drag-and-drop b2">
+      下に移動
+    </div>
   </div>
 </div>
   <script type="text/javascript" src="/js/tab.js"></script>
   <script type="text/javascript" src="/js/drag_and_drop.js"></script>
+  <script type="text/javascript">
+  var elements = document.getElementsByClassName("teacher-btn");
+    if (get_cookie("is_teacher") == "false") {
+      for ( var i = 0, l = elements.length; l > i; i++ ) {
+        var el = elements[i];
+        el.style.display="none";
+      }
+    } else {
+
+    }
+  </script>
 </body>
 </html>

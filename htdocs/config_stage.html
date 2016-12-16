@@ -30,10 +30,10 @@
           <option value="9">9</option>
         </select>
         <p>
-          <input type="button" name="ue" onclick="moveUpElement('junji')" value="上へ移動">
+          <input type="button" name="ue" onclick="moveUpElement('junji','tishi')" value="上へ移動">
         </p>
         <p>
-          <input type="button" name="shita" onclick="moveDownElement('junji')" value="下へ移動">
+          <input type="button" name="shita" onclick="moveDownElement('junji','tishi')" value="下へ移動">
         </p>
         <p>
           <input type="submit" name="delete"onclick="removeOption('junji','tishi')" value="削除">
@@ -62,10 +62,10 @@
           <option value="9">9</option>
         </select>
         <p>
-          <input type="button" name="ue" onclick="moveUpElement('bunki')" value="上へ移動">
+          <input type="button" name="ue" onclick="moveUpElement('bunki','tishi2')" value="上へ移動">
         </p>
         <p>
-          <input type="button" name="shita" onclick="moveDownElement('bunki')" value="下へ移動">
+          <input type="button" name="shita" onclick="moveDownElement('bunki','tishi2')" value="下へ移動">
         </p>
         <p>
           <input type="submit" name="delete" onclick="removeOption('bunki','tishi2')" value="削除">
@@ -94,10 +94,10 @@
           <option value="9">9</option>
         </select>
         <p>
-          <input type="button" name="ue" onclick="moveUpElement('kurikaeshi')" value="上へ移動">
+          <input type="button" name="ue" onclick="moveUpElement('kurikaeshi','tishi3')" value="上へ移動">
         </p>
         <p>
-          <input type="button" name="shita" onclick="moveDownElement('kurikaeshi')" value="下へ移動">
+          <input type="button" name="shita" onclick="moveDownElement('kurikaeshi','tishi3')" value="下へ移動">
         </p>
         <p>
           <input type="submit" name="delete" onclick="removeOption('kurikaeshi','tishi3')"value="削除">
@@ -126,10 +126,10 @@
           <option value="9">9</option>
         </select>
         <p>
-          <input type="button" name="ue" onclick="moveUpElement('ouyou')" value="上へ移動">
+          <input type="button" name="ue" onclick="moveUpElement('ouyou','tishi4')" value="上へ移動">
         </p>
         <p>
-          <input type="button" name="shita" onclick="moveDownElement('ouyou')" value="下へ移動">
+          <input type="button" name="shita" onclick="moveDownElement('ouyou','tishi4')" value="下へ移動">
         </p>
         <p>
           <input type="submit" name="delete" onclick="removeOption('ouyou','tishi4')" value="削除">
@@ -144,26 +144,28 @@
 </body>
 </form>
 <script type="text/javascript">
-function moveUpElement($id) {
+function moveUpElement($id,$tishi) {
 var selectbox = document.getElementById($id);
 var option_list = selectbox.getElementsByTagName('option');
 for (var i = 0; i < option_list.length; i++) {
   if (option_list[i].selected) {
-    if (i > 0 && !option_list[i-1].selected) {
-      selectbox.insertBefore(selectbox.removeChild(option_list[i]), option_list[i-1]);
+    if (i > 0 && !option_list[i - 1].selected) {
+      selectbox.insertBefore(selectbox.removeChild(option_list[i]), option_list[i - 1]);
+      document.getElementById($tishi).innerHTML="<font color='red'></font>";
       }
     }
   }
   selectbox.focus();
 }
 
-function moveDownElement($id) {
+function moveDownElement($id,$tishi) {
 var selectbox = document.getElementById($id);
 var option_list = selectbox.getElementsByTagName('option');
-for (var i = option_list.length-1; i >= 0; i--) {
+for (var i = option_list.length - 1; i >= 0; i--) {
   if (option_list[i].selected) {
-    if (i < option_list.length-1 && !option_list[i+1].selected) {
-      selectbox.insertBefore(selectbox.removeChild(option_list[i+1]), option_list[i]);
+    if (i < option_list.length - 1 && !option_list[i + 1].selected) {
+      selectbox.insertBefore(selectbox.removeChild(option_list[i + 1]), option_list[i]);
+      document.getElementById($tishi).innerHTML="<font color='red'></font>";
       }
     }
   }

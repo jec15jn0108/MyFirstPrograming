@@ -24,7 +24,7 @@
      return $stmt->rowCount();
    }
 
-   function geAlltAccount(){
+   function getAlltAccount(){
      $sql = "SELECT * FROM account";
      try{
        $stmt = $this->pdo->query($sql);

@@ -50,7 +50,7 @@ try{
   $sql = "CREATE TABLE account (
     accountID char(32),
     teamID char(32),
-    pass char(256),
+    pass char(255),
     isTeacher bit,
     PRIMARY KEY(accountID, teamID),
     FOREIGN KEY(teamID)
@@ -75,8 +75,8 @@ try{
     stageID int auto_increment,
     teamID char(32),
     genreID char(1),
-    stageFileUrl varchar(512),
-    answerFileUrl varchar(512),
+    stageFileUrl varchar(255),
+    answerFileUrl varchar(255),
     stageNumber int,
     PRIMARY KEY(stageID, teamID),
     FOREIGN KEY(teamID)
@@ -86,6 +86,23 @@ try{
   $pdo->exec($sql);
 
   echo "stageさくせす<br />";
+
+  $sql = "CREATE TABLE progress (
+    progressNumber char(20),
+    accountID char(32),
+    teamID char(32),
+    clearNum int,
+    nowStage int,
+    PRIMARY KEY(progressNumber, accountID, teamID),
+    FOREIGN KEY(accountID)
+    REFERENCES account(accountID),
+    FOREIGN KEY(teamID)
+    REFERENCES team(teamID)
+   )";
+
+  $pdo->exec($sql);
+
+  echo "progressさくせす<br />";
 }catch (PDOException $e){
   echo $e->getMessage();
 }
