@@ -11,12 +11,13 @@
   <p>団体ID : xxxxxxxxx</p>
   <p>団体名 : yyyyyyyyyy</p>
   <p>アカウントID : gggggggggg</p>
-   <form method="post" action="">
+   <form method="post" action="/php/config_teacher.php" target="_self">
      <p>パスワード変更</p>
-     <p>現在のパスワード : <input type="password" name="pass" required></p>
+     <p>現在のパスワード : <input type="password" name="currentpass" required></p>
+     <p id="error-number"></p>
      <p>新しいパスワード : <input type="password" name="newpass" required></p>
      <p>もう一度入力 : <input type="password" name="re-typingpass" required></p>
-     <p><input type="submit" value="パスワードを更新"></p>
+     <p><input type="submit" name="submit" value="パスワードを更新"></p>
    </form>
 
    <form method="post" action="">
@@ -27,6 +28,22 @@
      <p><input type="submit" value="パスワードを更新"></p>
    </form>
    <p>このアカウントの削除 : <input type="button" value="削除" onclick="alert('アカウントID : gggggggggを削除します')"></p>
-
+   <script type="text/javascript">
+   window.onload = function(){
+     var errName = [
+       "error-number",
+     ];
+     // var msg = get_cookie("login_failure");
+     var msg = [
+       "番号を入力してください。",
+     ];
+     var errNum = get_cookie("error-number");
+     if (errNum != null) {
+       // console.log(msg);
+       var element = document.getElementById(errName[errNum]);
+       element.innerHTML = msg[errNum];
+     }
+   }
+   </script>
 </body>
 </html>

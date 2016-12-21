@@ -13,13 +13,13 @@
    $accountId = $_COOKIE['account'];
    $teamId = $_COOKIE['team'];
    $newpass = $_POST['newpass'];
+   $currentpass = $_POST['currentpass'];
+   $teacherbox = 'teacherbox';
 
-   $ac->updateAccountPass($accountId, $teamId, $newpass);
-
- }
-
- function newTeacherCleate(){
-   
-
-
+   $isLogin = $ac->athentication($teamId, $accountId, $currentpass);
+   if ($isLogin == true) {
+     $ac->updateAccountPass($accountId, $teamId, $newpass);
+   } else {
+     setcookie('number_error', "1", time() + 1, "/");
+   }
  }
