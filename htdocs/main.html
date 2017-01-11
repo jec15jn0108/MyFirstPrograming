@@ -5,11 +5,17 @@
   <meta http-equiv="x-ua-compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <script type="text/javascript" src="/js/enchant.js/build/enchant.js"></script>
-  <script type="text/javascript" src="/js/main.js"></script>
+  <!-- <script type="text/javascript" src="/js/enchant.js/build/enchant.js"></script> -->
+  <!-- <script type="text/javascript" src="/js/main.js"></script> -->
   <script type="text/javascript" src="/js/get_cookie.js"></script>
 
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/google-blockly/blockly_compressed.js"></script>
+  <script type="text/javascript" src="/js/google-blockly/blocks_compressed.js"></script>
+  <script type="text/javascript" src="/js/google-blockly/msg/js/en.js"></script>
+  <script type="text/javascript" src="/js/google-blockly/javascript_compressed.js"></script>
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
   <script src="code_mirror/lib/codemirror.js"></script>
   <link rel="stylesheet" href="code_mirror/lib/codemirror.css">
@@ -17,8 +23,10 @@
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <link rel="stylesheet" type="text/css" href="/css/tab.css">
   <link rel="stylesheet" type="text/css" href="/css/drag_and_drop.css">
-  <title>M.F.P.</title>
 
+
+
+  <title>M.F.P.</title>
 
 
 </head>
@@ -52,25 +60,27 @@
 <div id="enchant-stage">
 </div>
 
-<div id="palette">
-  <div class="tabContent palette active">This is the content of TAB 1.</div>
-  <div class="tabContent palette">This is the content of TAB 2.</div>
-  <ul class="tab palette">
-      <li class="active">図形</li>
-      <li>コード</li>
-  </ul>
+<div id="blocklyArea"></div>
+<div id="blocklyDiv" style="position: absolute" ></div>
 
-  <div id="blocks">
-    <div class="drag-and-drop b1">
-      上に移動
-    </div>
-    <br />
-    <br />
-    <div class="drag-and-drop b2">
-      下に移動
-    </div>
-  </div>
-</div>
+<xml id="toolbox" style="display: none">
+  <category name="Control">
+    <block type="controls_if"></block>
+    <block type="controls_whileUntil"></block>
+    <block type="controls_for">
+  </category>
+  <category name="Logic">
+    <block type="logic_compare"></block>
+    <block type="logic_operation"></block>
+    <block type="logic_boolean"></block>
+  </category>
+</xml>
+
+<button onclick="showCode()">Show JavaScript</button>
+
+<script type="text/javascript" src="/js/main_blockly.js"></script>
+
+
   <script type="text/javascript" src="/js/tab.js"></script>
   <script type="text/javascript" src="/js/drag_and_drop.js"></script>
   <script type="text/javascript">
