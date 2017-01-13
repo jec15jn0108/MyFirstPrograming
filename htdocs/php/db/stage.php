@@ -4,8 +4,7 @@
 * Author   : Onogaki Kaichi
 * Remark   : stageテーブルへアクセスするクラス
 */
-include_once ($_SERVER['DOCUMENT_ROOT'] . '/php/db/db_operator.php');
-
+ include_once ($_SERVER['DOCUMENT_ROOT'] . '/php/db/db_operator.php');
 class Stage extends DbOperator {
 
  /*=========================================================
@@ -49,7 +48,7 @@ class Stage extends DbOperator {
  /*
   * genreIDごとにSELECT
   */
-  function selectStageGenre($teamID, $genreID){
+  function selectStageGenre($teamId, $genreId){
     $sql = "SELECT * FROM stage WHERE teamID = :teamId AND genreID = :genreId";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
@@ -148,7 +147,7 @@ function updateStageGenre($teamId, $stageId, $value){
 function updateStageNumber($teamId, $stageId, $value){
   $sql = "UPDATE stage SET stageNumber = :value WHERE stageID = :stageId AND teamID = :teamId";
   $stmt = $this->pdo->prepare($sql);
-  $stmt->bindParam(':value', $value, PDO::PARAM_INT);
+  $stmt->bindParam(':value', $value, PDO::PARAM_STR);
   $stmt->bindParam(':stageId', $stageId, PDO::PARAM_STR);
   $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
 

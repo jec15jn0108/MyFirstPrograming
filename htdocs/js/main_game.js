@@ -1,0 +1,3 @@
+function forward() {
+  alert("forward()");
+}

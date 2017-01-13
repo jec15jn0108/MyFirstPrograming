@@ -50,8 +50,8 @@ try{
   $sql = "CREATE TABLE account (
     accountID char(32),
     teamID char(32),
-    pass char(255),
-    isTeacher bit,
+    pass char(255) not null,
+    isTeacher bit not null,
     PRIMARY KEY(accountID, teamID),
     FOREIGN KEY(teamID)
     REFERENCES team(teamID)

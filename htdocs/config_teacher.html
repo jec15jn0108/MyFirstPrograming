@@ -3,16 +3,23 @@
 <head>
   <meta charset="utf-8">
   <title>M.F.P. </title>
-
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="js\jquery-cookie-master\src\jquery.cookie.js"></script>
+  <script type="text/javascript" src="js\get_account.js"></script>
+  <script type="text/javascript">
+  $(function(){
+    initialize();
+  });
+  </script>
 </head>
-
 <body>
   <h1>教師設定画面</h1>
-  <p>団体ID : xxxxxxxxx</p>
-  <p>団体名 : yyyyyyyyyy</p>
-  <p>アカウントID : gggggggggg</p>
+  <div id="team"></div>
+  <div id="teamname"></div>
+  <div id="account"></div>
    <form method="post" action="/php/config_teacher.php" target="_self">
      <p>パスワード変更</p>
+     <div id="pass_change_ok_ng"></div>
      <p>現在のパスワード : <input type="password" name="currentpass" required></p>
      <p id="error-number"></p>
      <p>新しいパスワード : <input type="password" name="newpass" required></p>
@@ -28,22 +35,5 @@
      <p><input type="submit" value="パスワードを更新"></p>
    </form>
    <p>このアカウントの削除 : <input type="button" value="削除" onclick="alert('アカウントID : gggggggggを削除します')"></p>
-   <script type="text/javascript">
-   window.onload = function(){
-     var errName = [
-       "error-number",
-     ];
-     // var msg = get_cookie("login_failure");
-     var msg = [
-       "番号を入力してください。",
-     ];
-     var errNum = get_cookie("error-number");
-     if (errNum != null) {
-       // console.log(msg);
-       var element = document.getElementById(errName[errNum]);
-       element.innerHTML = msg[errNum];
-     }
-   }
-   </script>
 </body>
 </html>

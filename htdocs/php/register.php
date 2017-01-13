@@ -28,13 +28,12 @@
     $tm->insertTeam($teamId, $teamName);
     $hashT = password_hash($tPass, PASSWORD_DEFAULT);
     $retT = $at->insertAccount($accountT,$teamId,$hashT,$isT);
-    $hashS = password_hash($sPass, PASSWORD_DEFAULT);
+    $hashS = password_hash($studentPass, PASSWORD_DEFAULT);
     $retS = $at->insertAccount($accountS,$teamId,$hashS,$isS);
     $_SESSION['teamId'] = "";
     header("Location: /index.html");
 
   }else {
-    // session_start();
     $_SESSION['teamId'] = "団体IDが存在しています";
   }
   session_unset();

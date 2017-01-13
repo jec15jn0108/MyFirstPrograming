@@ -43,7 +43,21 @@ class Team extends DbOperator {
     return $stmt->rowCount();
   }
 
+  function selectTeamName($teamId){
+    $sql = "SELECT * FROM team WHERE teamID = :id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':id', $teamId, PDO::PARAM_STR);
 
+    try{
+      $stmt->execute();
+    }catch (PDOException $e){
+      print($e->getMessage() . '<br />');
+      return false;
+    }
+    $result = $stmt->fetch(PDO::FETCH_ASSOC)["teamName"];
+
+    return $result;
+  }
 
   /*
    *  teamテーブルへINSERT
