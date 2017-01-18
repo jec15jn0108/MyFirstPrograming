@@ -55,19 +55,19 @@ button {
 }
 
 #palette {
-  width: 700px;
-  height: 800px;
+  width: 60%;
+  height: 90%;
   border: solid 1px black;
   margin-left: auto;
   margin-right: 10px;
 }
 
-#blocks {
+/*#blocks {
   width: 700px;
   height: 100px;
   border-top: solid 1px black;
   margin-top: 700px;
-}
+}*/
 
 .tabContent.stage {
   clear: both;
@@ -104,7 +104,11 @@ ul.tab.palette li {
   width: 100%;
 }*/
 #blocklyArea {
-  height: 90%;
-  width: 60%;
-  float: right;
+  height: 99%;
+  width: 85%;
+  /*float: right;*/
+}
+
+#blocklyDiv {
+  width: 100%;
 }

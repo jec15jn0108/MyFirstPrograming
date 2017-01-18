@@ -1,3 +1,5 @@
-function forward() {
-  alert("forward()");
-}
+var turtle = {
+  forword : function(){
+    alert("forword()");
+  }
+};

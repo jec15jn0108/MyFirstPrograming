@@ -1,5 +1,5 @@
+<?php include "/php/config_stage.php"?>
 <!DOCTYPE html>
-<!-- <?php include "/php/config_stage.php"?> -->
 <html>
 <head>
   <meta charset="utf-8">
@@ -9,7 +9,7 @@
 
 <body>
   <h1>ステージ管理画面</h1>
-  <form action="/php/config_stage.php" method="post">
+  <form>
 
   </form>
   <div id="buju" >
@@ -19,19 +19,18 @@
           <legend><b>順次</b></legend>
       </p>
       <p>
-          <?php
-              $i = 0;
-              include_once($_SERVER['DOCUMENT_ROOT'] . '/php/db/stage.php');
-              $st = new Stage();
-              $ret = $st->selectStageGenre("JN01","1");
-              $result = $ret->fetchAll();
-            echo '<select name="aaa" multiple="multiple"  size="9" required>' . "\n";
-            foreach($result as $row){
-              echo ('<option value = "$i++">' . $row['stageNumber'].'</option>' . "\n");
-            }
-            echo '<\select>' . "\n";
-          ?>
-        </p>
+        <script LANGUAG="JavaScript">
+        document.write("<select id='junji' name='junji'multiple='multiple' size='9' required>");
+        var arr = $result;
+        for(i=0;i<arr.length;i++){
+          document.write("<OPTION value='");
+          document.write(i);
+          document.write("'>");
+          document.write($result.stageNumber);
+          document.write("</OPTION>");
+        }
+        </script>
+      </p>
         <p>
           <input type="button" name="ue" onclick="moveUpElement('junji','tishi')" value="上へ移動">
         </p>

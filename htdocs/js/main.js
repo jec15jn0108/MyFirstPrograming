@@ -1,24 +1,29 @@
 enchant();
 
 window.onload = function() {
-  var game = new Core(520, 592);
+  var x = window.innerWidth / 100 * 35;
+  var y = window.innerHeight / 100 * 35;
+  console.log(x + ":" + y);
+  var game = new Core(x, x);
 
   var charaImage = "/js/enchant.js/images/chara1.png";
 
   game.preload(charaImage);
 
   game.onload = function(){
-
-    var sprite = new Sprite(2000, 1000);
-    sprite.x = 10;
-    sprite.y = 10;
-    var surface = new Surface(2000, 1000);
+    var x = window.innerWidth / 100 * 35;
+    var y = window.innerHeight / 100 * 35;
+    console.log(x + ":" + y);
+    var sprite = new Sprite(x, x);
+    sprite.x = 0;
+    sprite.y = 0;
+    var surface = new Surface(x, x);
     sprite.image = surface;
     var ctx = surface.context;
     ctx.strokeStyle = "rgb(0, 0, 0)";
-    ctx.strokeRect(1, 1, 500, 780);
-    ctx.strokeRect(1, 500, 500, 80);
-    ctx.strokeRect(520, 1, 700, 780);
+    ctx.strokeRect(10, 10, x - 20 , x - 20);
+    // ctx.strokeRect(1, 500, 500, 80);
+    // ctx.strokeRect(520, 1, 700, 780);
     ctx.stroke();
 
 
