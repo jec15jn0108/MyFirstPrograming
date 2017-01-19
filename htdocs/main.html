@@ -5,27 +5,29 @@
   <meta http-equiv="x-ua-compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <script type="text/javascript" src="/js/enchant.js/build/enchant.js"></script>
-  <script type="text/javascript" src="/js/main.js"></script>
+
+  <script type="text/javascript" src="/apis/enchant.js/build/enchant.js"></script>
   <script type="text/javascript" src="/js/get_cookie.js"></script>
 
-  <script type="text/javascript" src="/js/google-blockly/blockly_compressed.js"></script>
-  <script type="text/javascript" src="/js/google-blockly/blocks_compressed.js"></script>
-  <script type="text/javascript" src="/js/google-blockly/msg/js/en.js"></script>
-  <script type="text/javascript" src="/js/google-blockly/javascript_compressed.js"></script>
-  <script type="text/javascript" src="/js/JS-Interpreter/acorn_interpreter.js"></script>
-  <script type="text/javascript" src="/js/blocks.js"></script>
-  <script type="text/javascript" src="/js/main_game.js"></script>
+  <script type="text/javascript" src="/apis/google-blockly/blockly_compressed.js"></script>
+  <script type="text/javascript" src="/apis/google-blockly/blocks_compressed.js"></script>
+  <script type="text/javascript" src="/apis/google-blockly/msg/js/en.js"></script>
+  <script type="text/javascript" src="/apis/google-blockly/javascript_compressed.js"></script>
+  <script type="text/javascript" src="/apis/JS-Interpreter/acorn_interpreter.js"></script>
+  <script type="text/javascript" src="/js/main/blocks.js"></script>
+  <script type="text/javascript" src="/js/main/main_game.js"></script>
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-  <script src="code_mirror/lib/codemirror.js"></script>
-  <link rel="stylesheet" href="code_mirror/lib/codemirror.css">
-  <script src="code_mirror/mode/javascript/javascript.js"></script>
+  <script src="/apis/code_mirror/lib/codemirror.js"></script>
+  <link rel="stylesheet" href="/apis/code_mirror/lib/codemirror.css">
+  <script src="/apis/code_mirror/mode/javascript/javascript.js"></script>
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <link rel="stylesheet" type="text/css" href="/css/tab.css">
   <link rel="stylesheet" type="text/css" href="/css/drag_and_drop.css">
+
+  <script type="text/javascript" src="/js/main/main.js"></script>
 
 
 
@@ -66,7 +68,12 @@
   <div class="tabContent palette active" id="blocklyArea">
     <div id="blocklyDiv" style="position: absolute" ></div>
   </div>
-  <div class="tabContent palette">This is the content of TAB 2.</div>
+  <div class="tabContent palette" >
+    <div>
+      <textarea id="codeEditor"></textarea>
+    </div>
+  </div>
+
   <ul class="tab palette">
       <li class="active">図形</li>
       <li>コード</li>
@@ -212,7 +219,7 @@
 <button onclick="runCode()">run</button>
 <button onclick="showCode()">show</button>
 
-<script type="text/javascript" src="/js/main_blockly.js"></script>
+<script type="text/javascript" src="/js/main/main_blockly.js"></script>
 
 
   <script type="text/javascript" src="/js/tab.js"></script>
@@ -227,6 +234,15 @@
     } else {
 
     }
+  </script>
+
+  <script type="text/javascript">
+  var jsEditor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
+      mode: "javascript",
+      lineNumbers: true,
+      indentUnit: 4,
+      value: "var x = 10;"
+  });
   </script>
 </body>
 </html>

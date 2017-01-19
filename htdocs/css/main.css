@@ -33,13 +33,13 @@ button {
   float:left;
   /*margin-right: 10px;*/
   /*padding-bottom: 6px;*/
-  border: solid 1px black;
+  /*border: solid 1px black;*/
 }
 
 #teacher-header {
   padding-top: 5px;
   padding-bottom: 5px;
-  border: solid 1px black;
+  /*border: solid 1px black;*/
   width: 450px;
   margin-left: auto;
 }
@@ -111,4 +111,10 @@ ul.tab.palette li {
 
 #blocklyDiv {
   width: 100%;
+}
+
+
+#codeEditor {
+  width: 90%;
+  height: 90%;
 }
