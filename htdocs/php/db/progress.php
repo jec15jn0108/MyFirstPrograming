@@ -120,6 +120,21 @@ function deleteProgress($accountId, $teamId){
   return $stmt->rowCount();
 }
 
+/*teamIDを元にすべてを無に還す*/
+function deleteProgressAll($teamId){
+  $sql = "DELETE FROM progress WHERE teamID = :teamId";
+  $stmt = $this->pdo->prepare($sql);
+  $stmt->bindParam('teamId', $teamId, PDO::PARAM_STR);
+
+  try{
+    $result = $stmt->execute();
+  } catch (PDOException $e){
+    print($e->getMessage() . '<br />');
+    return false;
+  }
+  return $stmt->rowCount();
+}
+
 /*
  *　UPDATE類
  */

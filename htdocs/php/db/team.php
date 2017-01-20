@@ -96,5 +96,4 @@ class Team extends DbOperator {
 
     return $stmt->rowCount();
   }
-
 }

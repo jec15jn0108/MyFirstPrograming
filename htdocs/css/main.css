@@ -52,6 +52,7 @@ button {
 #enchant-stage {
   clear: both;
   float: left;
+  margin: 10px;
 }
 
 #palette {

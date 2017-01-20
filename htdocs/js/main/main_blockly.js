@@ -60,6 +60,14 @@ function initApi(interpreter, scope) {
   };
   interpreter.setProperty(scope, 'highlightBlock',
     interpreter.createNativeFunction(wrapper));
+
+  // Add TurtleAPI
+  var wrapper = function() {
+    // id = id ? id.toString() : '';
+    return interpreter.createPrimitive(turtle.forword());
+  };
+  interpreter.setProperty(scope, 'forword',
+    interpreter.createNativeFunction(wrapper));
 }
 
 var highlightPause = false;
@@ -90,7 +98,7 @@ function stepCode() {
       // Program complete, no more code to execute.
       document.getElementById('stepButton').disabled = 'disabled';
       workspace.highlightBlock(null);
-      return;
+      return false;
     }
   }
   if (highlightPause) {
@@ -100,21 +108,27 @@ function stepCode() {
     // Keep executing until a highlight statement is reached.
     stepCode();
   }
+  return true;
 }
 
 function runCode() {
+  // Blockly.JavaScript.addReservedWords('code');
   // var code = Blockly.JavaScript.workspaceToCode(workspace);
-  // myInterpreter = new Interpreter(code, initApi);
-  // myInterpreter.run();
+  // try {
+  //   eval(code);
+  // } catch (e) {
+  //   alert(e);
+  // }
   // workspace.highlightBlock(null);
-  Blockly.JavaScript.addReservedWords('code');
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
-  try {
-    eval(code);
-  } catch (e) {
-    alert(e);
+
+  parseCode();
+  if (myInterpreter.step()) {
+    var runTime = setInterval(function() {
+      if (!stepCode()) {
+        clearInterval(runTime);
+      }
+    }, 100);
   }
-  workspace.highlightBlock(null);
 }
 
 function showCode() {

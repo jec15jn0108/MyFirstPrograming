@@ -13,6 +13,6 @@ Blockly.Blocks['forword'] = {
 
 Blockly.JavaScript['forword'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = 'turtle.forword();\n';
+  var code = 'forword();\n';
   return code;
 };
