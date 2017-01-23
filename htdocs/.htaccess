@@ -1,0 +1,19 @@
+# 拡張子の省略
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html
+
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+# indexの表示なしに統一
+Options +FollowSymLinks
+RewriteEngine on
+RewriteCond %{THE_REQUEST} ^.*/index.(html|php)
+RewriteRule ^(.*)index.(html|php)$ http://%{HTTP_HOST}/$1 [R=301,L]
+
+#ファイルを隠す
+<Files ~ "\.(txt|js|ht*)$">
+order allow,deny
+deny from all
+</Files>

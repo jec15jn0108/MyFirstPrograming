@@ -67,8 +67,6 @@
      return $stmt->fetchColumn();
    }
 
-   }
-
 
    /* ユーザ認証 */
    function athentication($teamId, $accountId, $pass) {
