@@ -13,7 +13,7 @@ RewriteCond %{THE_REQUEST} ^.*/index.(html|php)
 RewriteRule ^(.*)index.(html|php)$ http://%{HTTP_HOST}/$1 [R=301,L]
 
 #ファイルを隠す
-<Files ~ "\.(txt|js|ht*)$">
+<Files ~ "\.(txt|ht*)$">
 order allow,deny
 deny from all
 </Files>
