@@ -9,11 +9,7 @@ body{
   overflow-y:hidden;
 }
 
-#code{
-  display: none;
-  width: 300px;
-  height: 10px;
-}
+
 
 button {
   width: 96px;
@@ -86,6 +82,7 @@ ul.tab.palette li {
   width: 40px;
   height: 200px;
   text-align: center;
+  position: relative;
 }
 
 .tab.palette {
@@ -106,8 +103,7 @@ ul.tab.palette li {
 }*/
 #blocklyArea {
   height: 99%;
-  width: 85%;
-  /*float: right;*/
+  width: 88%;
 }
 
 #blocklyDiv {
@@ -116,6 +112,5 @@ ul.tab.palette li {
 
 
 #codeEditor {
-  width: 90%;
-  height: 90%;
+  position: absolute;
 }

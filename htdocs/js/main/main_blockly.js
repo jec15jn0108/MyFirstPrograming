@@ -68,6 +68,13 @@ function initApi(interpreter, scope) {
   };
   interpreter.setProperty(scope, 'forword',
     interpreter.createNativeFunction(wrapper));
+
+    var wrapper = function() {
+      // id = id ? id.toString() : '';
+      return interpreter.createPrimitive(turtle.back());
+    };
+    interpreter.setProperty(scope, 'back',
+      interpreter.createNativeFunction(wrapper));
 }
 
 var highlightPause = false;

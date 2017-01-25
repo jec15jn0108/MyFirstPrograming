@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="/apis/enchant.js/build/enchant.js"></script>
   <script type="text/javascript" src="/js/get_cookie.js"></script>
 
@@ -20,11 +22,6 @@
   <script type="text/javascript" src="/apis/JS-Interpreter/acorn.js"></script>
   <script type="text/javascript" src="/apis/JS-Interpreter/interpreter.js"></script>
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
-  <script src="/apis/code_mirror/lib/codemirror.js"></script>
-  <link rel="stylesheet" href="/apis/code_mirror/lib/codemirror.css">
-  <script src="/apis/code_mirror/mode/javascript/javascript.js"></script>
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <link rel="stylesheet" type="text/css" href="/css/tab.css">
   <link rel="stylesheet" type="text/css" href="/css/drag_and_drop.css">
@@ -71,9 +68,7 @@
     <div id="blocklyDiv" style="position: absolute" ></div>
   </div>
   <div class="tabContent palette" >
-    <div>
-      <textarea id="codeEditor"></textarea>
-    </div>
+    <div id="codeEditor"></div>
   </div>
 
   <ul class="tab palette">
@@ -81,141 +76,141 @@
       <li>コード</li>
   </ul>
 </div>
-<!-- <div id="blocklyArea"></div> -->
 <div id="blocklyDiv" style="position: absolute" ></div>
 
-
-  <xml id="toolbox" style="display: none">
-    <category name="Logic">
-      <block type="controls_if"></block>
-      <block type="logic_compare"></block>
-      <block type="logic_operation"></block>
-      <block type="logic_negate"></block>
-      <block type="logic_boolean"></block>
-    </category>
-    <category name="Loops">
-      <block type="controls_repeat_ext">
-        <value name="TIMES">
-          <block type="math_number">
-            <field name="NUM">10</field>
-          </block>
-        </value>
-      </block>
-      <block type="controls_whileUntil"></block>
-    </category>
-    <category name="Math">
-      <block type="math_number"></block>
-      <block type="math_arithmetic"></block>
-      <block type="math_single"></block>
-    </category>
-    <category name="Text">
-      <block type="text"></block>
-      <block type="text_length"></block>
-      <block type="text_print"></block>
-      <block type="text_prompt_ext">
-        <value name="TEXT">
-          <block type="text"></block>
-        </value>
-      </block>
-    </category>
-    <category name="Variables" custom="VARIABLE"></category>
-    <category name="Functions" custom="PROCEDURE">
-      <block type="factory_base" id=";XI@O(zGNyCj==HR7+,/" deletable="false" movable="false" x="0" y="0">
-        <mutation connections="BOTH"></mutation>
-        <field name="NAME">forword</field>
-        <field name="INLINE">AUTO</field>
-        <field name="CONNECTIONS">BOTH</field>
-        <statement name="INPUTS">
-          <block type="input_dummy" id="#Tk/;JyqxF1wFb_2~is^">
-            <field name="ALIGN">LEFT</field>
-            <statement name="FIELDS">
-              <block type="field_static" id="o%Mnzb/v6yPk`kdQ6|[C">
-                <field name="TEXT">前に進む</field>
-              </block>
-            </statement>
-          </block>
-        </statement>
-        <value name="TOOLTIP">
-          <block type="text" id=":ZjaI-B3Je)sN.R6izpV" deletable="false" movable="false">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-        <value name="HELPURL">
-          <block type="text" id="f;O+k6FX^*?9v5_jkOvq" deletable="false" movable="false">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-        <value name="TOPTYPE">
-          <shadow type="type_null" id="^G//^z.M4X2lYZZwk$?!"></shadow>
-          <block type="type_null" id="IUI,a,,osR;8QTo}u%4E"></block>
-        </value>
-        <value name="BOTTOMTYPE">
-          <shadow type="type_null" id="G[rX@RWZhbAm[Q0h/R-7"></shadow>
-          <block type="type_null" id="Nnn~%;]dY7fOk6px+7mA"></block>
-        </value>
-        <value name="COLOUR">
-          <block type="colour_hue" id="=+lUf*PhQ(0)jn*mv!UP">
-            <mutation colour="#5b67a5"></mutation>
-            <field name="HUE">230</field>
-          </block>
-        </value>
-      </block>
-    </category>
-    <category name="Turtle">
-      <block type="forword"></block>
-    </category>
-  </xml>
-
-
-  <xml id="startBlocks" style="display: none">
-  <block type="variables_set" inline="true" x="20" y="20">
-    <field name="VAR">n</field>
-    <value name="VALUE">
-      <block type="math_number">
-        <field name="NUM">1</field>
-      </block>
-    </value>
-    <next>
-      <block type="controls_repeat_ext" inline="true">
-        <value name="TIMES">
-          <block type="math_number">
-            <field name="NUM">4</field>
-          </block>
-        </value>
-        <statement name="DO">
-          <block type="variables_set" inline="true">
-            <field name="VAR">n</field>
-            <value name="VALUE">
-              <block type="math_arithmetic" inline="true">
-                <field name="OP">MULTIPLY</field>
-                <value name="A">
-                  <block type="variables_get">
-                    <field name="VAR">n</field>
-                  </block>
-                </value>
-                <value name="B">
-                  <block type="math_number">
-                    <field name="NUM">2</field>
-                  </block>
-                </value>
-              </block>
-            </value>
-          </block>
-        </statement>
-        <next>
-          <block type="text_print" inline="false">
-            <value name="TEXT">
-              <block type="variables_get">
-                <field name="VAR">n</field>
-              </block>
-            </value>
-          </block>
-        </next>
-      </block>
-    </next>
-  </block>
+<!-- blockly 設定==================================================================== -->
+<xml id="toolbox" style="display: none">
+  <category name="Logic">
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
+    <block type="logic_operation"></block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean"></block>
+  </category>
+  <category name="Loops">
+    <block type="controls_repeat_ext">
+      <value name="TIMES">
+        <block type="math_number">
+          <field name="NUM">10</field>
+        </block>
+      </value>
+    </block>
+    <block type="controls_whileUntil"></block>
+  </category>
+  <category name="Math">
+    <block type="math_number"></block>
+    <block type="math_arithmetic"></block>
+    <block type="math_single"></block>
+  </category>
+  <category name="Text">
+    <block type="text"></block>
+    <block type="text_length"></block>
+    <block type="text_print"></block>
+    <block type="text_prompt_ext">
+      <value name="TEXT">
+        <block type="text"></block>
+      </value>
+    </block>
+  </category>
+  <category name="Variables" custom="VARIABLE"></category>
+  <category name="Functions" custom="PROCEDURE">
+    <block type="factory_base" id=";XI@O(zGNyCj==HR7+,/" deletable="false" movable="false" x="0" y="0">
+      <mutation connections="BOTH"></mutation>
+      <field name="NAME">forword</field>
+      <field name="INLINE">AUTO</field>
+      <field name="CONNECTIONS">BOTH</field>
+      <statement name="INPUTS">
+        <block type="input_dummy" id="#Tk/;JyqxF1wFb_2~is^">
+          <field name="ALIGN">LEFT</field>
+          <statement name="FIELDS">
+            <block type="field_static" id="o%Mnzb/v6yPk`kdQ6|[C">
+              <field name="TEXT">前に進む</field>
+            </block>
+          </statement>
+        </block>
+      </statement>
+      <value name="TOOLTIP">
+        <block type="text" id=":ZjaI-B3Je)sN.R6izpV" deletable="false" movable="false">
+          <field name="TEXT"></field>
+        </block>
+      </value>
+      <value name="HELPURL">
+        <block type="text" id="f;O+k6FX^*?9v5_jkOvq" deletable="false" movable="false">
+          <field name="TEXT"></field>
+        </block>
+      </value>
+      <value name="TOPTYPE">
+        <shadow type="type_null" id="^G//^z.M4X2lYZZwk$?!"></shadow>
+        <block type="type_null" id="IUI,a,,osR;8QTo}u%4E"></block>
+      </value>
+      <value name="BOTTOMTYPE">
+        <shadow type="type_null" id="G[rX@RWZhbAm[Q0h/R-7"></shadow>
+        <block type="type_null" id="Nnn~%;]dY7fOk6px+7mA"></block>
+      </value>
+      <value name="COLOUR">
+        <block type="colour_hue" id="=+lUf*PhQ(0)jn*mv!UP">
+          <mutation colour="#5b67a5"></mutation>
+          <field name="HUE">230</field>
+        </block>
+      </value>
+    </block>
+  </category>
+  <category name="Turtle">
+    <block type="forword"></block>
+    <block type="back"></block>
+  </category>
 </xml>
 
+
+<xml id="startBlocks" style="display: none">
+  <block type="variables_set" inline="true" x="20" y="20">
+  <field name="VAR">n</field>
+  <value name="VALUE">
+    <block type="math_number">
+      <field name="NUM">1</field>
+    </block>
+  </value>
+  <next>
+    <block type="controls_repeat_ext" inline="true">
+      <value name="TIMES">
+        <block type="math_number">
+          <field name="NUM">4</field>
+        </block>
+      </value>
+      <statement name="DO">
+        <block type="variables_set" inline="true">
+          <field name="VAR">n</field>
+          <value name="VALUE">
+            <block type="math_arithmetic" inline="true">
+              <field name="OP">MULTIPLY</field>
+              <value name="A">
+                <block type="variables_get">
+                  <field name="VAR">n</field>
+                </block>
+              </value>
+              <value name="B">
+                <block type="math_number">
+                  <field name="NUM">2</field>
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
+      </statement>
+      <next>
+        <block type="text_print" inline="false">
+          <value name="TEXT">
+            <block type="variables_get">
+              <field name="VAR">n</field>
+            </block>
+          </value>
+        </block>
+      </next>
+    </block>
+  </next>
+  </block>
+</xml>
+<!-- ================================================================================ -->
 <button onclick="parseCode()">parse</button>
 <button onclick="stepCode()" id="stepButton" disabled="disabled">step</button>
 <button onclick="runCode()">run</button>
@@ -226,25 +221,39 @@
 
   <script type="text/javascript" src="/js/tab.js"></script>
   <script type="text/javascript" src="/js/drag_and_drop.js"></script>
-  <script type="text/javascript">
-  var elements = document.getElementsByClassName("teacher-btn");
-    if (get_cookie("is_teacher") == "false") {
-      for ( var i = 0, l = elements.length; l > i; i++ ) {
-        var el = elements[i];
-        el.style.display="none";
-      }
-    } else {
 
-    }
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js"></script>
 
   <script type="text/javascript">
-  var jsEditor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
-      mode: "javascript",
-      lineNumbers: true,
-      indentUnit: 4,
-      value: "var x = 10;"
+  //ace
+  var width = window.innerWidth / 100 * 56.3;
+  var height = window.innerHeight / 100 * 88;
+  $("#codeEditor").css("width", width);
+  $("#codeEditor").css("height", height);
+  var editor = ace.edit("codeEditor");
+  editor.setTheme("ace/theme/monokai");
+  editor.setFontSize(22);
+  editor.getSession().setMode("ace/mode/html");
+  editor.getSession().setUseWrapMode(true);
+  editor.getSession().setTabSize(2);
+  editor.$blockScrolling = Infinity;
+  editor.setOptions({
+    enableBasicAutocompletion: true,
+    enableSnippets: true,
+    enableLiveAutocompletion: true
   });
+  editor.getSession().setMode("ace/mode/javascript");
+
+  editor.setValue(getCode(), -1);
+
+  function updateCode(event) {
+    editor.setValue(getCode(), -1);
+  }
+  workspace.addChangeListener(updateCode);
+
   </script>
+
+  <script type="text/javascript" src="/js/main/main.js"></script>
 </body>
 </html>
