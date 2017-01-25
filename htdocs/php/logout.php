@@ -13,5 +13,5 @@ if (isset($_SERVER['HTTP_COOKIE'])) {
   //  setcookie($name, '', time()-1000);
    setcookie($name, '', time()-1000, '/');
  }
- echo ("<script type='text/javascript'>window.location.href = '/'</script>");
+ // echo ("<script type='text/javascript'>window.location.href = '/'</script>");
 }

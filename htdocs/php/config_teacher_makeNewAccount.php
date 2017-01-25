@@ -10,7 +10,7 @@
  $teamId = $_COOKIE['team'];
  $newId = $_POST['newid'];
  $newPass = $_POST['newpass'];
- $hashnewpass = password_hash($newPass, PASSWORD_DEFAULT);
+ $hashNewpass = password_hash($newPass, PASSWORD_DEFAULT);
  $isTeacher = 1;
 
  $ovcheck = $ac->overlapCheck($teamId,$newId);
