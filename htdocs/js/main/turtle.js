@@ -1,9 +1,11 @@
 function restrictMove() {
   // 移動可能な範囲を制限
   var left   = 0;
-  var right  = window.innerWidth / 100 * 35 - character.width;
+  // var right  = window.innerWidth / 100 * 35 - character.width;
+  var right = 512 - 32;
   var top    = 0;
-  var bottom = window.innerWidth / 100 * 35 - character.height;
+  var bottom = 512 - 32;
+  // var bottom = window.innerWidth / 100 * 35 - character.height;
 
   // X軸
   if (character.x < left) {
@@ -22,8 +24,8 @@ function restrictMove() {
 var turtle = {
   forword : function(){
     // alert("forword()");
-    var x = window.innerWidth / 100 * 35;
-    character.x += x / 12;
+    // var x = window.innerWidth / 100 * 35;
+    character.x += 32;
     if (character.animeWaitCount > character.animeWaitMax) {
     	character.animeWaitCount = 0;
     	character.frame++;
@@ -35,8 +37,8 @@ var turtle = {
 
   back : function(){
     // alert("forword()");
-    var x = window.innerWidth / 100 * 35;
-    character.x -= x / 12;
+    // var x = window.innerWidth / 100 * 35;
+    character.x -= 32;
     if (character.animeWaitCount > character.animeWaitMax) {
     	character.animeWaitCount = 0;
     	character.frame++;
