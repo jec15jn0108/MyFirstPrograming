@@ -1,3 +1,14 @@
+function sleep(time) {
+  const d1 = new Date();
+  while (true) {
+    const d2 = new Date();
+    if (d2 - d1 > time) {
+      break;
+    }
+  }
+}
+
+
 function restrictMove() {
   // 移動可能な範囲を制限
   var left   = 0;
@@ -21,30 +32,90 @@ function restrictMove() {
   }
 }
 
-var turtle = {
-  forword : function(){
-    // alert("forword()");
-    // var x = window.innerWidth / 100 * 35;
-    character.x += 32;
-    if (character.animeWaitCount > character.animeWaitMax) {
-    	character.animeWaitCount = 0;
-    	character.frame++;
-    } else {
-    	character.animeWaitCount++;
+function getForwordCoordinate() {
+  var reversal;
+  if (character.direction / 2 < 1) {
+    reversal = 1;
+  } else {
+    reversal = -1;
+  }
+
+  var x = 0;
+  var y = 0;
+  if (character.direction % 2 == 0) {
+    y = character.y + 32 * reversal;
+  } else {
+    x = character.x + 32 * reversal;
+  }
+
+  return [x, y];
+}
+
+function move(fb) {
+  var reversal;
+  if (character.direction / 2 < 1) {
+    reversal = 1;
+  } else {
+    reversal = -1;
+  }
+
+  var vx = 0;
+  var vy = 0;
+
+  if (character.direction % 2 == 0) {
+    vy -= 2 * reversal * fb;
+  } else {
+    vx += 2 * reversal * fb;
+  }
+
+  if (!map.hitTest(character.x + vx * 16, character.y + vy * 16)) {
+    for (var i = 0; i < 16; i++) {
+      if (!map.hitTest(character.x + vx, character.y + vy)) {
+        character.x += vx;
+        character.y += vy;
+      }
+
+      if (character.animeWaitCount > character.animeWaitMax) {
+        character.animeWaitCount = 0;
+        character.frame++;
+        if (character.frame % 3 == 0) {
+          character.frame = character.direction * 3;
+        }
+      } else {
+        character.animeWaitCount++;
+      }
     }
-    restrictMove();
+  }
+  restrictMove();
+}
+
+function turn(rl) {
+  character.direction += rl;
+  character.direction = character.direction & 3;
+  character.frame = character.direction * 3;
+}
+
+
+// TurtleAPI ===================================================================================-
+var turtle = {
+  forword : function() {
+    move(1);
   },
 
-  back : function(){
-    // alert("forword()");
-    // var x = window.innerWidth / 100 * 35;
-    character.x -= 32;
-    if (character.animeWaitCount > character.animeWaitMax) {
-    	character.animeWaitCount = 0;
-    	character.frame++;
-    } else {
-    	character.animeWaitCount++;
-    }
-    restrictMove();
-  }
+  back : function() {
+    move(-1);
+  },
+
+  turnRight : function() {
+    turn(1);
+  },
+
+  turnLeft : function() {
+    turn(-1);
+  },
+
+  detect : function() {
+    var coord = getForwordCoordinate();
+    return map.hitTest(coord[0], coord[1]);
+  },
 };

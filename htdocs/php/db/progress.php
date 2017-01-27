@@ -79,28 +79,24 @@ function selectCount($progressNumber, $accountId, $teamId){
   return $stmt->fetch(PDO::FETCH_ASSOC)["count"];
 }
 /* progressテーブルに1行INSERT */
-function insertProgress($progressNumber , $accountId, $teamId, $clearNum, $nowStage){
-  $sql = "INSERT INTO progress (
-   progressnumber, accountID, teamID, clearNum, nowStage
- ) VALUES (
-   :progressnumber, :accountId, :teamId, :clearNum, :nowStage
- )";
+function insertProgress($progressNumber, $accountId, $teamId, $clearNum, $nowStage){
+  $sql = "INSERT INTO dbg02_15jn1.progress VALUES (:progressNumber,:accountID,:teamID,:clearNum,:nowStage)";
+  $stmt = $this->pdo->prepare($sql);
+  $stmt->bindParam(':progressNumber', $progressNumber,PDO::PARAM_STR);
+  $stmt->bindParam(':accountID', $accountId, PDO::PARAM_STR);
+  $stmt->bindParam(':teamID',$teamId, PDO::PARAM_STR);
+  $stmt->bindParam(':clearNum',$clearNum, PDO::PARAM_INT);
+  $stmt->bindParam(':nowStage',$nowStage, PDO::PARAM_INT);
 
- $stmt = $this->pdo->prepare($sql);
- $stmt->bindParam(':progressnumber', $progressNumber, PDO::PARAM_INT);
- $stmt->bindParam(':accountID', $accountId, PDO::PARAM_STR);
- $stmt->bindParam(':teamID', $teamId, PDO::PARAM_STR);
- $stmt->bindParam(':clearNum', $clearNum, PDO::PARAM_INT);
- $stmt->bindParam(':nowStage', $nowStage, PDO::PARAM_INT);
- try{
-   $stmt->execute();
- }catch (PDOException $e){
-   print($e->getMessage() . '<br>');
-   return false;
- }
-
- return $stmt->rowCount();
+  try{
+    $stmt->execute();
+  }catch (PDOException $e){
+    print($e->getMessage());
+    return false;
+  }
+  return $stmt->rowCount();
 }
+
 
 /* progressテーブルから1行DELETE */
 function deleteProgress($accountId, $teamId){

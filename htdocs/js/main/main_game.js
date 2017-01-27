@@ -1,5 +1,6 @@
 enchant();
 var character;
+var map;
 window.onload = function() {
   var x = window.innerWidth / 100 * 35;
   var y = window.innerHeight / 100 * 35;
@@ -7,15 +8,15 @@ window.onload = function() {
   var game = new Core(512, 512);
 
 
-  var charaImage  = "/apis/enchant.js/images/chara3.png";
+  var charaImage  = "/src/character.png";
   var mapImage    = "/apis/enchant.js/images/map.png";
   game.preload(charaImage, mapImage);
 
   game.onload = function(){
     // マップ====================================================
-    var backgroundMap = new Map(32, 32);
-    backgroundMap.image = game.assets[mapImage];
-    backgroundMap.loadData([
+    map = new Map(32, 32);
+    map.image = game.assets[mapImage];
+    map.loadData([
         [33,49,49,49,49,49,49,49,49,49,49,49,49,49,49,33],
         [34,20,20,20,20,20,20,20,20,20,20,20,20,20,20,32],
         [34,20,20,100,100,100,100,100,100,100,100,100,100,100,20,32],
@@ -50,7 +51,7 @@ window.onload = function() {
         [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
         [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
     ]);
-    backgroundMap.collisionData = [
+    map.collisionData = [
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
         [1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1],
@@ -70,7 +71,7 @@ window.onload = function() {
     ];
 
 
-    game.rootScene.addChild(backgroundMap);
+    game.rootScene.addChild(map);
     //==========================================================
 
     var sprite = new Sprite(x, x);
@@ -90,8 +91,11 @@ window.onload = function() {
     character.y = 2 * 32;
     // character.scaleX = 0.5;
     // character.scaleY = 0.5;
-    // character.animeWaitMax = 3;
-    // character.animeWaitCount = 0;
+    character.animeWaitMax = 3;
+    character.animeWaitCount = 0;
+
+    character.direction = 1; //初期向き
+    character.frame = character.direction * 3;
 
     game.rootScene.addChild(character);
     // game.rootScene.addChild(sprite);

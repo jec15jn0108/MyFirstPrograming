@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <title>M.F.P. </title>
+  <link rel="stylesheet" href="/css/validationEngine.jquery.css" type="text/css"/>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="/apis/jquery-validation-engine/jquery.validationEngine-ja.js"></script>
+  <script type="text/javascript" src="/apis/jquery-validation-engine/jquery.validationEngine.js"></script>
   <script type="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
   <script type="text/javascript" src="/js/get_account.js"></script>
   <script type="text/javascript" src="/js/delete_account.js"></script>
@@ -12,31 +15,36 @@
     initialize();
   });
   </script>
+  <script type="text/javascript">
+  jQuery(document).ready(function($){
+    jQuery("#passchange").validationEngine();
+  });
+
+  </script>
 </head>
 <body>
   <h1>教師設定画面</h1>
   <div id="team"></div>
   <div id="teamname"></div>
   <div id="account"></div>
-   <form method="post" action="/php/config_teacher_changepass.php" target="_self">
-     <p>パスワード変更</p>
-     <div id="pass_change_ok_ng"></div>
-     <p>現在のパスワード : <input type="password" name="currentpass" required></p>
-     <p id="error-number"></p>
-     <p>新しいパスワード : <input type="password" name="newpass" required></p>
-     <p>もう一度入力 : <input type="password" name="re-typingpass" required></p>
-     <p><input type="submit" name="submit" value="パスワードを更新"></p>
-   </form>
+  <form id="passchange" method="post" action="/php/config_teacher_changepass.php" target="_self">
+    <p>パスワード変更</p>
+    <div id="pass_change_ok_ng"></div>
+    <p>現在のパスワード : <input type="password" name="currentpass" id="currentpass" class="validate[required]"></p>
+    <p>新しいパスワード : <input type="password" name="changepass" id="changepass" class="validate[required]"></p>
+    <p>もう一度入力 : <input type="password" name="re-typingpass" class="validate[required,equals[changepass]]"></p>
+    <p><input type="submit" name="submit" value="パスワードを更新"></p>
+  </form>
 
-   <form method="post" action="/php/config_teacher_makeNewAccount.php" target="_self">
-     <p>教師アカウント新規登録</p>
-     <div id="registsuccess"></div>
-     <p>アカウントID : <input type="text" name="newid" required></p>
-     <div id="ovcheck"></div>
-     <p>パスワード : <input type="password" name="newpass" required></p>
-     <p>もう一度入力 : <input type="password" name="re-typingpass" required></p>
-     <p><input type="submit" value="パスワードを更新"></p>
-   </form>
-   <p>このアカウントの削除 : <input type="button" value="削除" onclick="deleteTeacher()"></p>
+  <form id="newaccount" method="post" action="/php/config_teacher_makeNewAccount.php" target="_self">
+    <p>教師アカウント新規登録</p>
+    <div id="registsuccess"></div>
+    <p>アカウントID : <input type="text" name="newid" id="newid" class="validate[required]"></p>
+    <div id="ovcheck"></div>
+    <p>パスワード : <input type="password" name="newpass" id="newpass" class="validate[required]"></p>
+    <p>もう一度入力 : <input type="password" name="re-typingnewpass" class="validate[required,equals[newpass]]"></p>
+    <p><input type="submit" value="新規作成"></p>
+  </form>
+  <p>このアカウントの削除 : <input type="button" value="削除" onclick="deleteTeacher()"></p>
 </body>
 </html>

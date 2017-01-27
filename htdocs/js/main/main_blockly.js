@@ -63,18 +63,34 @@ function initApi(interpreter, scope) {
 
   // Add TurtleAPI
   var wrapper = function() {
-    // id = id ? id.toString() : '';
     return interpreter.createPrimitive(turtle.forword());
   };
   interpreter.setProperty(scope, 'forword',
     interpreter.createNativeFunction(wrapper));
 
-    var wrapper = function() {
-      // id = id ? id.toString() : '';
-      return interpreter.createPrimitive(turtle.back());
-    };
-    interpreter.setProperty(scope, 'back',
-      interpreter.createNativeFunction(wrapper));
+  var wrapper = function() {
+    return interpreter.createPrimitive(turtle.back());
+  };
+  interpreter.setProperty(scope, 'back',
+    interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function() {
+    return interpreter.createPrimitive(turtle.turnRight());
+  };
+  interpreter.setProperty(scope, 'turnRight',
+    interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function() {
+    return interpreter.createPrimitive(turtle.turnLeft());
+  };
+  interpreter.setProperty(scope, 'turnLeft',
+    interpreter.createNativeFunction(wrapper));
+
+  var wrapper = function() {
+    return interpreter.createPrimitive(turtle.detect());
+  };
+  interpreter.setProperty(scope, 'detect',
+    interpreter.createNativeFunction(wrapper));
 }
 
 var highlightPause = false;

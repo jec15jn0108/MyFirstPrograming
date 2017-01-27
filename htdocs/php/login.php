@@ -13,24 +13,29 @@
  $teamId = $_POST['teamid'];
  $accountId = $_POST['accountid'];
  $pass = $_POST['pass'];
- $accountnum = $_POST['accountnum'];
+ $progressnum = $_POST['accountnum'];
+ $clearnum = 0;
+ $nowstage = 0;
 
  // $hashed = password_hash($pass, PASSWORD_DEFAULT);
 
  $isLogin = $ac->athentication($teamId, $accountId, $pass);
- $isExistNum = $pg->selectCount($accountnum, $accountId, $teamId);
+ $isExistNum = $pg->selectCount($progressnum, $accountId, $teamId);
  $isTeacher = $ac->isTeacher($accountId, $teamId);
 
  if ($isLogin == true) {
    if($isTeacher == false){
-     if(!empty($accountnum) && $isExistNum == 0){
+     if(!empty($progressnum) && $isExistNum == 0){
        setcookie('number', $accountnum, 0, "/"); //生徒ログイン成功
+       $pg->insertProgress($progressnum, $accountId, $teamId, $clearnum, $nowstage);
      } else {
        setcookie('login_error', "1", time() + 1, "/");
       //  header("Location: " . $_SERVER['DOCUMENT_ROOT'] . "/index.html");
        echo '<script type="text/javascript">window.location.href = `/index.html`;</script>';
        exit();
      }
+   } else {
+     ;//DoNotThing
    }
    setcookie('is_teacher', var_export($isTeacher, true), 0, "/");
    setcookie('team', $teamId, 0, "/");
