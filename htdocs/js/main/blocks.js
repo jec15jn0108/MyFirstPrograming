@@ -93,3 +93,33 @@ Blockly.JavaScript['detect'] = function(block) {
   var code = 'detect()' + argument0;
   return [code, order];
 };
+
+
+Blockly.Blocks['print'] = {
+  /**
+   * Block for print statement.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.TEXT_PRINT_TITLE,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TEXT"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": Blockly.Blocks.texts.HUE,
+      "tooltip": Blockly.Msg.TEXT_PRINT_TOOLTIP,
+      "helpUrl": Blockly.Msg.TEXT_PRINT_HELPURL
+    });
+  }
+};
+
+Blockly.JavaScript['print'] = function(block) {
+  var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
+      Blockly.JavaScript.ORDER_NONE) || '\'\'';
+  return 'print(' + msg + ');\n';
+};

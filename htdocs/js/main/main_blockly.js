@@ -91,6 +91,14 @@ function initApi(interpreter, scope) {
   };
   interpreter.setProperty(scope, 'detect',
     interpreter.createNativeFunction(wrapper));
+
+
+  //console API
+  var wrapper = function(text) {
+    return interpreter.createPrimitive(print(text));
+  };
+  interpreter.setProperty(scope, 'print',
+    interpreter.createNativeFunction(wrapper));
 }
 
 var highlightPause = false;
@@ -100,7 +108,11 @@ function highlightBlock(id) {
   highlightPause = true;
 }
 
+var isRunning = false;
+var isPause = false;
+
 function parseCode() {
+  reset();
   // Generate JavaScript code and parse it.
   Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
   Blockly.JavaScript.addReservedWords('highlightBlock');
@@ -108,49 +120,110 @@ function parseCode() {
   myInterpreter = new Interpreter(code, initApi);
 
   // alert('Ready to execute this code:\n\n' + code);
-  document.getElementById('stepButton').disabled = '';
+  // document.getElementById('stepButton').disabled = '';
+  isRunning = true;
   highlightPause = false;
   workspace.highlightBlock(null);
 }
 
-function stepCode() {
-  try {
-    var ok = myInterpreter.step();
-  } finally {
-    if (!ok) {
-      // Program complete, no more code to execute.
-      document.getElementById('stepButton').disabled = 'disabled';
-      workspace.highlightBlock(null);
-      return false;
+function stepCode(mode) {
+  if (isRunning) {
+    try {
+      var ok = myInterpreter.step();
+    } finally {
+      if (!ok) {
+        // Program complete, no more code to execute.
+        // document.getElementById('stepButton').disabled = 'disabled';
+        // $("#stepButton").prop("disabled", false);
+        disableStep(false);
+        // $("#runButton").prop("disabled", false);
+        // $("#pauseButton").prop("disabled", true);
+        changeRun("run");
+        isRunning = false;
+        workspace.highlightBlock(null);
+        return false;
+      }
     }
-  }
-  if (highlightPause) {
-    // A block has been highlighted.  Pause execution here.
-    highlightPause = false;
+    if (highlightPause) {
+      // A block has been highlighted.  Pause execution here.
+      highlightPause = false;
+    } else {
+      // Keep executing until a highlight statement is reached.
+      stepCode();
+    }
+    return true;
   } else {
-    // Keep executing until a highlight statement is reached.
-    stepCode();
+    if (mode == "run") {
+      return false;
+    } else {
+      parseCode();
+    }
+    // stepCode();
   }
-  return true;
 }
 
 function runCode() {
-  // Blockly.JavaScript.addReservedWords('code');
-  // var code = Blockly.JavaScript.workspaceToCode(workspace);
-  // try {
-  //   eval(code);
-  // } catch (e) {
-  //   alert(e);
-  // }
-  // workspace.highlightBlock(null);
-
-  parseCode();
+  if (!isRunning) {
+    parseCode();
+  }
+  // $("#runButton").prop("disabled", true);
+  // $("#runButton").attr("onclick", "pauseCode()");
+  changeRun("pause");
+  // $("#pauseButton").prop("disabled", false);
+  // $("#stepButton").prop("disabled", true);
+  disableStep(true);
+  isPause = false;
   if (myInterpreter.step()) {
     var runTime = setInterval(function() {
-      if (!stepCode()) {
+      if (!stepCode("run") || isPause) {
         clearInterval(runTime);
       }
-    }, 100);
+    }, 200);
+  }
+}
+
+function stopCode() {
+  // $("#stepButton").prop("disabled", false);
+  myInterpreter = null;
+  workspace.highlightBlock(null);
+  isRunning = false;
+  isPause = false;
+  // $("#runButton").attr("onclick", "runCode()");
+  changeRun("run");
+  // $("#stepButton").prop("disabled", false);
+  disableStep(false);
+}
+
+function pauseCode() {
+  isPause = true;
+  // $("#stepButton").prop("disabled", false);
+  // $("#runButton").prop("disabled", false);
+  // $("#runButton").attr("onclick", "runCode()");
+  changeRun("run");
+  disableStep(false);
+}
+
+function changeRun(mode) {
+  if (mode == "run") {
+    $("#runButton").attr("onclick", "runCode()");
+    // $("#runButton").text("Run");
+    $("#runButton > img").attr("src", "/src/ic_play_arrow_black_24dp.png");
+  } else if (mode == "pause") {
+    $("#runButton").attr("onclick", "pauseCode()");
+    // $("#runButton").text("Pause");
+    $("#runButton > img").attr("src", "/src/ic_pause_black_24dp.png");
+  } else {
+    //DoNothing
+  }
+}
+
+function disableStep(mode) {
+  if (mode == true) {
+    $("#stepButton").prop("disabled", true);
+    $("#stepButton > img").attr("src", "/src/ic_frame_forword_gray_24dp.png");
+  } else {
+    $("#stepButton").prop("disabled", false);
+    $("#stepButton > img").attr("src", "/src/ic_frame_forword_black_24dp.png");
   }
 }
 

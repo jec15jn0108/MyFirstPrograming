@@ -10,7 +10,7 @@ enchant.Map.prototype.straightData = function(index, sx, sy, ex, ey, paintNum) {
 	var sloping = eey > ssy ? 1 : -1;
 	if (width == height && width == 0) {
 		this._data[index][sy][sx] = paintNum;
-	} else if (width > height) { 
+	} else if (width > height) {
 		var y = ssy;
 		var sum = width;
 		for (var x = ssx; x <= eex; x++) {
@@ -53,7 +53,7 @@ enchant.Map.prototype.rectData = function(index, sx, sy, ex, ey, paintNum) {
 	}
 	this.redraw(0, 0, game.width, game.height);
 }
-enchant.Map.prototype.fillData = function(index, x, y, paintNum) {          
+enchant.Map.prototype.fillData = function(index, x, y, paintNum) {
 	var game = enchant.Game.instance;
 	var matrix = this._data;
 	var fillnum = matrix[index][y][x];
@@ -135,8 +135,9 @@ enchant.Map.prototype.addData = function(data) {
 
 
 enchant.Map.prototype.getDataCode = function(mapName, imagePath) {
-    var txt = 'var ' + mapName + ' = new Map(16, 16);\n';
-    txt += mapName + ".image = game.assets['" + imagePath + "'];\n"; 
+  var txt = '';
+    // var txt = 'var ' + mapName + ' = new Map(32, 32);\n';
+    // txt += mapName + ".image = game.assets['" + imagePath + "'];\n";
     txt += mapName + '.loadData(';
     for (var i = 0, l = this._data.length; i < l; i++) {
         txt += '[\n'
@@ -144,10 +145,10 @@ enchant.Map.prototype.getDataCode = function(mapName, imagePath) {
             txt += '    [';
             txt += this._data[i][j].toString();
             txt += '],\n';
-        }   
+        }
         txt = txt.slice(0,-2);
         txt += '\n],'
-    }   
+    }
     txt = txt.slice(0,-1);
     txt += ');\n';
 	if (this.collisionData != null) {
@@ -156,7 +157,7 @@ enchant.Map.prototype.getDataCode = function(mapName, imagePath) {
 			txt += '    [';
 			txt += this.collisionData[i].toString();
 			txt += '],\n';
-		}   
+		}
 		txt = txt.slice(0,-2);
 		txt += '\n];\n';
 	}
@@ -178,7 +179,7 @@ enchant.Map.prototype.straightType = function(index, sx, sy, ex, ey, paintNum) {
 	var sloping = eey > ssy ? 1 : -1;
 	if (width == height && width == 0) {
 		this._typeData[index][sy][sx] = paintNum;
-	} else if (width > height) { 
+	} else if (width > height) {
 		var y = ssy;
 		var sum = width;
 		for (var x = ssx; x <= eex; x++) {
@@ -221,7 +222,7 @@ enchant.Map.prototype.rectType = function(index, sx, sy, ex, ey, paintNum) {
 	this.type2data();
 	this.redraw(0, 0, game.width, game.height);
 };
-enchant.extendMap.ExMap.prototype.fillType = function(index, x, y, paintNum) {          
+enchant.extendMap.ExMap.prototype.fillType = function(index, x, y, paintNum) {
 	var game = enchant.Game.instance;
 	var matrix = this._typeData;
 	var fillnum = matrix[index][y][x];

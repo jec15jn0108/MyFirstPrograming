@@ -9,7 +9,7 @@
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="/js/get_cookie.js"></script>
-  <script type="text/javascript" src="/js/loop_sleep.js"></script>
+  <!-- <script type="text/javascript" src="/js/loop_sleep.js"></script> -->
 
   <script type="text/javascript" src="/apis/enchant.js/build/enchant.js"></script>
 
@@ -20,6 +20,7 @@
   <script type="text/javascript" src="/js/main/blocks.js"></script>
   <script type="text/javascript" src="/js/main/main_game.js"></script>
   <script type="text/javascript" src="/js/main/turtle.js"></script>
+  <script type="text/javascript" src="/js/main/console.js"></script>
 
   <script type="text/javascript" src="/apis/JS-Interpreter/acorn.js"></script>
   <script type="text/javascript" src="/apis/JS-Interpreter/interpreter.js"></script>
@@ -65,6 +66,18 @@
 
 <div id="enchant-stage">
 </div>
+
+<div id="buttons">
+  <button onclick="stepCode()" id="stepButton" ><img src="/src/ic_frame_forword_black_24dp.png"></button>
+  <!-- <button onclick="runCode()" id="runButton">Run</button> -->
+  <button onclick="runCode()" id="runButton"><img src="/src/ic_play_arrow_black_24dp.png"></button>
+  <button onclick="reset()" id="resetButton"><img src="/src/ic_stop_black_24dp.png"></button>
+</div>
+
+<textarea id="console" disabled>
+
+</textarea>
+
 <div id="palette">
   <div class="tabContent palette active" id="blocklyArea">
     <div id="blocklyDiv" style="position: absolute" ></div>
@@ -107,7 +120,7 @@
   <category name="Text">
     <block type="text"></block>
     <block type="text_length"></block>
-    <block type="text_print"></block>
+    <block type="print"></block>
     <block type="text_prompt_ext">
       <value name="TEXT">
         <block type="text"></block>
@@ -203,7 +216,7 @@
         </block>
       </statement>
       <next>
-        <block type="text_print" inline="false">
+        <block type="print" inline="false">
           <value name="TEXT">
             <block type="variables_get">
               <field name="VAR">n</field>
@@ -216,10 +229,10 @@
   </block>
 </xml>
 <!-- ================================================================================ -->
-<button onclick="parseCode()">parse</button>
+<!-- <button onclick="parseCode()">parse</button>
 <button onclick="stepCode()" id="stepButton" disabled="disabled">step</button>
 <button onclick="runCode()">run</button>
-<button onclick="showCode()">show</button>
+<button onclick="showCode()">show</button> -->
 
 <script type="text/javascript" src="/js/main/main_blockly.js"></script>
 
@@ -256,6 +269,7 @@
     editor.setValue(getCode(), -1);
   }
   workspace.addChangeListener(updateCode);
+  workspace.addChangeListener(reset);
 
   </script>
 

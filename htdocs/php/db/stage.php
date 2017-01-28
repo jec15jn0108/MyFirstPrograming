@@ -29,10 +29,10 @@ class Stage extends DbOperator {
  /*
   * 1行SELECT
   */
- function selectStage($teamId, $stageId){
-   $sql = "SELECT * FROM stage WHERE stageID = :stageId AND teamID = :teamId";
+ function selectStage($teamId, $stageName){
+   $sql = "SELECT * FROM stage WHERE stageName = :stageName AND teamID = :teamId";
    $stmt = $this->pdo->prepare($sql);
-   $stmt->bindParam(':stageId', $stageId, PDO::PARAM_STR);
+   $stmt->bindParam(':stageName', $stageName, PDO::PARAM_STR);
    $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
 
    try{
@@ -70,13 +70,12 @@ class Stage extends DbOperator {
  /*
   *  stageテーブルへINSERT
   */
- function insertStage($teamId, $genreId, $stageFileUrl, $answerFileUrl, $stageNumber){
-   $sql = "INSERT INTO stage (
-     teamID, genreID, stageFileUrl, answerFileUrl, stageNumber
-   ) VALUES(
-     :teamId, :genreId, :stageFileUrl, :answerFileUrl, :stageNumber
+ function insertStage($stageName, $teamId, $genreId, $stageFileUrl, $answerFileUrl, $stageNumber){
+   $sql = "INSERT INTO stage VALUES(
+     :stageName, :teamId, :genreId, :stageFileUrl, :answerFileUrl, :stageNumber
    )";
    $stmt = $this->pdo->prepare($sql);
+   $stmt->bindParam(':stageName', $stageName, PDO::PARAM_STR);
    $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
    $stmt->bindParam(':genreId', $genreId, PDO::PARAM_STR);
    $stmt->bindParam(':stageFileUrl', $stageFileUrl, PDO::PARAM_STR);
@@ -99,10 +98,10 @@ class Stage extends DbOperator {
  /*
   *  stageテーブルから1行DELETE
   */
- function deleteStage($teamId, $stageId){
-   $sql = "DELETE FROM stage WHERE stageID = :stageId AND teamID = :teamId";
+ function deleteStage($teamId, $stageName){
+   $sql = "DELETE FROM stage WHERE stageName = :stageName AND teamID = :teamId";
    $stmt = $this->pdo->prepare($sql);
-   $stmt->bindParam(':stageId', $stageId, PDO::PARAM_STR);
+   $stmt->bindParam(':stageName', $stageName, PDO::PARAM_STR);
    $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
 
    try{
@@ -139,11 +138,11 @@ class Stage extends DbOperator {
   * stageテーブルの
   * genreID を更新
   */
-function updateStageGenre($teamId, $stageId, $value){
-  $sql = "UPDATE stage SET genreID = :value WHERE stageID = :stageId AND teamID = :teamId";
+function updateStageGenre($teamId, $stageName, $value){
+  $sql = "UPDATE stage SET genreID = :value WHERE stageName = :stageName AND teamID = :teamId";
   $stmt = $this->pdo->prepare($sql);
   $stmt->bindParam(':value', $value, PDO::PARAM_STR);
-  $stmt->bindParam(':stageId', $stageId, PDO::PARAM_STR);
+  $stmt->bindParam(':stageName', $stageName, PDO::PARAM_STR);
   $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
 
   try{
@@ -160,11 +159,11 @@ function updateStageGenre($teamId, $stageId, $value){
   * stageテーブルの
   * stageNumber を更新
   */
-function updateStageNumber($teamId, $stageId, $value){
-  $sql = "UPDATE stage SET stageNumber = :value WHERE stageID = :stageId AND teamID = :teamId";
+function updateStageNumber($teamId, $stageName, $value){
+  $sql = "UPDATE stage SET stageNumber = :value WHERE stageName = :stageName AND teamID = :teamId";
   $stmt = $this->pdo->prepare($sql);
   $stmt->bindParam(':value', $value, PDO::PARAM_STR);
-  $stmt->bindParam(':stageId', $stageId, PDO::PARAM_STR);
+  $stmt->bindParam(':stageName', $stageName, PDO::PARAM_STR);
   $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
 
   try{

@@ -72,15 +72,17 @@ try{
   echo "genreさくせす<br />";
 
   $sql = "CREATE TABLE stage (
-    stageID int auto_increment,
+    stageName char(32),
     teamID char(32),
     genreID char(1),
     stageFileUrl varchar(255),
     answerFileUrl varchar(255),
     stageNumber int,
-    PRIMARY KEY(stageID, teamID),
+    PRIMARY KEY(stageName, teamID),
     FOREIGN KEY(teamID)
-    REFERENCES team(teamID)
+    REFERENCES team(teamID),
+    FOREIGN KEY(genreID)
+    REFERENCES genre(genreID)
    )";
 
   $pdo->exec($sql);

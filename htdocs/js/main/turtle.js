@@ -40,10 +40,10 @@ function getForwordCoordinate() {
     reversal = -1;
   }
 
-  var x = 0;
-  var y = 0;
+  var x = character.x;
+  var y = character.y;
   if (character.direction % 2 == 0) {
-    y = character.y + 32 * reversal;
+    y = character.y - 32 * reversal;
   } else {
     x = character.x + 32 * reversal;
   }
@@ -116,6 +116,6 @@ var turtle = {
 
   detect : function() {
     var coord = getForwordCoordinate();
-    return map.hitTest(coord[0], coord[1]);
+    return !map.hitTest(coord[0], coord[1]);
   },
 };

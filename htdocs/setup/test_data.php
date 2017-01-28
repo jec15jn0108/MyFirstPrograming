@@ -4,13 +4,15 @@
  * Author   : onogaki
  * Summary  : テスト用データ入れるよ（実装前用）
  */
-try{
-  $pdo = new PDO('mysql:host=localhost;dbname=dbg02_15jn1', 'dbg02_15jn1', 'dbg02_15jn1');
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $sql = "INSERT INTO ";
+include_once($_SERVER['DOCUMENT_ROOT'] . '/php/db/stage.php');
+$st = new Stage();
 
-  print("さくせす");
-}catch(PDOException $e){
-  print($e->getMessage());
-}
+$stageName = "test01";
+$teamId = "jec01";
+$genreId = null;
+$stageFileUrl = "/maps/jec01/test01.json";
+$answerFileUrl = null;
+$stageNumber = 1;
+
+$st->insertStage($stageName, $teamId, $genreId, $stageFileUrl, $answerFileUrl, $stageNumber);
