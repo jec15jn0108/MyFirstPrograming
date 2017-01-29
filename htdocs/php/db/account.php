@@ -24,7 +24,7 @@
      return $stmt->rowCount();
    }
 
-   function getAlltAccount(){
+   function getAllAccount(){
      $sql = "SELECT * FROM account";
      try{
        $stmt = $this->pdo->query($sql);
@@ -49,6 +49,22 @@
        return false;
      }
      return $stmt;
+   }
+   /*アカウントテーブルより同一団体内すべてのstudentアカウントIDを取得*/
+   function selectStudentAccount($teamId,$isTeacher){
+     $sql = "SELECT * FROM account WHERE teamID = :teamId AND isTeacher = :isteacher";
+     $stmt = $this->pdo->prepare($sql);
+     $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
+     $stmt->bindParam(':isteacher', $isTeacher, PDO::PARAM_STR);
+
+     try{
+       $stmt->execute();
+     }catch (PDOException $e){
+       print($e->getMessage() . '<br />');
+       return false;
+     }
+     $result = $stmt->fetchall(PDO::FETCH_COLUMN, 0);
+     return $result;
    }
 
    /* ユーザ認証 */

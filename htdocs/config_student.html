@@ -3,41 +3,64 @@
 <head>
   <meta charset="utf-8">
   <title>M.F.P. </title>
+  <link rel="stylesheet" href="/css/validationEngine.jquery.css" type="text/css"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="/apis/jquery-validation-engine/jquery.validationEngine-ja.js"></script>
+  <script type="text/javascript" src="/apis/jquery-validation-engine/jquery.validationEngine.js"></script>
+  <script type="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
+  <script type="text/javascript" src="/js/get_allaccount.js"></script>
+  <script type="text/javascript" src="/js/setresult.js"></script>
+  <script type="text/javascript" src="/js/delete_account.js"></script>
+  <script type="text/javascript">
+  $(function(){
+    setresult();
+  });
+  </script>
+  <script type="text/javascript">
+  $(function(){
+    get_allaccount();
+  });
+  </script>
+  <script type="text/javascript">
+  jQuery(document).ready(function($){
+    jQuery("#Spasschange").validationEngine();
+  });
 
+  </script>
+
+  <script type="text/javascript">
+  jQuery(document).ready(function($){
+    jQuery("#makeaccount").validationEngine();
+  });
+
+  </script>
 </head>
-
 <body>
   <h1>生徒設定画面</h1>
-  <p>生徒アカウントID : gggggggggg</p>
-   <form method="post" action="">
-     <p>使用台数変更・削除</p>
-     <p>変更するID : <select name="example2" size="1">
-　　　　<option value="---">登録されているIDがめっちゃでる</option>
-　　　</select>
-　　　</p>
-     <p>使用台数 : <input type="text" name="use_the_number" required></p>
-     <p><input type="submit" value="使用台数変更">　<input type="submit" value="アカウント削除"></p>
-   </form>
+  <div id="error"></div>
+  <p><select name="accountlist" id="accountlist" size="6" disabled>
+  </select></p>
 
-   <form method="post" action="">
-     <p>パスワード変更</p>
-     <p>変更するID : <select name="example2" size="1">
-　　　　<option value="---">登録されているIDがめっちゃでる</option>
-　　　</select></p>
-     <p>アカウントID : <input type="text" name="idregist" required></p>
-     <p>パスワード : <input type="password" name="newpass" required></p>
-     <p>もう一度入力 : <input type="password" name="re-typingpass" required></p>
-     <p><input type="submit" value="パスワードを更新"></p>
-   </form>
+  <form id="Spasschange" method="post" action="/php/config_student_changepass.php" target="_self">
+    <p>パスワード変更</p>
+    <p><select name="acclist" id="acclist" size="1" class="validate[required]">
+    </select></p>
+    <div id="result"></div>
+    <p>現在のパスワード : <input type="password" name="currentSpass" id="currentSpass" class="validate[required]"></p>
+    <p>新しいパスワード : <input type="password" name="changeSpass" id="changeSpass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber]]"></p>
+    <p>もう一度入力 : <input type="password" name="re-typingSpass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber],equals[changeSpass]]"></p>
+    <p><button type="submit">パスワードを更新</button></p>
+  </form>
 
-   <form method="post" action="">
-     <p>生徒用アカウント登録</p>
-     <p>アカウントID : <input type="text" name="idregist" required></p>
-     <p>パスワード : <input type="password" name="newpass" required></p>
-     <p>もう一度入力 : <input type="password" name="re-typingpass" required></p>
-     <p>使用台数 : <input type="text" name="use_the_number" required></p>
-     <p><input type="submit" value="新規登録"></p>
-   </form>
-
+  <form id="makeaccount" method="post" action="/php/config_student_makeNewAccount.php" target="_self">
+    <p>生徒用アカウント新規登録</p>
+    <div id="registsuccess"></div>
+    <p>アカウントID : <input type="text" name="newSid" id="newSid" class="validate[required]"></p>
+    <div id="ovcheck"></div>
+    <p>パスワード : <input type="password" name="newSpass" id="newSpass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber]]"></p>
+    <p>もう一度入力 : <input type="password" name="re-typingnewSpass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber],equals[newSpass]]"></p>
+    <p><button type="submit">新規登録</button></p>
+  </form>
+  <p>このアカウントの削除 : <button type="button" onclick="deleteAccount()">削除</button></p>
 </body>
 </html>

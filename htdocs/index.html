@@ -4,28 +4,40 @@
   <meta charset="utf-8">
   <title>M.F.P. ログイン</title>
 
+  <link rel="stylesheet" href="/css/validationEngine.jquery.css" type="text/css"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="/apis/jquery-validation-engine/jquery.validationEngine-ja.js"></script>
+  <script type="text/javascript" src="/apis/jquery-validation-engine/jquery.validationEngine.js"></script>
+  <script type="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
   <script type="text/javascript" src="/js/get_cookie.js"></script>
-  
+
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+  jQuery("#login").validationEngine();
+});
+
+</script>
 
 </head>
 
 <body>
   <h1>My First Programing</h1>
 
-  <form method="post" action="/php/login.php">
+  <form id="login" method="post" action="/php/login.php">
     <p id="error-login"></p>
     <p>
-      団体ID : <input type="text" name="teamid" required pattern="^[0-9A-Za-z]+$"title="※半角英数"maxlength="32">
+      団体ID : <input type="text" name="teamid" class="validate[required,maxSize[32]">
     </p>
     <p>
-      ユーザID : <input type="text" name="accountid" required pattern="^[0-9A-Za-z]+$"title="※半角英数" maxlength="32">
+      ユーザID : <input type="text" name="accountid" class="validate[required,maxSize[32]">
       &nbsp;
-      番号 : <input type="text" name="accountnum" pattern="^[0-9A-Za-z]+$"title="※半角英数" maxlength="20" >
+      認識番号 : <input type="text" name="accountnum" class="validate[maxSize[20],custom[onlyLetterNumber]]">
       <p id="error-number"></p>
     </p>
 
     <p>
-      パスワード : <input type="password" name="pass" required  onpaste="return false" maxlength="71">
+      パスワード : <input type="password" name="pass" class="validate[required,maxSize[71]">
     </p>
 
     <p>
@@ -45,7 +57,7 @@
     // var msg = get_cookie("login_failure");
     var msg = [
       "ログインできませんでした、ID類またはパスワードが間違っています",
-      "番号を入力してください。",
+      "認証番号を入力してください。",
     ];
     var errNum = get_cookie("login_error");
     if (errNum != null) {

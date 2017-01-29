@@ -26,7 +26,7 @@
 function initialize() {
   var team = $.cookie("team");
   var acco = $.cookie("account");
-  var changeResult = $.cookie("pass_change_ok_ng");
+  var changeResult = $.cookie("result");
   var ovcheck = $.cookie("ovcheck");
   var registsuccess = $.cookie("registsuccess");
 
@@ -45,7 +45,7 @@ function initialize() {
   $("#team").text("団体ID : " + team);
   // $("#teamname").text("団体名 : " + name);
   $("#account").text("アカウントID : " + acco);
-  $("#pass_change_ok_ng").text(changeResult);
+  $("#result").text(changeResult);
   $("#ovcheck").text(ovcheck);
   $("#registsuccess").text(registsuccess);
 }

@@ -21,6 +21,13 @@
   });
 
   </script>
+
+  <script type="text/javascript">
+  jQuery(document).ready(function($){
+    jQuery("#newaccount").validationEngine();
+  });
+
+  </script>
 </head>
 <body>
   <h1>教師設定画面</h1>
@@ -29,22 +36,22 @@
   <div id="account"></div>
   <form id="passchange" method="post" action="/php/config_teacher_changepass.php" target="_self">
     <p>パスワード変更</p>
-    <div id="pass_change_ok_ng"></div>
-    <p>現在のパスワード : <input type="password" name="currentpass" id="currentpass" class="validate[required]"></p>
-    <p>新しいパスワード : <input type="password" name="changepass" id="changepass" class="validate[required]"></p>
-    <p>もう一度入力 : <input type="password" name="re-typingpass" class="validate[required,equals[changepass]]"></p>
-    <p><input type="submit" name="submit" value="パスワードを更新"></p>
+    <div id="result"></div>
+    <p>現在のパスワード : <input type="password" name="currentTpass" id="currentTpass" class="validate[required]"></p>
+    <p>新しいパスワード : <input type="password" name="changeTpass" id="changeTpass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber]]"></p>
+    <p>もう一度入力 : <input type="password" name="re-typingTpass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber],equals[changeTpass]]"></p>
+    <p><button type="submit">パスワードを更新</button></p>
   </form>
 
   <form id="newaccount" method="post" action="/php/config_teacher_makeNewAccount.php" target="_self">
     <p>教師アカウント新規登録</p>
     <div id="registsuccess"></div>
-    <p>アカウントID : <input type="text" name="newid" id="newid" class="validate[required]"></p>
+    <p>アカウントID : <input type="text" name="newTid" id="newTid" class="validate[required]"></p>
     <div id="ovcheck"></div>
-    <p>パスワード : <input type="password" name="newpass" id="newpass" class="validate[required]"></p>
-    <p>もう一度入力 : <input type="password" name="re-typingnewpass" class="validate[required,equals[newpass]]"></p>
-    <p><input type="submit" value="新規作成"></p>
+    <p>パスワード : <input type="password" name="newTpass" id="newTpass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber]]"></p>
+    <p>もう一度入力 : <input type="password" name="re-typingnewTpass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber],equals[newTpass]]"></p>
+    <p><button type="submit">新規登録</button></p>
   </form>
-  <p>このアカウントの削除 : <input type="button" value="削除" onclick="deleteTeacher()"></p>
+  <p>このアカウントの削除 : <button type="button" onclick="deleteAccount()">削除</button></p>
 </body>
 </html>
