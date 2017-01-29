@@ -77,7 +77,7 @@ Blockly.JavaScript['turnLeft'] = function(block) {
 Blockly.Blocks['detect'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("前に進めるか");
+        .appendField("前にブロックがある");
     this.setOutput(true, "Boolean");
     this.setColour(210);
     this.setTooltip('');
@@ -122,4 +122,25 @@ Blockly.JavaScript['print'] = function(block) {
   var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
   return 'print(' + msg + ');\n';
+};
+
+
+Blockly.Blocks['isGoal'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("ゴールにたどり着く");
+    this.setOutput(true, "Boolean");
+    this.setColour(210);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.JavaScript['isGoal'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var order = Blockly.JavaScript.ORDER_LOGICAL_NOT;
+  var argument0 = Blockly.JavaScript.valueToCode(block, 'BOOL', order) ||
+      '';
+  var code = 'isGoal()' + argument0;
+  return [code, order];
 };

@@ -17,3 +17,5 @@ RewriteRule ^(.*)index.(html|php)$ http://%{HTTP_HOST}/$1 [R=301,L]
 order allow,deny
 deny from all
 </Files>
+
+Options -Indexes

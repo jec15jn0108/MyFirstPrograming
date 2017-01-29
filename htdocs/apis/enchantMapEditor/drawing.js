@@ -136,32 +136,55 @@ enchant.Map.prototype.addData = function(data) {
 
 enchant.Map.prototype.getDataCode = function(mapName, imagePath) {
   var txt = '';
+  var txt2 = '';
     // var txt = 'var ' + mapName + ' = new Map(32, 32);\n';
     // txt += mapName + ".image = game.assets['" + imagePath + "'];\n";
     txt += mapName + '.loadData(';
-    for (var i = 0, l = this._data.length; i < l; i++) {
-        txt += '[\n'
-        for (var j = 0, ll = this._data[0].length; j < ll; j++) {
-            txt += '    [';
-            txt += this._data[i][j].toString();
-            txt += '],\n';
-        }
-        txt = txt.slice(0,-2);
-        txt += '\n],'
-    }
-    txt = txt.slice(0,-1);
-    txt += ');\n';
-	if (this.collisionData != null) {
-		txt += mapName + '.collisionData = [\n';
-		for (var i = 0, l = this.collisionData.length; i < l; i++) {
-			txt += '    [';
-			txt += this.collisionData[i].toString();
-			txt += '],\n';
-		}
-		txt = txt.slice(0,-2);
-		txt += '\n];\n';
+  //   for (var i = 0, l = this._data.length; i < l; i++) {
+  //       txt += '[\n'
+  //       for (var j = 0, ll = this._data[0].length; j < ll; j++) {
+  //           txt += '    [';
+  //           txt += this._data[i][j].toString();
+  //           txt += '],\n';
+  //       }
+  //       txt = txt.slice(0,-2);
+  //       txt += '\n],'
+  //   }
+  //   txt = txt.slice(0,-1);
+  //   txt += ');\n';
+	// if (this.collisionData != null) {
+	// 	txt += mapName + '.collisionData = [\n';
+	// 	for (var i = 0, l = this.collisionData.length; i < l; i++) {
+	// 		txt += '    [';
+	// 		txt += this.collisionData[i].toString();
+	// 		txt += '],\n';
+	// 	}
+	// 	txt = txt.slice(0,-2);
+	// 	txt += '\n];\n';
+  // }
+  for (var i = 0, l = this._data.length; i < l; i++) {
+      txt += '['
+      for (var j = 0, ll = this._data[0].length; j < ll; j++) {
+          txt += '[';
+          txt += this._data[i][j].toString();
+          txt += '],';
+      }
+      txt = txt.slice(0,-1);
+      txt += '],'
+  }
+  txt = txt.slice(0,-1);
+  txt += ');';
+if (this.collisionData != null) {
+  txt2 += mapName + '.collisionData = [';
+  for (var i = 0, l = this.collisionData.length; i < l; i++) {
+    txt2 += '[';
+    txt2 += this.collisionData[i].toString();
+    txt2 += '],';
+  }
+  txt2 = txt2.slice(0,-1);
+  txt2 += '];';
 	}
-	return txt;
+	return [txt, txt2];
 };
 
 

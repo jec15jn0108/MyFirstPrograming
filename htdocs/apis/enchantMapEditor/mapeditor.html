@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <meta charset="utf-8">
-        <title>enchant MapEditor</title>
+        <title>M.F.P. ステージ作成</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script tyep="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
         <script type="text/javascript" src="enchant.js"></script>
-		<script type="text/javascript" src="plugins/extendMap.enchant.js"></script>
+    		<script type="text/javascript" src="plugins/extendMap.enchant.js"></script>
         <script type="text/javascript" src="drawing.js"></script>
         <script type="text/javascript" src="main.js"></script>
         <script type="text/javascript" src="mapeditor.js"></script>
+        <script type="text/javascript" src="custom.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="mapeditor.css">
+
     </head>
     <body>
-	<div id="enchant-stage" style="width: 640px; height: 480px; float:left"></div>
-	<div id="edit" style="width: 360px; margin-left: 640px"></div>
+      <div id="header">
+        <h1>ステージ作成 - マップ作成</h1>
+        <div id="teacher-header">
+          <button onclick='window.location.href="/main";' class="teacher-btn">戻る</button>
+          <!-- <button onclick='window.open("/progress.html");' class="teacher-btn">進捗管理</button> -->
+          <!-- <button onclick='window.location.href="/config_base.html";' class="teacher-btn">設定変更</button> -->
+          <button onclick='window.location.href="/php/logout.php";'>ログアウト</button>
+        </div>
+      </div>
+	<div id="enchant-stage" style="width: 800px; height: 800px; float:left"></div>
+	<div id="edit" style="width: 360px; margin-left: 800px"></div>
     </body>
 </html>

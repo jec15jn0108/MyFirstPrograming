@@ -33,31 +33,14 @@ window.onload = function() {
     character.animeWaitMax = 3;
     character.animeWaitCount = 0;
 
-    // //characterの初期設定
-    // character.startDirection = 1;
-    // character.startX = 3 * 32;
-    // character.startY = 2 * 32;
-
     //=マップ読み込み=================================================
-      $.ajax({
-        url: "/php/get_map.php",
-        type: "POST",
-        dataType: "text",
-        data: {
-          teamId: $.cookie("team"),
-          mapName: "test01"
-        }
-      })
-      .done(function (data) {
-        // console.log(data);
-        eval(data);
-        reset();
-      })
-      .fail(function () {
-        console.err("error");
-      });
+    //characterの初期設定
+
+      eval($.cookie("map0") + $.cookie("map1") + $.cookie("map2"));
+      reset();
+
     //===============================================================
-    reset();
+
     game.rootScene.addChild(map);
     game.rootScene.addChild(character);
     // game.rootScene.addChild(sprite);
@@ -92,7 +75,15 @@ window.onload = function() {
       editor.gotoLine(cursor.row + 1 , cursor.column - 1, true);
     });
 
-
+    //ゴール判定
+    // game.rootScene.addEventListener(enchant.Event.ENTER_FRAME, function() {
+    //   if (map.isGoal(character.x / 32, character.y / 32)) {
+    //     window.alert("gooooooal");
+    //     reset();
+    //   }
+    //   // console.log("char:" + character.x + "," + character.y);
+    //   // console.log("goal:" + map.goal.x + "," + map.goal.y);
+    // });
 
   };
   game.start();
@@ -105,6 +96,21 @@ function reset() {
   character.y = character.startY;
   character.direction = character.startDirection;
   character.frame = character.direction * 3;
-
+  console.log("reset!");
   $("#console").val("");
+}
+
+
+function showGoalWindow() {
+  var ret = window.confirm("実行したコードを模範解答に設定しますか？\n\nステージ名: " + $("#stageName").val() + "\nブロックの数: " + blockNum + "\n");
+  if (ret) {
+    var jsStr = $.cookie("map0") + $.cookie("map1") + $.cookie("map2") + "map.name = " + $("#stageName").val() + ";map.maxBlockNum = " + blockNum + ";";
+    var xmlStr = Blockly.Xml.workspaceToDom(workspace);
+    xmlStr.setAttribute('id', 'workspaceBlocks');
+    xmlStr.setAttribute('style', 'display:none');
+    console.log(jsStr);
+    console.log(xmlStr);
+  } else {
+
+  }
 }

@@ -8,7 +8,8 @@
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="/js/get_cookie.js"></script>
+  <!-- <script type="text/javascript" src="/js/get_cookie.js"></script> -->
+  <script tyep="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
   <!-- <script type="text/javascript" src="/js/loop_sleep.js"></script> -->
 
   <script type="text/javascript" src="/apis/enchant.js/build/enchant.js"></script>
@@ -56,7 +57,7 @@
       <!-- <button onclick="">チュートリアル</button> -->
     </div>
     <div id="teacher-header">
-      <button onclick='window.location.href="/stage_create.html";' class="teacher-btn">ステージ作成</button>
+      <button onclick='window.location.href="/apis/enchantMapEditor/mapeditor";' class="teacher-btn">ステージ作成</button>
       <button onclick='window.open("/progress.html");' class="teacher-btn">進捗管理</button>
       <button onclick='window.location.href="/config_base.html";' class="teacher-btn">設定変更</button>
       <button onclick='window.location.href="/php/logout.php";'>ログアウト</button>
@@ -87,8 +88,8 @@
   </div>
 
   <ul class="tab palette">
-      <li class="active">図形</li>
-      <li>コード</li>
+      <li class="active" id="blockTab">ブロック</li>
+      <li id="codeTab">コード</li>
   </ul>
 </div>
 <div id="blocklyDiv" style="position: absolute" ></div>
@@ -176,6 +177,7 @@
     <block type="turnRight"></block>
     <block type="turnLeft"></block>
     <block type="detect"></block>
+    <block type="isGoal"></block>
   </category>
 </xml>
 
@@ -270,6 +272,9 @@
   }
   workspace.addChangeListener(updateCode);
   workspace.addChangeListener(reset);
+  workspace.addChangeListener(function () {
+    console.log(workspace.getAllBlocks().length);
+  })
 
   </script>
 

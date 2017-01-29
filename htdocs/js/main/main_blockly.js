@@ -92,6 +92,12 @@ function initApi(interpreter, scope) {
   interpreter.setProperty(scope, 'detect',
     interpreter.createNativeFunction(wrapper));
 
+  var wrapper = function() {
+    return interpreter.createPrimitive(turtle.isGoal());
+  };
+  interpreter.setProperty(scope, 'isGoal',
+    interpreter.createNativeFunction(wrapper));
+
 
   //console API
   var wrapper = function(text) {
@@ -113,14 +119,23 @@ var isPause = false;
 
 function parseCode() {
   reset();
-  // Generate JavaScript code and parse it.
-  Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-  Blockly.JavaScript.addReservedWords('highlightBlock');
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
-  myInterpreter = new Interpreter(code, initApi);
+  if ($("#blockTab").attr("class") == "active") {
+    // Generate JavaScript code and parse it.
+    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+    Blockly.JavaScript.addReservedWords('highlightBlock');
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    myInterpreter = new Interpreter(code, initApi);
 
-  // alert('Ready to execute this code:\n\n' + code);
-  // document.getElementById('stepButton').disabled = '';
+    // alert('Ready to execute this code:\n\n' + code);
+    // document.getElementById('stepButton').disabled = '';
+    // isRunning = true;
+    // highlightPause = false;
+    // workspace.highlightBlock(null);
+
+  } else if ($("#codeTab").attr("class") == "active") {
+    var code = editor.getValue();
+    myInterpreter = new Interpreter(code, initApi);
+  }
   isRunning = true;
   highlightPause = false;
   workspace.highlightBlock(null);
@@ -141,6 +156,13 @@ function stepCode(mode) {
         changeRun("run");
         isRunning = false;
         workspace.highlightBlock(null);
+
+        //GOAL判定
+        if (map.isGoal(character.x / 32, character.y / 32)) {
+          showGoalWindow();
+        }
+
+
         return false;
       }
     }
@@ -178,7 +200,7 @@ function runCode() {
       if (!stepCode("run") || isPause) {
         clearInterval(runTime);
       }
-    }, 200);
+    }, 50);
   }
 }
 

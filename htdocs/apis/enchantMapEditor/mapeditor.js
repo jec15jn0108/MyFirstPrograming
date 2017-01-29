@@ -1,6 +1,6 @@
 function start(mapWidth, mapHeight, gameImage, extend) {
 
-    var game = new Game(640, 480);
+    var game = new Game(16 * 16, 16 * 16);
     game.preload('ui_16.png', gameImage);
     game.onload = function() {
 
@@ -33,7 +33,7 @@ function start(mapWidth, mapHeight, gameImage, extend) {
 				this.paintNum = 0;
 			}
 		};
-		
+
 		app.maps.bgMap = bgMap;
 		app.maps.colMap = colMap;
 		backgroundMap = bgMap;
@@ -79,7 +79,7 @@ function start(mapWidth, mapHeight, gameImage, extend) {
 		mapFrame.image = frame;
 
 		var bg = new Sprite(640, 480);
-		
+
 
 		var stage = new Group();
 		stage.addChild(bgMap);
@@ -148,7 +148,7 @@ function start(mapWidth, mapHeight, gameImage, extend) {
 				}
 			}
 			console.log(arg);
-			
+
 			if (app.selectedLayer >= 0) {
 				if (app.extendMode && app.typeEdit) {
 					enchant.extendMap.ExMap.prototype[app.editFunc + 'Type'].apply(bgMap, arg);
@@ -191,7 +191,7 @@ function start(mapWidth, mapHeight, gameImage, extend) {
 					arg.push(app.selectedData);
 				}
 			}
-			
+
 			if (app.selectedLayer >= 0) {
 				if (app.extendMode && app.typeEdit) {
 					enchant.extendMap.ExMap.prototype[app.editFunc + 'Type'].apply(bgMap, arg);

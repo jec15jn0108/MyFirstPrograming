@@ -2,22 +2,274 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!-- <script type="text/javascript" src="/js/get_cookie.js"></script> -->
+  <script tyep="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
+  <!-- <script type="text/javascript" src="/js/loop_sleep.js"></script> -->
 
-  <title>M.F.P. </title>
+  <script type="text/javascript" src="/apis/enchant.js/build/enchant.js"></script>
+
+  <script type="text/javascript" src="/apis/google-blockly/blockly_compressed.js"></script>
+  <script type="text/javascript" src="/apis/google-blockly/blocks_compressed.js"></script>
+  <script type="text/javascript" src="/apis/google-blockly/msg/js/en.js"></script>
+  <script type="text/javascript" src="/apis/google-blockly/javascript_compressed.js"></script>
+  <script type="text/javascript" src="/js/main/blocks.js"></script>
+  <script type="text/javascript" src="/js/createstage/createstage_game.js"></script>
+  <script type="text/javascript" src="/js/main/turtle.js"></script>
+  <script type="text/javascript" src="/js/main/console.js"></script>
+
+  <script type="text/javascript" src="/apis/JS-Interpreter/acorn.js"></script>
+  <script type="text/javascript" src="/apis/JS-Interpreter/interpreter.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/tab.css">
+  <link rel="stylesheet" type="text/css" href="/css/drag_and_drop.css">
+  <link rel="stylesheet" type="text/css" href="/css/stage_create.css">
+
+
+
+
+
+  <title>M.F.P.</title>
+
 
 </head>
 
 <body>
+  <div id="header">
+    <div id="header1">
+      <h1 style="position: absolute;">ステージ作成 - 模範解答作成</h1>
+      <textarea id="stageName">ステージ名を設定</textarea>
+    </div>
+    <div id="teacher-header">
+      <button onclick='window.location.href="/main";' class="teacher-btn">戻る</button>
+      <!-- <button onclick='window.open("/progress.html");' class="teacher-btn">進捗管理</button> -->
+      <!-- <button onclick='window.location.href="/config_base.html";' class="teacher-btn">設定変更</button> -->
+      <button onclick='window.location.href="/php/logout.php";'>ログアウト</button>
+    </div>
+  </div>
+
+
+<div id="enchant-stage">
+</div>
+
+<div id="buttons">
+  <button onclick="stepCode()" id="stepButton" ><img src="/src/ic_frame_forword_black_24dp.png"></button>
+  <!-- <button onclick="runCode()" id="runButton">Run</button> -->
+  <button onclick="runCode()" id="runButton"><img src="/src/ic_play_arrow_black_24dp.png"></button>
+  <button onclick="reset()" id="resetButton"><img src="/src/ic_stop_black_24dp.png"></button>
+</div>
+
+<textarea id="console" disabled>
+
+</textarea>
+
+<div id="palette">
+  <div class="tabContent palette active" id="blocklyArea">
+    <div id="blocklyDiv" style="position: absolute" ></div>
+  </div>
+  <div class="tabContent palette" >
+    <div id="codeEditor"></div>
+  </div>
+
+  <ul class="tab palette">
+      <li class="active" id="blockTab">ブロック</li>
+      <li id="codeTab">コード</li>
+  </ul>
+</div>
+<div id="blocklyDiv" style="position: absolute" ></div>
+
+<!-- blockly 設定==================================================================== -->
+<xml id="toolbox" style="display: none">
+  <category name="Logic">
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
+    <block type="logic_operation"></block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean"></block>
+  </category>
+  <category name="Loops">
+    <block type="controls_repeat_ext">
+      <value name="TIMES">
+        <block type="math_number">
+          <field name="NUM">10</field>
+        </block>
+      </value>
+    </block>
+    <block type="controls_whileUntil"></block>
+  </category>
+  <category name="Math">
+    <block type="math_number"></block>
+    <block type="math_arithmetic"></block>
+    <block type="math_single"></block>
+  </category>
+  <category name="Text">
+    <block type="text"></block>
+    <block type="text_length"></block>
+    <block type="print"></block>
+    <block type="text_prompt_ext">
+      <value name="TEXT">
+        <block type="text"></block>
+      </value>
+    </block>
+  </category>
+  <category name="Variables" custom="VARIABLE"></category>
+  <category name="Functions" custom="PROCEDURE">
+    <block type="factory_base" id=";XI@O(zGNyCj==HR7+,/" deletable="false" movable="false" x="0" y="0">
+      <mutation connections="BOTH"></mutation>
+      <field name="NAME">forword</field>
+      <field name="INLINE">AUTO</field>
+      <field name="CONNECTIONS">BOTH</field>
+      <statement name="INPUTS">
+        <block type="input_dummy" id="#Tk/;JyqxF1wFb_2~is^">
+          <field name="ALIGN">LEFT</field>
+          <statement name="FIELDS">
+            <block type="field_static" id="o%Mnzb/v6yPk`kdQ6|[C">
+              <field name="TEXT">前に進む</field>
+            </block>
+          </statement>
+        </block>
+      </statement>
+      <value name="TOOLTIP">
+        <block type="text" id=":ZjaI-B3Je)sN.R6izpV" deletable="false" movable="false">
+          <field name="TEXT"></field>
+        </block>
+      </value>
+      <value name="HELPURL">
+        <block type="text" id="f;O+k6FX^*?9v5_jkOvq" deletable="false" movable="false">
+          <field name="TEXT"></field>
+        </block>
+      </value>
+      <value name="TOPTYPE">
+        <shadow type="type_null" id="^G//^z.M4X2lYZZwk$?!"></shadow>
+        <block type="type_null" id="IUI,a,,osR;8QTo}u%4E"></block>
+      </value>
+      <value name="BOTTOMTYPE">
+        <shadow type="type_null" id="G[rX@RWZhbAm[Q0h/R-7"></shadow>
+        <block type="type_null" id="Nnn~%;]dY7fOk6px+7mA"></block>
+      </value>
+      <value name="COLOUR">
+        <block type="colour_hue" id="=+lUf*PhQ(0)jn*mv!UP">
+          <mutation colour="#5b67a5"></mutation>
+          <field name="HUE">230</field>
+        </block>
+      </value>
+    </block>
+  </category>
+  <category name="Turtle">
+    <block type="forword"></block>
+    <block type="back"></block>
+    <block type="turnRight"></block>
+    <block type="turnLeft"></block>
+    <block type="detect"></block>
+    <block type="isGoal"></block>
+  </category>
+</xml>
+
+
+<xml id="startBlocks" style="display: none">
+  <block type="variables_set" inline="true" x="20" y="20">
+  <field name="VAR">n</field>
+  <value name="VALUE">
+    <block type="math_number">
+      <field name="NUM">1</field>
+    </block>
+  </value>
+  <next>
+    <block type="controls_repeat_ext" inline="true">
+      <value name="TIMES">
+        <block type="math_number">
+          <field name="NUM">4</field>
+        </block>
+      </value>
+      <statement name="DO">
+        <block type="variables_set" inline="true">
+          <field name="VAR">n</field>
+          <value name="VALUE">
+            <block type="math_arithmetic" inline="true">
+              <field name="OP">MULTIPLY</field>
+              <value name="A">
+                <block type="variables_get">
+                  <field name="VAR">n</field>
+                </block>
+              </value>
+              <value name="B">
+                <block type="math_number">
+                  <field name="NUM">2</field>
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
+      </statement>
+      <next>
+        <block type="print" inline="false">
+          <value name="TEXT">
+            <block type="variables_get">
+              <field name="VAR">n</field>
+            </block>
+          </value>
+        </block>
+      </next>
+    </block>
+  </next>
+  </block>
+</xml>
+<!-- ================================================================================ -->
+<!-- <button onclick="parseCode()">parse</button>
+<button onclick="stepCode()" id="stepButton" disabled="disabled">step</button>
+<button onclick="runCode()">run</button>
+<button onclick="showCode()">show</button> -->
+
+<script type="text/javascript" src="/js/main/main_blockly.js"></script>
+
+
+  <script type="text/javascript" src="/js/tab.js"></script>
+  <script type="text/javascript" src="/js/drag_and_drop.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js"></script>
+
   <script type="text/javascript">
-  $.ajax({
-    url: "main.html",
-    cache: false,
-    success: function(html){
-      document.write(html);
-    }
+  //ace
+  var width = window.innerWidth / 100 * 56.3;
+  var height = window.innerHeight / 100 * 88;
+  $("#codeEditor").css("width", width);
+  $("#codeEditor").css("height", height);
+  var editor = ace.edit("codeEditor");
+  editor.setTheme("ace/theme/monokai");
+  editor.setFontSize(22);
+  editor.getSession().setMode("ace/mode/html");
+  editor.getSession().setUseWrapMode(true);
+  editor.getSession().setTabSize(2);
+  editor.$blockScrolling = Infinity;
+  editor.setOptions({
+    enableBasicAutocompletion: true,
+    enableSnippets: true,
+    enableLiveAutocompletion: true
+  });
+  editor.getSession().setMode("ace/mode/javascript");
+
+  editor.setValue(getCode(), -1);
+
+  function updateCode(event) {
+    editor.setValue(getCode(), -1);
+  }
+  workspace.addChangeListener(updateCode);
+  workspace.addChangeListener(reset);
+
+  var blockNum;
+  workspace.addChangeListener(function () {
+    blockNum = workspace.getAllBlocks().length;
+    console.log(blockNum);
   });
   </script>
+
+  <script type="text/javascript" src="/js/main/main.js"></script>
 </body>
 </html>

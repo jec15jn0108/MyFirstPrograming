@@ -74,17 +74,26 @@ var mapForm = {
 						return;
 					}
 					start(wv, hv, iv, ev);
-					edit.innerHTML+= '矢印キーでスクロール (Push Arrow Key to Scroll)';
+					// edit.innerHTML+= '矢印キーでスクロール (Push Arrow Key to Scroll)';
 					editorTabs.initialize();
 					edit.appendChild(editorTabs.element);
 					edit.appendChild(icons.create());
 					var d = document.createElement('div');
 					d.appendChild(palette);
 					edit.appendChild(d);
-					var d2 = document.createElement('div');
-					d2.appendChild(geneButton);
-					d2.appendChild(loadButton);
-					edit.appendChild(d2);
+					// var d2 = document.createElement('div');
+					// d2.appendChild(geneButton);
+					// d2.appendChild(loadButton);
+					// edit.appendChild(d2);
+          setStart();
+          setGoal();
+          // var d3 = document.createElement('div');
+          // d3.appendChild(geneButton);
+
+          $("body").append("<div id='next'></div>");
+          $("#next").append(geneButton);
+          $("#next").css("margin", "20px");
+
 					palette.loadImage(app.image);
 				};
 			} else {
@@ -155,7 +164,7 @@ var editorTabs = {
 		element.style.width = '20px';
 		element.style.height = '20px';
 		element.style.float = 'left';
-		element.style.backgroundColor = 'rgb(85,85,85)',
+		element.style.backgroundColor = 'rgb(200, 200, 200)',
 		element.style['text-align'] = 'center';
 		element.innerText = '+';
 		return element;
@@ -164,11 +173,11 @@ var editorTabs = {
 		var data = this.element.childNodes;
 		for (var i = 0, l = data.length; i < l; i++) {
 			if (data[i].isActive) {
-				data[i].style.backgroundColor = 'rgb(51, 85, 119)';
+				data[i].style.backgroundColor = 'rgb(100, 150, 250)';
 				data[i].style.color = 'rgb(0, 0, 0)';
 			} else {
-				data[i].style.backgroundColor = 'rgb(85, 85, 85)';
-				data[i].style.color = 'rgb(119, 119, 119)';
+				data[i].style.backgroundColor = 'rgb(200, 200, 200)';
+				data[i].style.color = 'rgb(0, 0, 0)';
 			}
 		}
 	},
@@ -315,17 +324,40 @@ var geneButton = (function() {
 	var element = document.createElement('input');
 	element.type = 'button';
 	element.id = 'geneButton';
-	element.value = 'コード生成';
+	element.value = '次へ';
 	element.onclick = function() {
-		var txt = '';
-		var w = window.open('about:blank', '_blank');
-		var output = document.createElement('textarea');
+		// var txt = '';
+		// var w = window.open('about:blank', '_blank');
+		// var output = document.createElement('textarea');
 		app.maps.bgMap.collisionData = app.maps.colMap._data[0];
-		output.rows = 30;
-		output.cols = 120;
-		txt += app.maps.bgMap.getDataCode('map', app.imagePath);
-		output.value = txt;
-		w.document.body.appendChild(output);
+		// output.rows = 30;
+		// output.cols = 120;
+	  var data = app.maps.bgMap.getDataCode('map', app.imagePath);
+		// output.value = txt;
+		// w.document.body.appendChild(output);
+
+
+    var txt0 = data[0];
+    var txt1 = data[1];
+
+    //スタート、ゴール設定
+    var txt2 = "";
+    txt2 += "map.goal = {};";
+    txt2 += "map.goal.x = " + $("#gx").val() + ";";
+    txt2 += "map.goal.y = " + $("#gy").val() + ";";
+
+    txt2 += "character.startX = 32 * " + $("#sx").val() + ";";
+    txt2 += "character.startY = 32 * " + $("#sy").val() + ";";
+    txt2 += "character.startDirection = " + $("#direction").val() + ";";
+
+    $.cookie("map0", txt0, { path: "/" });
+    $.cookie("map1", txt1, { path: "/" });
+    $.cookie("map2", txt2, { path: "/" });
+    console.log($.cookie("map0") + $.cookie("map1") + $.cookie("map2"));
+
+    window.location.href = "/stage_create";
+
+
 	};
 	return element;
 })();

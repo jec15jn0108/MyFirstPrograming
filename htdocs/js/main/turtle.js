@@ -116,6 +116,10 @@ var turtle = {
 
   detect : function() {
     var coord = getForwordCoordinate();
-    return !map.hitTest(coord[0], coord[1]);
+    return map.hitTest(coord[0], coord[1]);
+  },
+
+  isGoal : function() {
+    return map.isGoal(character.x / 32, character.y / 32);
   },
 };
