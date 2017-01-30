@@ -96,20 +96,45 @@ function reset() {
   character.y = character.startY;
   character.direction = character.startDirection;
   character.frame = character.direction * 3;
-  console.log("reset!");
   $("#console").val("");
 }
 
 
 function showGoalWindow() {
-  var ret = window.confirm("実行したコードを模範解答に設定しますか？\n\nステージ名: " + $("#stageName").val() + "\nブロックの数: " + blockNum + "\n");
+  var mapName = $("#stageName").val();
+  var ret = window.confirm("実行したコードを模範解答に設定しますか？\n\nステージ名: " + mapName + "\nブロックの数: " + blockNum + "\n");
   if (ret) {
-    var jsStr = $.cookie("map0") + $.cookie("map1") + $.cookie("map2") + "map.name = " + $("#stageName").val() + ";map.maxBlockNum = " + blockNum + ";";
+    var jsStr = $.cookie("map0") + $.cookie("map1") + $.cookie("map2") + "map.name = " + mapName + ";map.maxBlockNum = " + blockNum + ";";
     var xmlStr = Blockly.Xml.workspaceToDom(workspace);
     xmlStr.setAttribute('id', 'workspaceBlocks');
     xmlStr.setAttribute('style', 'display:none');
-    console.log(jsStr);
-    console.log(xmlStr);
+    // console.log(jsStr);
+    // console.log(xmlStr);
+
+    $.ajax({
+      url: "/php/save_map.php",
+      type: "POST",
+      data: {
+        teamId: $.cookie("team"),
+        mapName: $("#stageName").val(),
+        mapData: jsStr,
+        answer: xmlStr,
+      }
+    })
+    .done(function (data) {
+      console.log(data);
+    })
+    .fail(function () {
+      console.err("error");
+    });
+
+    // var stageJson = {
+    //   map: jsStr,
+    //   answer: xmlStr
+    // };
+    //
+    // console.log(stageJson);
+
   } else {
 
   }

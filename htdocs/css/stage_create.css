@@ -9,3 +9,12 @@
 h1 {
   margin: 10px;
 }
+
+#stageName {
+  float: left;
+}
+
+#genre {
+  font-size: 30px;
+  margin: 10px;
+}
