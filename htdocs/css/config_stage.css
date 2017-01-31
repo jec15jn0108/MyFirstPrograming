@@ -1,0 +1,27 @@
+<style>
+.ui-selecting{
+  background-color: rgba(93, 221, 170, 0.1);
+}
+.ui-selected{
+  background-color: rgba(93, 221, 170, 0.5);
+}
+
+#select_sortableO, #select_sortableC, #select_sortableR, #select_sortableA {
+  list-style: none;
+}
+li {
+  font-size: 20px;
+  position: relative;
+  padding-left: 1px;
+  border: solid 1px;
+  margin-bottom: 4px;
+  font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  height: 30px;
+  width: 150px;
+}
+span {
+  cursor: move;
+  position: absolute;
+  margin: auto;
+}
+</style>

@@ -45,56 +45,6 @@ class Stage extends DbOperator {
    return $stmt;
  }
 
- /**
-  * @author Onogaki
-  * @return PDOStatement
-  * ジャンルIDとステージナンバーからステージを特定
-  */
-  function selectStageByGenreAndNumber($teamId, $genreId, $stageNumber) {
-    $sql = "SELECT * FROM stage WHERE teamID = :teamId AND genreId = :genreId AND stageNumber = :stageNumber";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
-    $stmt->bindParam(':genreId', $genreId, PDO::PARAM_INT);
-    $stmt->bindParam(':stageNumber', $stageNumber, PDO::PARAM_STR);
-
-    try{
-      $stmt->execute();
-    }catch (PDOException $e){
-      print($e->getMessage() . '<br>');
-      return -1;
-    }
-
-    return $stmt;
-  }
-
- /**
-  * @author Onogaki
-  * @return boolean
-  * ステージデータが既にあるかどうか
-  */
-  function isExistStage($teamId, $stageName) {
-    $sql = "SELECT COUNT(*) AS cnt FROM stage WHERE stageName = :stageName AND teamID = :teamId";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindParam(':stageName', $stageName, PDO::PARAM_STR);
-    $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
-
-    try{
-      $stmt->execute();
-    }catch (PDOException $e){
-      print($e->getMessage() . '<br>');
-      return false;
-    }
-
-    $cnt = $stmt->fetch(PDO::FETCH_ASSOC)["cnt"];
-    if ($cnt == 0) {
-      $ret = false;
-    } else {
-      $ret = true;
-    }
-
-    return $ret;
-  }
-
  /*
   * genreIDごとにSELECT
   */
@@ -114,28 +64,26 @@ class Stage extends DbOperator {
     return $stmt;
   }
 
-  /**
-   *  @author Onogaki
-   *  @return Integer
-   *  そのジャンルに登録されているステージの数
+  /*
+   * genreIDごとに全てSELECT
    */
-  function countStage($teamId, $genreId) {
-    $sql = "SELECT COUNT(*) AS cnt FROM stage WHERE teamID = :teamId AND genreID = :genreId";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
-    $stmt->bindParam(':genreId', $genreId, PDO::PARAM_STR);
+   function selectAllStageGenre($teamId, $genreId){
+     $sql = "SELECT * FROM stage WHERE teamID = :teamId AND genreID = :genreId";
+     $stmt = $this->pdo->prepare($sql);
+     $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
+     $stmt->bindParam(':genreId', $genreId, PDO::PARAM_STR);
 
-    try{
-      $stmt->execute();
-    }catch (PDOException $e){
-      print($e->getMessage() . '<br>');
-      return false;
-    }
+     try{
+       $stmt->execute();
+     }catch (PDOException $e){
+       print($e->getMessage() . '<br>');
+       return false;
+     }
 
-    $cnt = $stmt->fetch(PDO::FETCH_ASSOC)["cnt"];
+     $result = $stmt->fetchall(PDO::FETCH_COLUMN, 0);
+     return $result;
 
-    return $cnt;
-  }
+   }
 
   /*=========================================================
    * INSERT
@@ -143,16 +91,16 @@ class Stage extends DbOperator {
  /*
   *  stageテーブルへINSERT
   */
- function insertStage($stageName, $teamId, $genreId, $stageFileUrl, $stageNumber){
+ function insertStage($stageName, $teamId, $genreId, $stageFileUrl, $answerFileUrl, $stageNumber){
    $sql = "INSERT INTO stage VALUES(
-     :stageName, :teamId, :genreId, :stageFileUrl, :stageNumber
+     :stageName, :teamId, :genreId, :stageFileUrl, :answerFileUrl, :stageNumber
    )";
    $stmt = $this->pdo->prepare($sql);
    $stmt->bindParam(':stageName', $stageName, PDO::PARAM_STR);
    $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
-   $stmt->bindParam(':genreId', $genreId, PDO::PARAM_INT);
+   $stmt->bindParam(':genreId', $genreId, PDO::PARAM_STR);
    $stmt->bindParam(':stageFileUrl', $stageFileUrl, PDO::PARAM_STR);
-  //  $stmt->bindParam(':answerFileUrl', $answerFileUrl, PDO::PARAM_STR);
+   $stmt->bindParam(':answerFileUrl', $answerFileUrl, PDO::PARAM_STR);
    $stmt->bindParam(':stageNumber', $stageNumber, PDO::PARAM_INT);
    try{
      $stmt->execute();
