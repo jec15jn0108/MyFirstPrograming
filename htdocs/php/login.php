@@ -20,13 +20,13 @@
  // $hashed = password_hash($pass, PASSWORD_DEFAULT);
 
  $isLogin = $ac->athentication($teamId, $accountId, $pass);
- $isExistNum = $pg->selectCount($progressnum, $accountId, $teamId);
+ $isExistNum = $pg->isExist($progressnum, $accountId, $teamId);
  $isTeacher = $ac->isTeacher($accountId, $teamId);
 
  if ($isLogin == true) {
    if($isTeacher == false){
      if(!empty($progressnum) && $isExistNum == 0){
-       setcookie('number', $accountnum, 0, "/"); //生徒ログイン成功
+       setcookie('number', $progressnum, 0, "/"); //生徒ログイン成功
        $pg->insertProgress($progressnum, $accountId, $teamId, $clearnum, $nowstage);
      } else {
        setcookie('login_error', "1", time() + 1, "/");

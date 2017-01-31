@@ -9,17 +9,6 @@ body{
   overflow-y:hidden;
 }
 
-
-
-button {
-  width: 120px;
-  height: 40px;
-  margin: 2px;
-}
-
-
-
-
 #enchant-stage {
   clear: both;
   float: left;
@@ -121,18 +110,12 @@ ul.tab.palette li {
   margin-top: 0px;
   cursor: pointer;
   border: 1px solid #999999;
+  background: white;
 }
 
 .stageNumber:hover {
   background-color: #ff8200;
   color: #000000;
-}
-
-h1 {
-  position: absolute;
-  margin: 5px;
-  margin-left: 35%;
-  font-size: 48px;
 }
 
 #genre li {

@@ -3,25 +3,46 @@
 <head>
   <meta charset="utf-8">
 
-  <link rel="stylesheet" type="text/css" href="/css/common.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script tyep="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
 
-  <title>M.F.P. </title>
+  <script type="text/javascript" src="/js/progress/progress.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/css/common.css">
+  <link rel="stylesheet" type="text/css" href="/css/progress.css">
+
+  <title>M.F.P. 進捗管理画面</title>
 
 </head>
 
-<body>
+<body onload="reloadEveryMinute()">
   <div id="header">
     <h1>進捗管理画面</h1>
     <div id="teacher-header">
-      <button onclick='window.location.href="/apis/enchantMapEditor/mapeditor";' class="teacher-btn">ステージ作成</button>
-      <button onclick='window.open("/progress.html");' class="teacher-btn">進捗管理</button>
-      <button onclick='window.location.href="/config_base.html";' class="teacher-btn">設定変更</button>
-      <button onclick='window.location.href="/php/logout.php";'>ログアウト</button>
+      <button onclick="window.open('','_self').close();">閉じる</button>
     </div>
   </div>
-  <b>団体ID</b><select id="studentId" name="studentid">
+  <div>
+    <b>団体ID </b>
+    <select id="idList">
+    </select>
 
+    <img src="/src/ic_autorenew_black_36dp.png" onclick="reload()">
 
-  </select>
+  </div>
+  <div id="tables">
+    <!-- <table class="progressTable">
+      <thead>
+        <tr>
+          <th>番号</th>
+          <th>ステージクリア数</th>
+          <th>挑戦中のステージ</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table> -->
+  </div>
+
 </body>
 </html>

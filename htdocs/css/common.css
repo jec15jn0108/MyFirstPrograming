@@ -24,3 +24,19 @@
   width: 100px;
   margin-right: auto;
 }
+
+
+
+button {
+  width: 120px;
+  height: 40px;
+  margin: 2px;
+}
+
+
+h1 {
+  position: absolute;
+  margin: 5px;
+  margin-left: 35%;
+  font-size: 48px;
+}

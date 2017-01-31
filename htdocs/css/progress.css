@@ -1,0 +1,62 @@
+#teacher-header {
+  width: 110px;
+}
+
+b {
+  font-size: 24px;
+}
+
+select {
+  font-size: 24px;
+}
+
+.progressTable {
+  border-collapse: collapse;
+	text-align: left;
+	line-height: 1.5;
+	border: 1px solid #ccc;
+
+  font-size: 24px;
+  float: left;
+}
+
+.progressTable thead {
+  border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	background: #04162e;
+}
+
+.progressTable thead th {
+  padding: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #fff;
+}
+
+.progressTable tbody th {
+  width: 60px;
+	padding: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+	font-weight: bold;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+	background: #efefef;
+}
+
+.progressTable tbody td {
+  width: 200px;
+	padding: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+
+
+
+th, td{
+  /*border: solid black 1px;*/
+}

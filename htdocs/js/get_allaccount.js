@@ -9,7 +9,9 @@ function get_allaccount() {
   $.ajax({
     type: "POST",
     url: "/php/get_studentid.php",
-    data: {PostValue01: team,PostValue02: isteacher},
+    data: {
+      teamId: team,
+    },
     success: function(data) {
       var accountlist = JSON.parse(data);
       var i;

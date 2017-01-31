@@ -24,7 +24,7 @@ function selectProgressAll(){
 }
 
 /* 生徒IDごとのselect */
-function selectAccountidProgress($accountId, $teamId){
+function selectAccountidProgress($teamId, $accountId){
   $sql = "SELECT * FROM progress WHERE accountID = :acId AND teamID = :teId";
 
   $stmt = $this->pdo->prepare($sql);
@@ -42,8 +42,8 @@ function selectAccountidProgress($accountId, $teamId){
 }
 
 /* 1行select */
-function selectProgress($progressNumber, $accountId, $teamId){
-  $sql = "SELECT * FROM progress WHERE progressNumber = :pgnum AND accountID = :acId AND teamID = :teId";
+function isExist($progressNumber, $accountId, $teamId){
+  $sql = "SELECT COUNT(*) AS cnt FROM progress WHERE progressNumber = :pgnum AND accountID = :acId AND teamID = :teId";
 
   $stmt = $this->pdo->prepare($sql);
   $stmt->bindParam(':pgnum', $progressNumber, PDO::PARAM_INT);
@@ -57,15 +57,14 @@ function selectProgress($progressNumber, $accountId, $teamId){
     return false;
   }
 
-  return $stmt;
+  return $stmt->fetch(PDO::FETCH_ASSOC)["cnt"];
 }
 
 /* count取得用select */
-function selectCount($progressNumber, $accountId, $teamId){
-  $sql = "SELECT COUNT(*) AS count FROM progress WHERE progressNumber = :pgnum AND accountID = :acId AND teamID = :teId";
+function getCountById($teamId, $accountId){
+  $sql = "SELECT COUNT(*) AS count FROM progress WHERE accountID = :acId AND teamID = :teId";
 
   $stmt = $this->pdo->prepare($sql);
-  $stmt->bindParam(':pgnum', $progressNumber, PDO::PARAM_INT);
   $stmt->bindParam(':acId', $accountId, PDO::PARAM_STR);
   $stmt->bindParam(':teId', $teamId, PDO::PARAM_STR);
 
@@ -99,12 +98,13 @@ function insertProgress($progressNumber, $accountId, $teamId, $clearNum, $nowSta
 
 
 /* progressテーブルから1行DELETE */
-function deleteProgress($accountId, $teamId){
-  $sql = "DELETE FROM progress WHERE accountID = :accountId AND teamID = :teamId";
+function deleteProgress($teamId, $accountId, $number){
+  $sql = "DELETE FROM progress WHERE accountID = :accountId AND teamID = :teamId AND progressNumber = :num";
 
   $stmt = $this->pdo->prepare($sql);
-  $stmt->bindParam(':accountId', $accountId, PDO::PARAM_STR);
   $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
+  $stmt->bindParam(':accountId', $accountId, PDO::PARAM_STR);
+  $stmt->bindParam(':num', $number, PDO::PARAM_STR);
 
   try{
     $stmt->execute();
@@ -136,13 +136,13 @@ function deleteProgressAll($teamId){
  */
 
 /* progressテーブルのclearNumをUPDATE */
-function updateClearNum($accountId, $teamId, $value){
-  $sql = "UPDATE progress SET clearNum = :value WHERE accountID = :accountId AND teamID = :teamId";
+function addClearNum($teamId, $accountId, $number){
+  $sql = "UPDATE progress SET clearNum = clearNum + 1 WHERE accountID = :accountId AND teamID = :teamId AND progressNumber = :num";
 
   $stmt = $this->pdo->prepare($sql);
-  $stmt->bindParam(':value', $value, PDO::PARAM_INT);
   $stmt->bindParam(':accountId', $accountId, PDO::PARAM_STR);
   $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
+  $stmt->bindParam(':num', $number, PDO::PARAM_STR);
 
   try{
     $stmt->execute();
@@ -154,13 +154,14 @@ function updateClearNum($accountId, $teamId, $value){
 }
 
 /* progressテーブルのnowStageをUPDATE */
-function updateNowStage($accountId, $teamId, $value){
-  $sql = "UPDATE progress SET nowStage = :value WHERE accountID = :accountId AND teamID = :teamId";
+function updateNowStage($teamId, $accountId, $number, $value){
+  $sql = "UPDATE progress SET nowStage = :value WHERE accountID = :accountId AND teamID = :teamId AND progressNumber = :num";
 
   $stmt = $this->pdo->prepare($sql);
   $stmt->bindParam(':value', $value, PDO::PARAM_INT);
   $stmt->bindParam(':accountId', $accountId, PDO::PARAM_STR);
   $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
+  $stmt->bindParam(':num', $number, PDO::PARAM_STR);
 
   try{
     $stmt->execute();

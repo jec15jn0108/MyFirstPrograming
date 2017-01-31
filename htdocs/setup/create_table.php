@@ -104,7 +104,7 @@ try{
     accountID char(32),
     teamID char(32),
     clearNum int,
-    nowStage int,
+    nowStage char(64),
     PRIMARY KEY(progressNumber, accountID, teamID),
     FOREIGN KEY(accountID)
     REFERENCES account(accountID),

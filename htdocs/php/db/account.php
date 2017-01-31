@@ -50,12 +50,13 @@
      }
      return $stmt;
    }
+
    /*アカウントテーブルより同一団体内すべてのstudentアカウントIDを取得*/
-   function selectStudentAccount($teamId,$isTeacher){
-     $sql = "SELECT * FROM account WHERE teamID = :teamId AND isTeacher = :isteacher";
+   function selectStudentAccount($teamId){
+     $sql = "SELECT * FROM account WHERE teamID = :teamId AND isTeacher = 0";
      $stmt = $this->pdo->prepare($sql);
      $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
-     $stmt->bindParam(':isteacher', $isTeacher, PDO::PARAM_STR);
+    //  $stmt->bindParam(':isteacher', $isTeacher, PDO::PARAM_STR);
 
      try{
        $stmt->execute();

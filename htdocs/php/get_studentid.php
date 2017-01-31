@@ -8,14 +8,14 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/db/account.php');
 
 $ac = new Account();
-if (isset($_POST["PostValue01"],$_POST["PostValue02"])) {
-  $teamId = $_POST['PostValue01'];
-  $isteacher = $_POST["PostValue02"];
+if (isset($_POST["teamId"])) {
+  $teamId = $_POST['teamId'];
+  // $isteacher = $_POST["PostValue02"];
 } else {
   $teamId = "";
-  $isteacher = "";
+  // $isteacher = "";
 }
 $accountlist;
-$accountlist = $ac->selectStudentAccount($teamId, $isteacher);
+$accountlist = $ac->selectStudentAccount($teamId);
 $accountlist = json_encode($accountlist);
 echo ($accountlist);

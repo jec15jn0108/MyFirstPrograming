@@ -44,12 +44,6 @@ $.ajax({
 })
 .done(function (data) {
   // console.log(data);
-  var clearedNumber = $.cookie("cleared_number");
-  if (clearedNumber) {
-    clearedNumber = JSON.parse(clearedNumber);
-  } else {
-    clearedNumber = [[],[],[],[]];
-  }
   data = data.split(",");
   $(".stageList").each(function(i) {
     for (var j = 1; j <= data[i]; j++) {
@@ -60,9 +54,6 @@ $.ajax({
         $("#genre li").eq(i).addClass("active");
       } else {
         $("li", this).eq(j - 1).attr("onclick", "chooseStage(" + (i + 1) + "," + j + ")");
-      }
-      if (clearedNumber[i][j - 1]) {
-        $("li", this).eq(j - 1).css("background-color", "#4bc600");
       }
     }
   });
@@ -103,49 +94,62 @@ function setNowStage() {
 
 
 //ゴール時の処理
-function  showGoalWindow() {
-  if (workspace.getAllBlocks().length <= map.maxBlockNum) {
-    var ret = window.confirm("GOOOOOOAL");
+function showGoalWindow() {
+  print("Code:");
+  print(getCode());
+  var mapName = $("#stageName").val();
 
+  if (mapName == "") {
+    window.alert("ステージ名を設定してもう一度実行して下さい");
+    $("#stageName").val("");
+    $("#stageName").focus();
+    return false;
+  }
 
-    var cleared = $.cookie("cleared");
-    var clearedNumber = $.cookie("cleared_number");
-    if (!cleared) {
-      cleared = new Object();
-      clearedNumber = [[], [], [], []];
-    } else {
-      cleared = JSON.parse(cleared);
-      clearedNumber = JSON.parse(clearedNumber);
-    }
-    if (!cleared[map.name]) {
-      $.ajax({
-        url: "/php/progress/add_clear_num.php",
-        type: "POST",
-        data: {
-          teamId: $.cookie("team"),
-          accountId: $.cookie("account"),
-          number: $.cookie("number"),
-        }
-      })
-      .done(function(data) {
-        console.log(data);
-      })
-      .fail(function() {
-      });
-      cleared[map.name] = 1;
-      clearedNumber[Number($.cookie("stage_genre")) - 1][Number($.cookie("stage_number")) - 1] = 1;
-    }
+  var ret = window.confirm("実行したコードを模範解答に設定しますか？\n\nステージ名: " + mapName + "\nブロックの数: " + blockNum + "\n\n" + getCode() + "\n");
+  if (ret) {
+    var jsStr = $.cookie("map0") + $.cookie("map1") + $.cookie("map2");
+    var xmlStr = Blockly.Xml.workspaceToDom(workspace);
+    xmlStr.setAttribute('id', 'workspaceBlocks');
+    xmlStr.setAttribute('style', 'display:none');
+    xmlStr = xmlStr.outerHTML;
 
-    cleared = JSON.stringify(cleared);
-    clearedNumber = JSON.stringify(clearedNumber);
-    $.cookie("cleared", cleared);
-    $.cookie("cleared_number", clearedNumber);
+    // console.log(jsStr);
+    // console.log(xmlStr);
 
-    if (ret) {
+    $.ajax({
+      url: "/php/save_map.php",
+      type: "POST",
+      data: {
+        teamId: $.cookie("team"),
+        mapName: $("#stageName").val(),
+        mapData: jsStr,
+        answer: xmlStr,
+        blockNum: blockNum,
+        genre: $("#genre").val(),
+      }
+    })
+    .done(function (data) {
+      console.log(data);
+      if (data == "false") {
+        window.alert("ステージ名: " + $("#stageName").val() + " は既に存在しています。")
+      } else {
+        window.location.href = "/main";
+      }
+    })
+    .fail(function () {
+      console.err("error");
+    });
 
-    }
+    // var stageJson = {
+    //   map: jsStr,
+    //   answer: xmlStr
+    // };
+    //
+    // console.log(stageJson);
+
   } else {
-    window.alert("ブロック数をもっと減らせるよ！\n\nパー：" + map.maxBlockNum + "ブロック");
+
   }
 }
 

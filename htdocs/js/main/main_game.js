@@ -51,7 +51,9 @@ window.onload = function() {
         // console.log(data);
         eval(data);
         $("h1").text(map.name);
+        $("title").text("M.F.P. " + map.name);
         reset();
+        setNowStage();
       })
       .fail(function () {
         console.err("error");
