@@ -9,10 +9,13 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/db/stage.php');
 $st = new Stage();
 
+// $mapName = $_POST['mapName'];
 $teamId = $_POST['teamId'];
-$mapName = $_POST['mapName'];
+$genreId = $_POST['genre'];
+$num = intval($_POST['number']);
 
-$stmt = $st->selectStage($teamId, $mapName);
+$stmt = $st->selectStageByGenreAndNumber($teamId, $genreId, $num);
+// $stmt = $st->selectStage($teamId, $mapName);
 // echo($stmt->fetch(PDO::FETCH_ASSOC)["stageFileUrl"]);
 $fileName = $stmt->fetch(PDO::FETCH_ASSOC)["stageFileUrl"];
 // echo($fileName);

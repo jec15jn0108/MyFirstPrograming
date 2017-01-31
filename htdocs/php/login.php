@@ -40,6 +40,8 @@
    setcookie('is_teacher', var_export($isTeacher, true), 0, "/");
    setcookie('team', $teamId, 0, "/");
    setcookie('account', $accountId, 0, "/");
+   setcookie('stage_genre', 1, 0, "/");
+   setcookie('stage_number', 1, 0, "/");
    header( "Location: ../main.html" );
    exit();
  } else {

@@ -10,9 +10,8 @@ $st = new Stage();
 
 $stageName = "test01";
 $teamId = "jec01";
-$genreId = null;
-$stageFileUrl = "/maps/jec01/test01.json";
-$answerFileUrl = null;
+$genreId = 4;
+$stageFileUrl = "/maps/jec01/test01.txt";
 $stageNumber = 1;
 
-$st->insertStage($stageName, $teamId, $genreId, $stageFileUrl, $answerFileUrl, $stageNumber);
+$st->insertStage($stageName, $teamId, $genreId, $stageFileUrl, $stageNumber);

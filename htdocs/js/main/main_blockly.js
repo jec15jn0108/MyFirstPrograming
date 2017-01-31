@@ -11,7 +11,7 @@ var workspace = Blockly.inject(blocklyDiv,
       snap: true},
     trashcan: true});
     //初期状態
-    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), workspace);
+    // Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), workspace);
 
 
 var onresize = function(e) {

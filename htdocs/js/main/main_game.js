@@ -8,8 +8,6 @@ window.onload = function() {
   // console.log(x + ":" + y);
   var game = new Core(512, 512);
 
-  game.fps = 15;
-
 
   var charaImage  = "/src/character.png";
   var mapImage    = "/src/map0.gif";
@@ -45,12 +43,14 @@ window.onload = function() {
         dataType: "text",
         data: {
           teamId: $.cookie("team"),
-          mapName: "test01"
+          genre: $.cookie("stage_genre"),
+          number: $.cookie("stage_number"),
         }
       })
       .done(function (data) {
         // console.log(data);
         eval(data);
+        $("h1").text(map.name);
         reset();
       })
       .fail(function () {

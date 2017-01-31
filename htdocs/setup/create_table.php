@@ -62,7 +62,7 @@ try{
   echo "studentさくせす<br />";
 
   $sql = "CREATE TABLE genre (
-    genreID char(1),
+    genreID int,
     genreName char(10),
     PRIMARY KEY(genreID)
    )";
@@ -71,12 +71,22 @@ try{
 
   echo "genreさくせす<br />";
 
+  $sql = "INSERT INTO genre VALUES (1, '順次')";
+  $pdo->exec($sql);
+  $sql = "INSERT INTO genre VALUES (2, '判断')";
+  $pdo->exec($sql);
+  $sql = "INSERT INTO genre VALUES (3, '繰返し')";
+  $pdo->exec($sql);
+  $sql = "INSERT INTO genre VALUES (4, '応用')";
+  $pdo->exec($sql);
+
+
+
   $sql = "CREATE TABLE stage (
     stageName char(32),
     teamID char(32),
-    genreID char(1),
+    genreID int,
     stageFileUrl varchar(255),
-    answerFileUrl varchar(255),
     stageNumber int,
     PRIMARY KEY(stageName, teamID),
     FOREIGN KEY(teamID)

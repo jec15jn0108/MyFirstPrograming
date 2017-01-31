@@ -101,13 +101,25 @@ function reset() {
 
 
 function showGoalWindow() {
+  print("Code:");
+  print(getCode());
   var mapName = $("#stageName").val();
-  var ret = window.confirm("実行したコードを模範解答に設定しますか？\n\nステージ名: " + mapName + "\nブロックの数: " + blockNum + "\n");
+
+  if (mapName == "") {
+    window.alert("ステージ名を設定してもう一度実行して下さい");
+    $("#stageName").val("");
+    $("#stageName").focus();
+    return false;
+  }
+
+  var ret = window.confirm("実行したコードを模範解答に設定しますか？\n\nステージ名: " + mapName + "\nブロックの数: " + blockNum + "\n\n" + getCode() + "\n");
   if (ret) {
-    var jsStr = $.cookie("map0") + $.cookie("map1") + $.cookie("map2") + "map.name = " + mapName + ";map.maxBlockNum = " + blockNum + ";";
+    var jsStr = $.cookie("map0") + $.cookie("map1") + $.cookie("map2");
     var xmlStr = Blockly.Xml.workspaceToDom(workspace);
     xmlStr.setAttribute('id', 'workspaceBlocks');
     xmlStr.setAttribute('style', 'display:none');
+    xmlStr = xmlStr.outerHTML;
+
     // console.log(jsStr);
     // console.log(xmlStr);
 
@@ -119,10 +131,17 @@ function showGoalWindow() {
         mapName: $("#stageName").val(),
         mapData: jsStr,
         answer: xmlStr,
+        blockNum: blockNum,
+        genre: $("#genre").val(),
       }
     })
     .done(function (data) {
       console.log(data);
+      if (data == "false") {
+        window.alert("ステージ名: " + $("#stageName").val() + " は既に存在しています。")
+      } else {
+        window.location.href = "/main";
+      }
     })
     .fail(function () {
       console.err("error");

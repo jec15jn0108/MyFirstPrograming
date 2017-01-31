@@ -26,6 +26,7 @@
   <script type="text/javascript" src="/apis/JS-Interpreter/acorn.js"></script>
   <script type="text/javascript" src="/apis/JS-Interpreter/interpreter.js"></script>
 
+  <link rel="stylesheet" type="text/css" href="/css/common.css">  
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <link rel="stylesheet" type="text/css" href="/css/tab.css">
   <link rel="stylesheet" type="text/css" href="/css/drag_and_drop.css">
@@ -42,20 +43,36 @@
 <body>
   <div id="header">
     <div id="header1">
-      <ul class="tab stage">
-        <li class="active">順次</li>
-        <li>判断</li>
-        <li>繰返し</li>
-        <li>応用</li>
+      <ul class="tab stage" id="genre">
+        <li value="1">順次<img src="/src/ic_trending_flat_black_18dp.png"></li>
+        <li value="2">判断<img src="/src/ic_call_split_black_18dp.png"></li>
+        <li value="3">繰返し<img src="/src/ic_loop_black_18dp.png"></li>
+        <li value="4">応用<img src="/src/ic_all_inclusive_black_18dp.png"></li>
       </ul>
 
-      <div class="tabContent stage active">This is the content of TAB 1.</div>
-      <div class="tabContent stage">This is the content of TAB 2.</div>
-      <div class="tabContent stage">This is the content of TAB 3.</div>
-      <div class="tabContent stage">This is the content of TAB 4.</div>
+      <div class="tabContent stage genre">
+        <ul class="stageList">
 
+        </ul>
+      </div>
+      <div class="tabContent stage genre">
+        <ul class="stageList">
+
+        </ul>
+      </div>
+      <div class="tabContent stage genre">
+        <ul class="stageList">
+
+        </ul>
+      </div>
+      <div class="tabContent stage genre">
+        <ul class="stageList">
+
+        </ul>
+      </div>
       <!-- <button onclick="">チュートリアル</button> -->
     </div>
+    <h1>StageName</h1>
     <div id="teacher-header">
       <button onclick='window.location.href="/apis/enchantMapEditor/mapeditor";' class="teacher-btn">ステージ作成</button>
       <button onclick='window.open("/progress.html");' class="teacher-btn">進捗管理</button>
@@ -181,7 +198,7 @@
   </category>
 </xml>
 
-
+<!--
 <xml id="startBlocks" style="display: none">
   <block type="variables_set" inline="true" x="20" y="20">
   <field name="VAR">n</field>
@@ -230,11 +247,8 @@
   </next>
   </block>
 </xml>
+-->
 <!-- ================================================================================ -->
-<!-- <button onclick="parseCode()">parse</button>
-<button onclick="stepCode()" id="stepButton" disabled="disabled">step</button>
-<button onclick="runCode()">run</button>
-<button onclick="showCode()">show</button> -->
 
 <script type="text/javascript" src="/js/main/main_blockly.js"></script>
 
@@ -246,35 +260,35 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js"></script>
 
   <script type="text/javascript">
-  //ace
-  var width = window.innerWidth / 100 * 56.3;
-  var height = window.innerHeight / 100 * 88;
-  $("#codeEditor").css("width", width);
-  $("#codeEditor").css("height", height);
-  var editor = ace.edit("codeEditor");
-  editor.setTheme("ace/theme/monokai");
-  editor.setFontSize(22);
-  editor.getSession().setMode("ace/mode/html");
-  editor.getSession().setUseWrapMode(true);
-  editor.getSession().setTabSize(2);
-  editor.$blockScrolling = Infinity;
-  editor.setOptions({
-    enableBasicAutocompletion: true,
-    enableSnippets: true,
-    enableLiveAutocompletion: true
-  });
-  editor.getSession().setMode("ace/mode/javascript");
-
-  editor.setValue(getCode(), -1);
-
-  function updateCode(event) {
-    editor.setValue(getCode(), -1);
-  }
-  workspace.addChangeListener(updateCode);
-  workspace.addChangeListener(reset);
-  workspace.addChangeListener(function () {
-    console.log(workspace.getAllBlocks().length);
-  })
+  // //ace
+  // var width = window.innerWidth / 100 * 56.3;
+  // var height = window.innerHeight / 100 * 88;
+  // $("#codeEditor").css("width", width);
+  // $("#codeEditor").css("height", height);
+  // var editor = ace.edit("codeEditor");
+  // editor.setTheme("ace/theme/monokai");
+  // editor.setFontSize(22);
+  // editor.getSession().setMode("ace/mode/html");
+  // editor.getSession().setUseWrapMode(true);
+  // editor.getSession().setTabSize(2);
+  // editor.$blockScrolling = Infinity;
+  // editor.setOptions({
+  //   enableBasicAutocompletion: true,
+  //   enableSnippets: true,
+  //   enableLiveAutocompletion: true
+  // });
+  // editor.getSession().setMode("ace/mode/javascript");
+  //
+  // editor.setValue(getCode(), -1);
+  //
+  // function updateCode(event) {
+  //   editor.setValue(getCode(), -1);
+  // }
+  // workspace.addChangeListener(updateCode);
+  // workspace.addChangeListener(reset);
+  // workspace.addChangeListener(function () {
+  //   console.log(workspace.getAllBlocks().length);
+  // })
 
   </script>
 
