@@ -12,7 +12,10 @@
         <script type="text/javascript" src="main.js"></script>
         <script type="text/javascript" src="mapeditor.js"></script>
         <script type="text/javascript" src="custom.js"></script>
+        <script type="text/javascript" src="/js/is_login.js"></script>
+        <script type="text/javascript" src="/js/logout.js"></script>
 
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
         <link rel="stylesheet" type="text/css" href="mapeditor.css">
 
@@ -24,7 +27,7 @@
           <button onclick='window.location.href="/main";' class="teacher-btn">戻る</button>
           <!-- <button onclick='window.open("/progress.html");' class="teacher-btn">進捗管理</button> -->
           <!-- <button onclick='window.location.href="/config_base.html";' class="teacher-btn">設定変更</button> -->
-          <button onclick='window.location.href="/php/logout.php";'>ログアウト</button>
+          <button onclick='logout();'>ログアウト</button>
         </div>
       </div>
 	<div id="enchant-stage" style="width: 800px; height: 800px; float:left"></div>

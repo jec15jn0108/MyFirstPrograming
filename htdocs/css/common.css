@@ -13,11 +13,13 @@
 }
 
 #teacher-header {
+  position: absolute;
   padding-top: 5px;
   padding-bottom: 5px;
   /*border: solid 1px black;*/
-  width: 450px;
-  margin-left: auto;
+  width: 330px;
+  margin-left: 65%;
+  float: left;
 }
 
 #teacher-header button {
@@ -39,4 +41,10 @@ h1 {
   margin: 5px;
   margin-left: 35%;
   font-size: 48px;
+}
+
+#logout {
+  width: 150px;
+  margin-left: auto;
+  padding: 5px;
 }

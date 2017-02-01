@@ -142,7 +142,7 @@ class Stage extends DbOperator {
    * genreIDごとに全てSELECT
    */
    function selectAllStageGenre($teamId, $genreId){
-     $sql = "SELECT * FROM stage WHERE teamID = :teamId AND genreID = :genreId";
+     $sql = "SELECT * FROM stage WHERE teamID = :teamId AND genreID = :genreId ORDER BY stageNumber";
      $stmt = $this->pdo->prepare($sql);
      $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
      $stmt->bindParam(':genreId', $genreId, PDO::PARAM_STR);
@@ -268,6 +268,26 @@ function updateStageNumber($teamId, $stageName, $value){
     return false;
   }
   return $stmt->rowCount();
+}
+
+/*
+ * stageテーブルの
+ * stageNumber を更新
+ */
+function updateStageNum($teamId, $stageName, $value){
+ $sql = "UPDATE stage SET stageNumber = :value WHERE stageName = :stageName AND teamID = :teamId";
+ $stmt = $this->pdo->prepare($sql);
+ $stmt->bindParam(':value', $value, PDO::PARAM_STR);
+ $stmt->bindParam(':stageName', $stageName, PDO::PARAM_STR);
+ $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
+
+ try{
+   $stmt->execute();
+ }catch (PDOException $e){
+   print($e->getMessage() . '<br>');
+   return false;
+ }
+ return $stmt->rowCount();
 }
 
 }

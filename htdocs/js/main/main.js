@@ -33,6 +33,11 @@ $(".tab.palette li").eq(1).click(function() {
   editor.focus();
 });
 
+if ($.cookie("is_teacher") == "false") {
+  $("#teacher-header").empty();
+
+}
+
 
 //ステージ選択メニュー=================================================================
 $.ajax({
@@ -142,22 +147,36 @@ function  showGoalWindow() {
     $.cookie("cleared_number", clearedNumber);
 
     if (ret) {
+      $.ajax({
+        url: "/php/get_stage_count.php",
+        type: "POST",
+        data: {
+          teamId: $.cookie("team"),
+        }
+      })
+      .done(function(data) {
+        data = data.split(",");
+        var genre = Number($.cookie("stage_genre")) - 1;
+        var num = Number($.cookie("stage_number"));
 
+        if (num >= data[genre]) {
+          if (genre == 3) {
+            window.alert("おめでとう！最後の問題をクリアした！");
+          } else {
+            $.cookie("stage_genre", genre + 2, {path: "/"});
+            $.cookie("stage_number", 1, {path: "/"});
+            window.location.reload();
+          }
+        } else {
+          $.cookie("stage_number", num + 1, {path: "/"});
+          window.location.reload();
+        }
+      })
+      .fail(function() {
+
+      });
     }
   } else {
     window.alert("ブロック数をもっと減らせるよ！\n\nパー：" + map.maxBlockNum + "ブロック");
   }
-}
-
-
-function logout() {
-  $.ajax({
-    url: "/php/logout.php",
-  })
-  .done(function() {
-    window.location.href = "/";
-  })
-  .fail(function() {
-
-  });
 }

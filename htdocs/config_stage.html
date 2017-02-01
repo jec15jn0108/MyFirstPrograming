@@ -12,55 +12,36 @@
   <script type="text/javascript" src="/apis/jquery-validation-engine/jquery.validationEngine.js"></script>
   <script type="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
   <script type="text/javascript" src="/js/get_allstage.js"></script>
-  <script type="text/javascript">
-  $(function(){
-    get_allstage();
-  });
-  </script>
+  <script type="text/javascript" src="/js/config_stage.js"></script>
 </head>
 <body>
   <p>順次</p>
-  <form id="Order" action="" method="post">
+  <!-- <form id="Order" name="Order" target="_self"> -->
     <ul id="select_sortableO">
     </ul>
-    <input type="hidden" id="result" name="result" />
-    <button type="submit" id="submitO">並び順を保存する</button>
-  </form>
+    <button id='submitO' value='1'>並び順を保存する</button>
+  <!-- </form> -->
 
   <p>選択</p>
-  <form>
+  <!-- <form> -->
     <ul id="select_sortableC">
     </ul>
-  </form>
+    <button id='submitO' value='2'>並び順を保存する</button>
+  <!-- </form> -->
 
   <p>繰返し</p>
-  <form>
+  <!-- <form> -->
     <ul id="select_sortableR">
     </ul>
-  </form>
+    <button id='submitO' value='3'>並び順を保存する</button>
+  <!-- </form> -->
 
   <p>応用</p>
-  <form>
+  <!-- <form> -->
     <ul id="select_sortableA">
     </ul>
-  </form>
-
-  <script>
-  var selected = new Array();
-  $(function () {
-    $('#select_sortableO,#select_sortableC,#select_sortableR,#select_sortableA').sortable({
-      handle: 'span',
-      opacity: 0.5,
-    }).selectable({
-      cansel: 'span',
-      filter: 'li',
-    })$("#btnO").click(function(){
-      var result = $("#select_sortableO").sortable("toArray");
-      $("#result").val(result);
-      $("#Order").submit();
-    });
-  });
-  </script>
+    <button id='submitO' value='4'>並び順を保存する</button>
+  <!-- </form> -->
 
 </body>
 </html>

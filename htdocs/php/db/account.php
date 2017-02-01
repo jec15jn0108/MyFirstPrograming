@@ -13,7 +13,7 @@
      $stmt->bindParam(':NewId', $NewId,PDO::PARAM_STR);
      $stmt->bindParam(':NewTeamId', $NewTeamId, PDO::PARAM_STR);
      $stmt->bindParam('NewPass',$NewPass, PDO::PARAM_STR);
-     $stmt->bindParam(':isTeacher',$isTeacher, PDO::PARAM_STR);
+     $stmt->bindParam(':isTeacher',$isTeacher, PDO::PARAM_INT);
 
      try{
        $stmt->execute();
@@ -66,6 +66,22 @@
      }
      $result = $stmt->fetchall(PDO::FETCH_COLUMN, 0);
      return $result;
+   }
+
+   /*1団体内の教師IDの数を数える*/
+   function selectTeacherNum($teamId,$isTeacher){
+     $sql = "SELECT count(*) FROM account WHERE teamID = :teamId and isTeacher = :isTeacher";
+     $stmt = $this->pdo->prepare($sql);
+     $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
+     $stmt->bindParam(':isTeacher',$isTeacher,PDO::PARAM_STR);
+
+     try{
+       $stmt->execute();
+     }catch (PDOException $e){
+       print($e->getMessage() . '<br />');
+       return false;
+     }
+     return $stmt->fetchColumn();
    }
 
    /* ユーザ認証 */
@@ -143,6 +159,20 @@
      $sql = "DELETE FROM account WHERE accountID = :accountId AND teamID = :teamId";
      $stmt = $this->pdo->prepare($sql);
      $stmt->bindParam(':accountId', $accountId, PDO::PARAM_STR);
+     $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
+
+     try{
+       $result = $stmt->execute();
+     }catch (PDOException $e){
+       print($e->getMessage() . '<br />');
+       return false;
+     }
+     return $stmt->rowCount();
+   }
+
+   function deleteAccountAll($teamId){
+     $sql = "DELETE FROM account WHERE teamID = :teamId";
+     $stmt = $this->pdo->prepare($sql);
      $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
 
      try{

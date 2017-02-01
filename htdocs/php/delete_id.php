@@ -18,20 +18,24 @@ $st = new Stage();
 $teamId = $_POST['PostValue01'];
 $accountId = $_POST['PostValue02'];
 $isTeacher = $_POST['PostValue03'];
+$sid = $_POST['PostValue04'];
 
-if($isTeacher){
-  $isTeacher = true;
+if(($isTeacher AND empty($sid)) === true){
+  $result1 = $ac->selectTeacherNum($teamId, $isTeacher);
 } else {
-  $isTeacher = false;
+  $result1 = 0;
 }
 
-$result1 = $ac->selectTeacherNum($teamId, $isTeacher);
 if($result1 == 1){
   $pr->deleteProgressAll($teamId);
   $st->deleteStageAll($teamId);
   $ac->deleteAccountAll($teamId);
   $te->deleteTeam($teamId);
 } else {
-  $ac->deleteAccount($accountId,$teamId);
+  if(empty($sid) === false){
+    $ac->deleteAccount($accountId,$sid);
+  } else {
+    $ac->deleteAccount($accountId,$teamId);
+  }
 }
 echo($result1);

@@ -5,124 +5,105 @@
     <link rel="stylesheet" type="text/css" href="/css/register.css">
     <meta charset="utf-8">
     <title>アカウント作成</title>
+    <link rel="stylesheet" href="/css/validationEngine.jquery.css" type="text/css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/apis/jquery-validation-engine/jquery.validationEngine-ja.js"></script>
+    <script type="text/javascript" src="/apis/jquery-validation-engine/jquery.validationEngine.js"></script>
+    <script type="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/get_cookie.js"></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function($){
+      jQuery("#team").validationEngine();
+    });
+
+    </script>
+
+    <script type="text/javascript">
+    jQuery(document).ready(function($){
+      jQuery("#newaccount").validationEngine();
+    });
+    </script>
+
+    <script type="text/javascript">
+    jQuery(document).ready(function($){
+      jQuery("#student").validationEngine();
+    });
+
+    </script>
   </head>
   <body>
     <h1>My First Programing</h1>
     <h2>新規登録</h2><br>
-    <form action="/php/register.php" method="post">
-    <!-- <form action="javascript:check()" method="post"> -->
-    <div id="errorMessage"></div>
-    <div class="team">
+    <form id ="newaccount" action="/php/register.php" method="post">
+      <p id="error-team"></p>
+    <div id="team">
       <p>
         団体ID&nbsp;
-        <input type="text" name="teamid" id="teamid" pattern="^[0-9A-Za-z]+$"title="※半角英数"maxlength="32" onkeyup="idcheck('teamid','teamidlen')"required>
+        <input type="text" name="teamid" id="teamid" class="validate[required,minSize[4],maxSize[32],custom[onlyLetterSymbolandNumber]]">
       </p>
       <p>
         <span id="teamidlen"></span>
       </p>
       <p>
         団体名&nbsp;
-        <input type="text" name="teamname" required>
+        <input type="text" name="teamname" class="validate[required]">
       </p>
     </div>
-    <div id="container">
-      <div id="teacher">
-        <p>
-          教師用ID<br>
-          <input type="text" name="accountT" id="accountT"pattern="^[0-9A-Za-z]+$"title="※半角英数" maxlength="32" onkeypress="idcheck('accountT','tidlen')"onkeyup="idcheck('accountT','tidlen')" required>
-          <span id="tidlen"></span>
-        </p>
-        <p>
-          教師用パスワード<br>
-          <input type="password" name="tPass" id ="tPass" onpaste="return false" onkeypress="pcheck('tPass','tpasslength')"onkeyup="check('tPass', 'tPass2', 'tishitp1')"required>
-          <span id="tpasslength"></span>
-        </p>
-        <p>
-          教師用パスワードの再入力<br>
-          <input type="password" name="tPass2" id="tPass2" onpaste="return false" maxlength="71"onkeypress="pcheck('tPass','tpasslength')" onkeyup="check('tPass', 'tPass2', 'tishitp1')"required>
-          <span id="tishitp1"></span>
-        </p>
-        <p id="message">
-          <?php
-          echo $_SESSION['teamId']; ?>
-        </p>
-        <p>
-          <br>
-          <br>
-          <br>
-          <input id="register" type="submit" name="register"  value="登録">
-        </p>
-      </div>
-      <div id="student">
-        <p>
-          生徒ID<br>
-          <input type="text" name="accountS" id="accountS" pattern="^[0-9A-Za-z]+$"title="※半角英数" maxlength="32" onkeyup="idcheck('accountS','sidlen')"required>
-          <span id="sidlen"></span>
-        </p>
-        <p>
-          生徒用パスワード<br>
-          <input type="password" name="sPass" id="sPass" onpaste="return false" maxlength="71" onkeypress="pcheck('sPass','spasslength')"onkeyup="check('sPass', 'sPass2', 'tishisp2')"required>
-          <span id="spasslength"></span>
-        </p>
-        <p>
-          生徒用パスワードの再入力<br>
-          <input type="password" name="sPass2" id="sPass2" onpaste="return false" maxlength="71" onkeypress="pcheck('sPass','spasslength')" onkeyup="check('sPass', 'sPass2', 'tishisp2')"required>
-          <span id="tishisp2"></span>
-        </p>
-      </div>
+    <div id="teacher">
+      <p>
+        教師用ID<br>
+        <input type="text" name="accountT" id="accountT" class="validate[required,minSize[4],maxSize[32],custom[onlyLetterSymbolandNumber]]">
+        <span id="tidlen"></span>
+      </p>
+      <p>
+        教師用パスワード<br>
+        <input type="password" name="tPass" id ="tPass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber]]">
+        <span id="tpasslength"></span>
+      </p>
+      <p>
+        教師用パスワードの再入力<br>
+        <input type="password" name="tPass2" id="tPass2" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber],equals[tPass]]">
+        <span id="tishitp1"></span>
+      </p>
+      <p>
+        <br>
+        <br>
+        <br>
+        <input id="register" type="submit" name="register"  value="登録">
+      </p>
+  </div>
+    <div id="student">
+      <p>
+        生徒ID<br>
+        <input type="text" name="accountS" id="accountS" class="validate[required,minSize[4],maxSize[32],custom[onlyLetterSymbolandNumber]]">
+        <span id="sidlen"></span>
+      </p>
+      <p>
+        生徒用パスワード<br>
+        <input type="password" name="sPass" id="sPass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber]]">
+        <span id="spasslength"></span>
+      </p>
+      <p>
+        生徒用パスワードの再入力<br>
+        <input type="password" name="sPass2" id="sPass2" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber],equals[sPass]]">
+        <span id="tishisp2"></span>
+      </p>
     </div>
-    </form>
-    <script type="text/javascript">
-      // var form = document.forms[0];
-      function　check($id1, $id2, $tishi){
-        var pw1 = document.getElementById($id1).value;
-        var pw2 = document.getElementById($id2).value;
-        if(pw1 == pw2){
-          document.getElementById($tishi).innerHTML="<font color='green'>OK</font>";
-          document.getElementById("register").disabled = false;
-          if($tishi == "tishisp2" && document.getElementById("register").disabled == true || pcheck('tPass','tpasslength') == false || pcheck('sPass','spasslength') == false){
-            document.getElementById("register").disabled = true;
-          }
-        }
-        else{
-        document.getElementById($tishi).innerHTML="<font color='red'>一致していません</font>";
-        document.getElementById("register").disabled = true;
-        }
+  </form>
+  <script type="text/javascript">
+  window.onload = function(){
+    var errName = [
+      "error-team",
+    ];
+    var msg = [
+      "団体IDが存在しています！！",
+    ];
+    var errNum = get_cookie("team_error");
+    if (errNum != null) {
+      var element = document.getElementById(errName[errNum]);
+      element.innerHTML = msg[errNum];
     }
-    function pcheck($pass,$length){
-      str = document.getElementById($pass).value;
-      if(str.length < 7){
-       document.getElementById($length).innerHTML="<font color='red'>8 ~ 71文字</font>";
-       document.getElementById("register").disabled = true;
-       if($length == "spasslength" && document.getElementById("register").disabled == true || idcheck('accountT','tidlen') == false ||idcheck('accountS','sidlen') == false){
-         document.getElementById("register").disabled = true;
-       }
-       return  false;
-     }else{
-       document.getElementById($length).innerHTML="<font color='green'>OK</font>";
-       document.getElementById("register").disabled = false;
-       return true;
-     }
-    }
-    function idcheck($id,$idlen){
-      str = document.getElementById($id).value;
-      if(str.length < 4){
-       document.getElementById($idlen).innerHTML="<font color='red'>4 ~ 32文字</font>";
-       document.getElementById("register").disabled = true;
-       if($idlen == "sidlen" && document.getElementById("register").disabled == true){
-         document.getElementById("register").disabled = true;
-       }
-       return  false;
-     }else{
-       document.getElementById($idlen).innerHTML="<font color='green'>OK</font>";
-       document.getElementById("register").disabled = false;
-       return true;
-     }
-    }
-      // 入力値チェックエラーが発生したときの処理
-      form.addEventListener("invalid", function() {
-        document.getElementById("errorMessage").innerHTML = "入力値にエラーがあります";
-      }, false);
-    </script>
+  }
+  </script>
   </body>
 </html>

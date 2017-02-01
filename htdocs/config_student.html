@@ -61,6 +61,14 @@
     <p>もう一度入力 : <input type="password" name="re-typingnewSpass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber],equals[newSpass]]"></p>
     <p><button type="submit">新規登録</button></p>
   </form>
-  <p>このアカウントの削除 : <button type="button" onclick="deleteAccount()">削除</button></p>
+  <p>このアカウントの削除 : <button type="button" id="btndelete" name="btndelete">削除</button></p>
+<script>
+  $("#btndelete").click(function(){
+    var selectVal = $('[#acclist] option:selected').text();
+    $(function(){
+      deleteStudent(selectVal);
+    });
+});
+</script>
 </body>
 </html>

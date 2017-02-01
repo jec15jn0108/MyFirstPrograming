@@ -8,7 +8,10 @@
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script tyep="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
+  <script type="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
+
+  <script type="text/javascript" src="/js/is_login.js"></script>
+  <script type="text/javascript" src="/js/logout.js"></script>
 
   <script type="text/javascript" src="/apis/enchant.js/build/enchant.js"></script>
 
@@ -75,7 +78,10 @@
       <button onclick='window.location.href="/apis/enchantMapEditor/mapeditor";' class="teacher-btn">ステージ作成</button>
       <button onclick='window.open("/progress.html");' class="teacher-btn">進捗管理</button>
       <button onclick='window.location.href="/config_base.html";' class="teacher-btn">設定変更</button>
+    </div>
+    <div id="logout">
       <button onclick="logout();">ログアウト</button>
+
     </div>
   </div>
 
@@ -111,6 +117,14 @@
 
 <!-- blockly 設定==================================================================== -->
 <xml id="toolbox" style="display: none">
+  <category name="Turtle">
+    <block type="forword"></block>
+    <block type="back"></block>
+    <block type="turnRight"></block>
+    <block type="turnLeft"></block>
+    <block type="detect"></block>
+    <block type="isGoal"></block>
+  </category>
   <category name="Logic">
     <block type="controls_if"></block>
     <block type="logic_compare"></block>
@@ -186,14 +200,7 @@
       </value>
     </block>
   </category>
-  <category name="Turtle">
-    <block type="forword"></block>
-    <block type="back"></block>
-    <block type="turnRight"></block>
-    <block type="turnLeft"></block>
-    <block type="detect"></block>
-    <block type="isGoal"></block>
-  </category>
+
 </xml>
 
 <!--

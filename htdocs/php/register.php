@@ -6,7 +6,7 @@
  */
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/db/account.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/db/team.php');
-// include_once($_SERVER['DOCUMENT_ROOT'] . '/register.html');
+
 
 $at = new Account();
 $tm = new Team();
@@ -30,11 +30,10 @@ if($retTm == 0) {
   $retT = $at->insertAccount($accountT,$teamId,$hashT,$isT);
   $hashS = password_hash($sPass, PASSWORD_DEFAULT);
   $retS = $at->insertAccount($accountS,$teamId,$hashS,$isS);
-  $_SESSION['teamId'] = "";
   header("Location: /");
 
 }else {
-  $_SESSION['teamId'] = "団体IDが存在しています";
-  header("Location: /register.html");
+  setcookie('team_error', "0", time() + 1, "/");
+  echo '<script type="text/javascript">window.location.href = `/register.html`;</script>';
+  exit();
 }
-session_unset();

@@ -11,7 +11,8 @@
   <!-- <script type="text/javascript" src="/js/get_cookie.js"></script> -->
   <script tyep="text/javascript" src="/apis/jquery-cookie/src/jquery.cookie.js"></script>
   <!-- <script type="text/javascript" src="/js/loop_sleep.js"></script> -->
-
+  <script type="text/javascript" src="/js/is_login.js"></script>
+  <script type="text/javascript" src="/js/logout.js"></script>
   <script type="text/javascript" src="/apis/enchant.js/build/enchant.js"></script>
 
   <script type="text/javascript" src="/apis/google-blockly/blockly_compressed.js"></script>
@@ -57,7 +58,7 @@
       <button onclick='window.location.href="/main";' class="teacher-btn">戻る</button>
       <!-- <button onclick='window.open("/progress.html");' class="teacher-btn">進捗管理</button> -->
       <!-- <button onclick='window.location.href="/config_base.html";' class="teacher-btn">設定変更</button> -->
-      <button onclick='window.location.href="/php/logout.php";'>ログアウト</button>
+      <button onclick='logout();'>ログアウト</button>
     </div>
   </div>
 
@@ -93,6 +94,14 @@
 
 <!-- blockly 設定==================================================================== -->
 <xml id="toolbox" style="display: none">
+  <category name="Turtle">
+    <block type="forword"></block>
+    <block type="back"></block>
+    <block type="turnRight"></block>
+    <block type="turnLeft"></block>
+    <block type="detect"></block>
+    <block type="isGoal"></block>
+  </category>
   <category name="Logic">
     <block type="controls_if"></block>
     <block type="logic_compare"></block>
@@ -168,14 +177,7 @@
       </value>
     </block>
   </category>
-  <category name="Turtle">
-    <block type="forword"></block>
-    <block type="back"></block>
-    <block type="turnRight"></block>
-    <block type="turnLeft"></block>
-    <block type="detect"></block>
-    <block type="isGoal"></block>
-  </category>
+
 </xml>
 
 <!--
