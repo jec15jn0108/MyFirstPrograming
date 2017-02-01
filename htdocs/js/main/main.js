@@ -54,15 +54,15 @@ $.ajax({
   $(".stageList").each(function(i) {
     for (var j = 1; j <= data[i]; j++) {
       $(this).append("<li class='stageNumber'>" + j + "</li>");
+      if (clearedNumber[i][j - 1]) {
+          $("li", this).eq(j - 1).css("background-color", "#4bc600");
+      }
       if (i + 1 == $.cookie("stage_genre") && j == $.cookie("stage_number")) {
         $("li", this).eq(j - 1).css("background-color", "#ff8200");
         $(".genre").eq(i).addClass("active");
         $("#genre li").eq(i).addClass("active");
       } else {
         $("li", this).eq(j - 1).attr("onclick", "chooseStage(" + (i + 1) + "," + j + ")");
-      }
-      if (clearedNumber[i][j - 1]) {
-        $("li", this).eq(j - 1).css("background-color", "#4bc600");
       }
     }
   });

@@ -6,6 +6,7 @@
  */
  include_once ($_SERVER['DOCUMENT_ROOT'] . '/php/db/account.php');
  include_once ($_SERVER['DOCUMENT_ROOT'] . '/php/db/progress.php');
+ include_once ($_SERVER['DOCUMENT_ROOT'] . '/php/logout.php');
 
  $ac = new Account();
  $pg = new Progress();

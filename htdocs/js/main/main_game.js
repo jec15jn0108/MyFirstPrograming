@@ -48,7 +48,7 @@ window.onload = function() {
         }
       })
       .done(function (data) {
-        // console.log(data);
+        console.log(data);
         eval(data);
         $("h1").text(map.name);
         $("title").text("M.F.P. " + map.name);
