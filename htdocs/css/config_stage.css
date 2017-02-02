@@ -5,7 +5,7 @@
   background-color: rgba(93, 221, 170, 0.5);
 }
 
-#select_sortableO, #select_sortableC, #select_sortableR, #select_sortableA {
+.sortlist {
   list-style: none;
 }
 li {

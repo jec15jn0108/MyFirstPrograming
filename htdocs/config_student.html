@@ -62,13 +62,26 @@
     <p><button type="submit">新規登録</button></p>
   </form>
   <p>このアカウントの削除 : <button type="button" id="btndelete" name="btndelete">削除</button></p>
-<script>
+  <script>
   $("#btndelete").click(function(){
-    var selectVal = $('[#acclist] option:selected').text();
-    $(function(){
-      deleteStudent(selectVal);
-    });
-});
+    var selectstudent = $("#acclist option:selected").text();
+    var teamId = $.cookie('team');
+    if (confirm(selectstudent + "を削除します")) {
+      $.ajax({
+        type: "POST",
+        url: "/php/delete_account.php",
+        data: {
+          PostValue01: teamId,
+          PostValue02: selectstudent
+        },
+        success: function(data) {
+          window.location.href = "/config_student.html";
+        }
+      });
+    } else {
+      ;//donothig
+    }
+  });
 </script>
 </body>
 </html>

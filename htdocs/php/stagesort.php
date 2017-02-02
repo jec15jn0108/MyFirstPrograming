@@ -9,15 +9,19 @@
 
  $st = new Stage();
 
- $list = $_POST['list'];
+ $stagelist = $_POST['list'];
  $genre = $_POST['genre'];
- $team = $_COOKIE['team'];
+ $sortlist = $_POST['sortlist'];
+ $teamId = $_COOKIE['team'];
 
- if ((empty($list)) === false) {
+ if ((empty($sortlist)) === false) {
 
-   $sortlist = explode(",", $list);
-
-   for ($i = 1; $i < count($sortlist) + 1; $i++) {
-    
+   for ($i = 1, $j = 0; $j < count($sortlist); $i++, $j++) {
+    $stage = $sortlist[$j];
+    $stagenum = $stage - 1;
+    $list = $stagelist[$stagenum];
+    $st->updateStageNumber($teamId, $list, $i);
   }
+} else {
+  ;//Do not Shing
 }
