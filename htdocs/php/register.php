@@ -30,6 +30,10 @@ if($retTm == 0) {
   $retT = $at->insertAccount($accountT,$teamId,$hashT,$isT);
   $hashS = password_hash($sPass, PASSWORD_DEFAULT);
   $retS = $at->insertAccount($accountS,$teamId,$hashS,$isS);
+
+  //ステージフォルダ作成
+  mkdir($_SERVER['DOCUMENT_ROOT'] . "/maps/" . $teamId);
+
   header("Location: /");
 
 }else {

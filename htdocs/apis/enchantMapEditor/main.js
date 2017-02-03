@@ -355,7 +355,7 @@ var geneButton = (function() {
     $.cookie("map2", txt2, { path: "/" });
     console.log($.cookie("map0") + $.cookie("map1") + $.cookie("map2"));
 
-    window.location.href = "/stage_create";
+    window.location.href = "/stage_create.html";
 
 
 	};

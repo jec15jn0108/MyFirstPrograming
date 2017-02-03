@@ -131,10 +131,10 @@ function showGoalWindow() {
     })
     .done(function (data) {
       console.log(data);
-      if (data == "false") {
+      if (data != "true") {
         window.alert("ステージ名: " + $("#stageName").val() + " は既に存在しています。")
       } else {
-        window.location.href = "/main";
+        window.location.href = "/main.html";
       }
     })
     .fail(function () {

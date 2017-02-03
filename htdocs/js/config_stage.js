@@ -37,14 +37,39 @@ $(function () {
       var listnum = $(listname[i]).sortable("toArray");
       // console.log(genreId);
 
-      if (confirm(listnum + "の順番でいいかい？")) {
+      if(($.isEmptyObject(listnum)) == false){
+
+        if (confirm(listnum + "の順番でいいかい？")) {
+          $.ajax({
+            type: "POST",
+            url: "/php/stagesort.php",
+            data: {
+              list: stageList[genreId - 1],
+              genre: genreId,
+              sortlist: listnum
+            },
+            success: function(data) {
+              window.location.href = "/config_stage.html";
+            }
+          });
+        } else {
+          ;//donothig
+        }
+      } else {
+        alert("データがありません");
+      }
+    });
+  });
+  $("#delete").click(function(){
+    console.log(selected);
+
+    if(($.isEmptyObject(selected)) == false){
+      if(confirm(selected + "を削除します")){
         $.ajax({
           type: "POST",
-          url: "/php/stagesort.php",
+          url: "/php/stagedelete.php",
           data: {
-            list: stageList[genreId - 1],
-            genre: genreId,
-            sortlist: listnum
+            deletelist: selected
           },
           success: function(data) {
             window.location.href = "/config_stage.html";
@@ -53,23 +78,8 @@ $(function () {
       } else {
         ;//donothig
       }
-    });
-  });
-  $("#delete").click(function(){
-    console.log(selected);
-    if(confirm(selected + "を削除します")){
-      $.ajax({
-        type: "POST",
-        url: "/php/stagedelete.php",
-        data: {
-          deletelist: selected
-        },
-        success: function(data) {
-          window.location.href = "/config_stage.html";
-        }
-      });
     } else {
-      ;//donothig
+      alert("削除項目を選択してください");
     }
   });
   // });

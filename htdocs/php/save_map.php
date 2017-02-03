@@ -41,7 +41,11 @@ $isExist = $st->isExistStage($teamId, $mapName);
 
 if (!$isExist) {
   $st->insertStage($mapName, $teamId, $genreId, $file, $cnt + 1);
-  file_put_contents($_SERVER['DOCUMENT_ROOT'] . $file, $txt);
+  if (file_put_contents($_SERVER['DOCUMENT_ROOT'] . $file, $txt) !== false) {
+    echo("true");
+  } else {
+    echo("FileWriteError");
+  }
 } else {
-  echo("false");
+  echo("StageExist");
 }
