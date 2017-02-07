@@ -1,43 +1,30 @@
-#title_logo{
-  width: 100%;
-}
-
-.guest {
-  font-size: 20px;
-}
-
-.guesticon {
-  width: 20%;
-  height: 20%;
-  float: left;
-  margin-bottom: 10px;
-  margin-right: 10px;
-}
-
-.guestname {
-  font-size: 36px;
-  text-shadow: 3px 0px 1px #c27a00,
-               0px 3px 1px #ffa100,
-               -3px 0px 1px #ffa100,
-               0px -3px 1px #ffa100;
-  color: #ffffff;
-  /*background-image: url("/src/images/under.png");*/
-}
-.twitter-follow-button {
-  float: right;
-}
-
-h3, h4 {
-  clear: both;
-}
-
-h5 {
+body {
   margin: 0px;
-
 }
-h5 a {
-  font-size: 20px;
-  color: black;
-  background: #3ccf3d;
-  text-decoration: none;
+
+h1 {
+  background: #00e0ff;
+  font-size: 48px;
+  font-family: Century;
+  text-align: center;
+}
+
+form {
+  text-align: center;
+  font-size: 24px;
+}
+
+button {
+  height: 40px;
+  width: 120px;
+  font-size: 24px;
+  /*float: left;*/
+  margin: 10px;
+}
+
+#regi {
+  width: 200px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -33,7 +33,7 @@
   </head>
   <body>
     <h1>My First Programing</h1>
-    <h2>新規登録</h2><br>
+    <h2>新規登録</h2>
     <form id ="newaccount" action="/php/register.php" method="post">
       <p id="error-team"></p>
     <div id="team">
@@ -49,12 +49,13 @@
         <input type="text" name="teamname" class="validate[required]">
       </p>
     </div>
+
     <div id="teacher">
-      <p>
+      <!-- <p> -->
         教師用ID<br>
         <input type="text" name="accountT" id="accountT" class="validate[required,minSize[4],maxSize[32],custom[onlyLetterSymbolandNumber]]">
         <span id="tidlen"></span>
-      </p>
+      <!-- </p> -->
       <p>
         教師用パスワード<br>
         <input type="password" name="tPass" id ="tPass" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber]]">
@@ -65,13 +66,8 @@
         <input type="password" name="tPass2" id="tPass2" class="validate[required,minSize[8],maxSize[71],custom[onlyLetterSymbolandNumber],equals[tPass]]">
         <span id="tishitp1"></span>
       </p>
-      <p>
-        <br>
-        <br>
-        <br>
-        <input id="register" type="submit" name="register"  value="登録">
-      </p>
-  </div>
+    </div>
+
     <div id="student">
       <p>
         生徒ID<br>
@@ -89,7 +85,14 @@
         <span id="tishisp2"></span>
       </p>
     </div>
+
+    <p id="button">
+      <input id="register" type="submit" name="register"  value="登録">
+    </p>
+
   </form>
+
+
   <script type="text/javascript">
   window.onload = function(){
     var errName = [

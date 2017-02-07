@@ -1,11 +1,12 @@
 $(function() {
     $(".tab li").click(function() {
-        var name = event.target.parentNode.classList[1];
+        // var name = event.target.parentNode.classList[1];
+        var name = $(this).parent().attr("class").split(" ")[1];
         // console.log(name);
-        var num = $(".tab li").index(this);
-        $(".tabContent." + name).removeClass('active');
-        $(".tabContent").eq(num).addClass('active');
-        $(".tab." + name + " li").removeClass('active');
-        $(this).addClass('active')
+        var num = $(".tab." + name + " li").index(this);
+        $(".tabContent.active." + name).removeClass('active');
+        $(".tab." + name + " li.active").removeClass('active');
+        $(".tabContent." + name).eq(num).addClass('active');
+        $(this).addClass('active');
     });
 });

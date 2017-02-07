@@ -38,6 +38,14 @@ if ($.cookie("is_teacher") == "false") {
 
 }
 
+$(function() {
+  $(".tab li img").click(function() {
+    var num = $(".tab li img").index(this);
+    $(".tab.stage li").eq(num).click();
+    // console.log(num);
+  });
+});
+
 
 //ステージ選択メニュー=================================================================
 $.ajax({

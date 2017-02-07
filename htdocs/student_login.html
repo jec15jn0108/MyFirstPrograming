@@ -25,22 +25,25 @@ jQuery(document).ready(function($){
 <body>
   <h1>My First Programing</h1>
 
-  <form id="login" method="post" action="/php/login.php">
+  <form id="login" method="post" action="/php/student_login.php">
     <p id="error-login"></p>
-    <p>
-      団体ID : <input type="text" name="teamid" class="validate[required,maxSize[32]">
-    </p>
-    <p>
-      ユーザID : <input type="text" name="accountid" class="validate[required,maxSize[32]">
-    </p>
     <!-- <p>
-      番号 : <input type="text" name="accountnum" class="validate[maxSize[20],custom[onlyLetterNumber]]">
-      <p id="error-number"></p>
+      団体ID : <input type="text" name="teamid" class="validate[required,maxSize[32]">
     </p> -->
-
+    <!-- <p>
+      ユーザID : <input type="text" name="accountid" class="validate[required,maxSize[32]">
+    </p> -->
     <p>
-      パスワード : <input type="password" name="pass" class="validate[required,maxSize[71]">
+      ユーザID: <b></b>
     </p>
+    <p>
+      番号 : <input type="text" name="number" class="validate[maxSize[20],custom[onlyLetterNumber]]">
+      <p id="error-number"></p>
+    </p>
+
+    <!-- <p>
+      パスワード : <input type="password" name="pass" class="validate[required,maxSize[71]">
+    </p> -->
 
     <p>
       <button type="submit" name ="submit" value="button">ログイン</button>
@@ -48,31 +51,35 @@ jQuery(document).ready(function($){
 
   </form>
 
-  <div id="regi">
+  <!-- <div id="regi">
     <h2>初めての方</h2>
     <button onclick="location.href='/register.html'">新規登録</button>
 
-  </div>
+  </div> -->
 
 
   <script type="text/javascript">
-  window.onload = function(){
-    var errName = [
-      "error-login",
-      "error-number",
-    ];
-    // var msg = get_cookie("login_failure");
-    var msg = [
-      "ログインできませんでした、IDまたはパスワードが間違っています",
-      "番号を入力してください。",
-    ];
-    var errNum = get_cookie("login_error");
-    if (errNum != null) {
-      // console.log(msg);
-      var element = document.getElementById(errName[errNum]);
-      element.innerHTML = msg[errNum];
-    }
-  }
+  // window.onload = function(){
+  //   var errName = [
+  //     "error-login",
+  //     "error-number",
+  //   ];
+  //   // var msg = get_cookie("login_failure");
+  //   var msg = [
+  //     "ログインできませんでした、IDまたはパスワードが間違っています",
+  //     "番号を入力してください。",
+  //   ];
+  //   var errNum = get_cookie("login_error");
+  //   if (errNum != null) {
+  //     // console.log(msg);
+  //     var element = document.getElementById(errName[errNum]);
+  //     element.innerHTML = msg[errNum];
+  //   }
+  // }
+  </script>
+
+  <script>
+    $("b").text($.cookie("account"));
   </script>
 </body>
 </html>
