@@ -19,6 +19,6 @@ $stmt = $st->selectStageByGenreAndNumber($teamId, $genreId, $num);
 // echo($stmt->fetch(PDO::FETCH_ASSOC)["stageFileUrl"]);
 $fileName = $stmt->fetch(PDO::FETCH_ASSOC)["stageFileUrl"];
 // echo($fileName);
-$data = file_get_contents($_SERVER['DOCUMENT_ROOT'] . $fileName);
+$data = file_get_contents(mb_convert_encoding($_SERVER['DOCUMENT_ROOT'] . $fileName, "SJIS"));
 
 echo($data);

@@ -48,12 +48,18 @@ window.onload = function() {
         }
       })
       .done(function (data) {
-        console.log(data);
-        eval(data);
-        $("h1").text(map.name);
-        $("title").text("M.F.P. " + map.name);
-        reset();
-        setNowStage();
+        console.log(data.charAt(0));
+        if (data.charAt(0) != "<") {
+          eval(data);
+          $("h1").text(map.name);
+          $("title").text("M.F.P. " + map.name);
+          reset();
+          setNowStage();
+        } else if ($.cookie("is_teacher") == "true") {
+          window.alert("右上の[ステージ作成]ボタンを押し、ステージを作成して下さい。")
+        } else {
+          window.alert("ステージがありません");
+        }
       })
       .fail(function () {
         console.err("error");

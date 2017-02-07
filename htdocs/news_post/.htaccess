@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName prototype
+AuthUserFile /home/takmi/.htpasswd
+Require valid-user

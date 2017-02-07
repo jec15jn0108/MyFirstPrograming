@@ -29,7 +29,7 @@ $file = "/maps/" . $teamId . "/" . $mapName . ".txt";
 
 // echo($txt);
 // echo($file);
-$file = mb_convert_encoding($file, "SJIS");
+// $file = mb_convert_encoding($file, "SJIS");
 
 
 //DataBase ====================================================================
@@ -40,8 +40,8 @@ $cnt = $st->countStage($teamId, $genreId);
 $isExist = $st->isExistStage($teamId, $mapName);
 
 if (!$isExist) {
-  $st->insertStage($mapName, $teamId, $genreId, $file, $cnt + 1);
-  if (file_put_contents($_SERVER['DOCUMENT_ROOT'] . $file, $txt) !== false) {
+  if (file_put_contents(mb_convert_encoding($_SERVER['DOCUMENT_ROOT'] . $file, "SJIS"), $txt) !== false) {
+    $st->insertStage($mapName, $teamId, $genreId, $file, $cnt + 1);
     echo("true");
   } else {
     echo("FileWriteError");

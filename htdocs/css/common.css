@@ -13,18 +13,21 @@
 }
 
 #teacher-header {
-  position: absolute;
+  /*position: relative;*/
   padding-top: 5px;
   padding-bottom: 5px;
   /*border: solid 1px black;*/
   width: 330px;
-  margin-left: 65%;
-  float: left;
+  /*margin-left: 65%;*/
+  /*margin-right: 200px;*/
+  /*margin-left: auto;*/
+  /*float: left;*/
+  float: right;
 }
 
 #teacher-header button {
   width: 100px;
-  margin-right: auto;
+  /*margin-right: auto;*/
 }
 
 
@@ -47,4 +50,5 @@ h1 {
   width: 150px;
   margin-left: auto;
   padding: 5px;
+  float: right;
 }
