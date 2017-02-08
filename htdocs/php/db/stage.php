@@ -274,20 +274,20 @@ function updateStageNumber($teamId, $stageName, $value){
  * stageテーブルの
  * stageNumber を更新
  */
-function updateStageNum($teamId, $stageName, $value){
- $sql = "UPDATE stage SET stageNumber = :value WHERE stageName = :stageName AND teamID = :teamId";
- $stmt = $this->pdo->prepare($sql);
- $stmt->bindParam(':value', $value, PDO::PARAM_STR);
- $stmt->bindParam(':stageName', $stageName, PDO::PARAM_STR);
- $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
-
- try{
-   $stmt->execute();
- }catch (PDOException $e){
-   print($e->getMessage() . '<br>');
-   return false;
- }
- return $stmt->rowCount();
-}
+// function updateStageNum($teamId, $stageName, $value){
+//  $sql = "UPDATE stage SET stageNumber = :value WHERE stageName = :stageName AND teamID = :teamId";
+//  $stmt = $this->pdo->prepare($sql);
+//  $stmt->bindParam(':value', $value, PDO::PARAM_STR);
+//  $stmt->bindParam(':stageName', $stageName, PDO::PARAM_STR);
+//  $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
+//
+//  try{
+//    $stmt->execute();
+//  }catch (PDOException $e){
+//    print($e->getMessage() . '<br>');
+//    return false;
+//  }
+//  return $stmt->rowCount();
+// }
 
 }

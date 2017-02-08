@@ -38,7 +38,10 @@ ul.menulist li#stage  a:hover { background-color: #808000; color: #ffffcc; }
 
 div.box {
    /* ▼(C-2)ボックス共通の装飾 */
-   height: 800px; overflow: auto; clear: left;
+  /*height: 800px;*/
+  height: 840px;
+  /*overflow: auto;*/
+  clear: left;
 }
 /* ▼(C-3)各ボックスの配色 */
 div#teacherbox { border: 2px solid blue; background-color: #ccffcc; }

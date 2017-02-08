@@ -16,7 +16,7 @@ $(function () {
     cansel: 'span',
     filter: 'li',
     selected: function (event, ui) {
-      if (selected.indexOf(ui.selected.id) === -1) {
+      if (selected.indexOf($(ui.selected).text()) === -1) {
         selected.push($(ui.selected).text());
       }
     },

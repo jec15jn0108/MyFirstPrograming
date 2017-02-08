@@ -4,6 +4,8 @@ window.onload = function() {
 	stage.appendChild(mapForm.create());
 	document.getElementById('checkbox').checked = false;
   document.getElementById("button").click();
+
+
 }
 var app = {};
 app.maps= {};
@@ -95,6 +97,12 @@ var mapForm = {
           $("#next").css("margin", "20px");
 
 					palette.loadImage(app.image);
+
+					// if ($.cookie("map0") != "") {
+					// 	console.log("load");
+					// 	// loadMap();
+					// 	loadButton.click();
+					// }
 				};
 			} else {
 				alert("input number");
@@ -376,16 +384,25 @@ var loadButton = (function() {
 		var accept = document.createElement('input');
 		accept.type = 'button';
 		accept.value = '読み込み (Import)';
-		accept.type = 'button';
+		// accept.type = 'button';
 		accept.onclick = function() {
+			var map = new Map(16,16);
+			// var backgroundMap;
 			try {
-				eval(w.document.getElementById('load').value);
+				// eval(w.document.getElementById('load').value);
+				eval($.cookie("map0"));
+				eval($.cookie("map1"));
+				backgroundMap = map;
 			} catch (e) {
 				console.log(e);
 				alert(e);
 			}
-			app.mapWidth = backgroundMap._data[0][0].length;
-			app.mapHeight = backgroundMap._data[0].length;
+			console.log(backgroundMap);
+			// app.mapWidth = backgroundMap._data[0][0].length;
+			// app.mapHeight = backgroundMap._data[0].length;
+			app.mapWidth = 16;
+			app.mapHeight = 16;
+			console.log(app);
 			app.maps.colMap.loadData(backgroundMap.collisionData);
 			var length = backgroundMap._data.length;
 			var tabs = document.getElementById('tabs');
@@ -401,12 +418,49 @@ var loadButton = (function() {
 			}
 			app.frame.changeSize(app.mapWidth, app.mapHeight);
 			editorTabs.applyColors();
-			w.close();
+			// w.close();
 		};
 		w.document.body.appendChild(input);
 		w.document.body.innerHTML += '<br />';
 		w.document.body.appendChild(accept);
-		w.document.getElementById('load').value += '// example \n// backGround.loadData([[0, 1, 2], [3, 4, 5], [6, 7, 8]]);';
+		accept.click();
+		w.close();
+		// w.document.getElementById('load').value += '// example \n// backGround.loadData([[0, 1, 2], [3, 4, 5], [6, 7, 8]]);';
 	};
 	return element;
 })();
+
+
+// function loadMap() {
+// 	var map = new Map(16,16);
+// 	try {
+// 		// console.log($.cookie("map0"));
+// 		// console.log($.cookie("map1"));
+// 		eval($.cookie("map0"));
+// 		eval($.cookie("map1"));
+// 	} catch (e) {
+// 		console.log(e);
+// 		alert(e);
+// 	}
+// 	// app.mapWidth = backgroundMap._data[0][0].length;
+// 	// app.mapHeight = backgroundMap._data[0].length;
+//
+// 	// app.mapWidth = 16;
+// 	// app.mapHeight = 16;
+// 	app.maps.colMap.loadData(map.collisionData);
+// 	// var length = backgroundMap._data.length;
+// 	var length = 16;
+// 	var tabs = document.getElementById('tabs');
+// 	var num = tabs.childNodes.length - 2;
+// 	if (length < num) {
+// 		for (var i = num; i > length; i--) {
+// 			tabs.removeChild(tabs.childNodes[tabs.childNodes.length - 2]);
+// 		}
+// 	} else if (length > num) {
+// 		for (var i = num; i < length; i++) {
+// 			editorTabs.addNewTab('bgtab' + i, 'layer' + i);
+// 		}
+// 	}
+// 	// app.frame.changeSize(app.mapWidth, app.mapHeight);
+// 	editorTabs.applyColors();
+// }

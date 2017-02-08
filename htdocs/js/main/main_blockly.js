@@ -200,7 +200,7 @@ function runCode() {
       if (!stepCode("run") || isPause) {
         clearInterval(runTime);
       }
-    }, 50);
+    }, 200);
   }
 }
 

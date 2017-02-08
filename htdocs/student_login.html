@@ -59,23 +59,23 @@ jQuery(document).ready(function($){
 
 
   <script type="text/javascript">
-  // window.onload = function(){
-  //   var errName = [
-  //     "error-login",
-  //     "error-number",
-  //   ];
-  //   // var msg = get_cookie("login_failure");
-  //   var msg = [
-  //     "ログインできませんでした、IDまたはパスワードが間違っています",
-  //     "番号を入力してください。",
-  //   ];
-  //   var errNum = get_cookie("login_error");
-  //   if (errNum != null) {
-  //     // console.log(msg);
-  //     var element = document.getElementById(errName[errNum]);
-  //     element.innerHTML = msg[errNum];
-  //   }
-  // }
+  window.onload = function(){
+    var errName = [
+      "error-login",
+      "error-number",
+    ];
+    // var msg = get_cookie("login_failure");
+    var msg = [
+      "ログインできませんでした、IDまたはパスワードが間違っています",
+      "番号を入力してください。",
+    ];
+    var errNum = get_cookie("login_error");
+    if (errNum != null) {
+      // console.log(msg);
+      var element = document.getElementById(errName[errNum]);
+      element.innerHTML = msg[errNum];
+    }
+  }
   </script>
 
   <script>

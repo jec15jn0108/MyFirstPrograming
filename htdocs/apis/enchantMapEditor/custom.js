@@ -21,3 +21,10 @@ function setGoal() {
     $(this).attr("onclick", "$(this).focus()");
   });
 }
+
+// $(function() {
+//   console.log("load");
+//   if ($.cookie("map0") != "") {
+//     loadMap();
+//   }
+// });
