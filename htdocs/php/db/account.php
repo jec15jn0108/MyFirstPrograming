@@ -70,10 +70,10 @@
 
    /*1団体内の教師IDの数を数える*/
    function selectTeacherNum($teamId,$isTeacher){
-     $sql = "SELECT count(*) FROM account WHERE teamID = :teamId and isTeacher = :isTeacher";
+     $sql = "SELECT count(*) AS cnt FROM account WHERE teamID = :teamId and isTeacher = :isTeacher";
      $stmt = $this->pdo->prepare($sql);
      $stmt->bindParam(':teamId', $teamId, PDO::PARAM_STR);
-     $stmt->bindParam(':isTeacher',$isTeacher,PDO::PARAM_STR);
+     $stmt->bindParam(':isTeacher',$isTeacher,PDO::PARAM_INT);
 
      try{
        $stmt->execute();
@@ -81,7 +81,7 @@
        print($e->getMessage() . '<br />');
        return false;
      }
-     return $stmt->fetchColumn();
+     return $stmt->fetch(PDO::FETCH_ASSOC)["cnt"];
    }
 
    /* ユーザ認証 */
